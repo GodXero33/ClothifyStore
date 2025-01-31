@@ -1,9 +1,0 @@
-echo "# ClothifyStore" >> README.md
-git init  # Initialize the repository
-git add README.md  # Add the README file to the staging area
-git add pom.xml  # Add the pom.xml file to the staging area
-git add src/  # Add the src folder to the staging area
-git commit -m "Initial commit with pom.xml and src folder"  # Commit your changes
-git branch -M main  # Rename the branch to 'main'
-git remote add origin https://github.com/GodXero33/ClothifyStore.git  # Link to GitHub
-git push -u origin main  # Push your commit to GitHub
