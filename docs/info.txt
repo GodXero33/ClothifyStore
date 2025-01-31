@@ -1,0 +1,5 @@
+Name of the business : “Clothify Store” (PVT) Ltd.
+               Owned : By Mr. Sheshan Thilakshana
+            Location : Panadura
+             Contact : +94 123 456 789
+               Email : clothify@sample.com

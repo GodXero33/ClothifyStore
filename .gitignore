@@ -1,0 +1,7 @@
+# Ignore IDE folder
+.idea/
+
+# Ignore compiled files
+target/
+
+# Ignore any other file or folder you don’t want to commit
