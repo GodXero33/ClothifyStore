@@ -1,0 +1,52 @@
+.anchor-pane {
+-fx-background-color: #000000;
+}
+
+.title {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 40px;
+    -fx-font-style: italic;
+    -fx-font-weight: bold;
+}
+
+.text-field-label {
+    -fx-background-color: #000000;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.text-field:hover {
+    -fx-background-color: #343434;
+}
+
+.text-field:focused  {
+    -fx-background-color: #565555;
+}
+
+.button {
+    -fx-background-color: #232323;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #343434;
+}
+
+.check-box {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+    -fx-cursor: hand;
+}
