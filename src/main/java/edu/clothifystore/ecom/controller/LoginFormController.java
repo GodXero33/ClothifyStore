@@ -6,9 +6,7 @@ import edu.clothifystore.ecom.service.custom.UserService;
 import edu.clothifystore.ecom.util.ServiceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -35,21 +33,24 @@ public class LoginFormController {
 			return;
 		}
 
-		if (this.loadedUser == null || !this.loadedUser.getUserName().equals(userName)) this.loadedUser = this.userService.get(userName);
+		// If loaded user data is empty load user data from database.
+		if (this.loadedUser == null) this.loadedUser = this.userService.get(userName);
 
+		// If loaded user data still empty after loaded, that means user is not found.
 		if (this.loadedUser == null) {
 			new Alert(Alert.AlertType.WARNING, "The user with user name '" + userName + "' is not found. Please try again with different user name.").show();
 			return;
 		}
 
-		if (this.loadedUser.getPassword().equals(this.passwordPasswordField.getText())) {
+		// Check password in loaded data and password field text is equals.
+		if (this.loadedUser.getPassword().equals(this.passwordPasswordField.getText())) { // If both strings are equal, login is success.
 			try {
-				SuperFormController.openStage(this.getClass().getResource("../../../../view/main_view.fxml"), "Clothify Store", true);
-				((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
+				SuperFormController.openStage(this.getClass().getResource("../../../../view/main_view.fxml"), "Clothify Store", true); // Open main window.
+				((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close(); // Close current login window.
 			} catch (IOException exception) {
 				new Alert(Alert.AlertType.ERROR, "Failed to load application window. Please click 'Login' button again.").show();
 			}
-		} else {
+		} else { // If both strings are not equal, login failed.
 			new Alert(Alert.AlertType.WARNING, "The password is incorrect. Please try again.").show();
 		}
 	}
@@ -57,13 +58,14 @@ public class LoginFormController {
 	@FXML
 	public void signupButtonOnAction (ActionEvent actionEvent) {
 		try {
-			SuperFormController.openStage(this.getClass().getResource("../../../../view/signup_view.fxml"), "Signup - Clothify Store", true);
-			((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close();
+			SuperFormController.openStage(this.getClass().getResource("../../../../view/signup_view.fxml"), "Signup - Clothify Store", true); // Open signup window.
+			((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close(); // Close current login window.
 		} catch (IOException exception) {
 			new Alert(Alert.AlertType.ERROR, "Failed to load signup window. Please click 'Signup' button again.").show();
 		}
 	}
 
+	// Toggle visibility between password 'password field' and password 'text field' and focus visibility enabled field.
 	@FXML
 	public void showPasswordCheckBoxOnAction (ActionEvent actionEvent) {
 		final boolean isPasswordFieldNotVisible = ((CheckBox) actionEvent.getTarget()).isSelected();
@@ -75,15 +77,17 @@ public class LoginFormController {
 
 	@FXML
 	public void passwordTextFieldOnKeyReleased (KeyEvent keyEvent) {
-		this.loadedUser = null;
-
 		this.passwordPasswordField.setText(this.passwordTextField.getText());
 	}
 
 	@FXML
 	public void passwordPasswordFieldOnKeyReleased (KeyEvent keyEvent) {
-		this.loadedUser = null;
-
 		this.passwordTextField.setText(this.passwordPasswordField.getText());
+	}
+
+	// If user changed username text field text delete loaded user data.
+	@FXML
+	public void userNameTextFieldOnKeyReleased (KeyEvent keyEvent) {
+		this.loadedUser = null;
 	}
 }

@@ -21,6 +21,27 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public boolean add (UserEntity entity) {
+		try {
+			return (Integer) (CrudUtil.execute(
+				"INSERT INTO `user` (user_name, initials, first_name, last_name, nic, email, address, dob, password, salary, type, role, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				entity.getUserName(),
+				entity.getInitials(),
+				entity.getFirstName(),
+				entity.getLastName(),
+				entity.getNIC(),
+				entity.getEmail(),
+				entity.getAddress(),
+				entity.getDOB(),
+				entity.getPassword(),
+				entity.getSalary(),
+				entity.getType(),
+				entity.getRole(),
+				entity.getAdminID()
+			)) == 1;
+		} catch (SQLException exception) {
+			System.out.println(exception);
+		}
+
 		return false;
 	}
 
@@ -65,6 +86,19 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 
 		return null;
+	}
+
+	@Override
+	public Integer getAdminID (String adminUserName) {
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT id FROM `user` WHERE user_name = ? AND type = 'ADMIN'", adminUserName);
+
+			if (resultSet.next()) return resultSet.getInt(1);
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+		}
+
+		return -1;
 	}
 
 	@Override

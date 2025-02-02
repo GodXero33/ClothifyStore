@@ -5,4 +5,6 @@ import edu.clothifystore.ecom.service.SuperService;
 
 public interface UserService extends SuperService {
 	User get (String userName);
+	Integer getAdminID (String adminUserName);
+	boolean add (User user);
 }

@@ -19,7 +19,7 @@
                   <Group layoutX="80.0" layoutY="14.0">
                      <children>
                           <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="Username" />
-                          <TextField fx:id="userNameTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" />
+                          <TextField fx:id="userNameTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" promptText="Required" text="DETER" />
                      </children>
                   </Group>
                   <Group layoutX="80.0" layoutY="66.0">
@@ -27,29 +27,27 @@
                           <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="Password" />
                         <PasswordField fx:id="passwordPasswordField" layoutX="178.0" onKeyReleased="#passwordPasswordFieldOnKeyReleased" prefHeight="44.0" prefWidth="445.0" />
                         <CheckBox layoutX="504.0" layoutY="44.0" mnemonicParsing="false" onAction="#showPasswordCheckBoxOnAction" text="Show Password" />
-                        <TextField fx:id="passwordTextField" layoutX="178.0" onKeyReleased="#passwordTextFieldOnKeyReleased" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="passwordTextField" layoutX="178.0" onKeyReleased="#passwordTextFieldOnKeyReleased" prefHeight="44.0" prefWidth="445.0" visible="false" />
                      </children>
                   </Group>
                   <Group layoutX="55.0" layoutY="138.0">
                      <children>
                           <CheckBox layoutX="530.0" layoutY="44.0" mnemonicParsing="false" onAction="#showConfirmPasswordCheckBoxOnAction" text="Show Password" />
-                          <PasswordField fx:id="confirmPasswordPasswordField" layoutX="204.0"
-                                         onKeyReleased="#confirmPasswordPasswordFieldOnKeyReleased" prefHeight="44.0"
-                                         prefWidth="445.0" />
+                          <PasswordField fx:id="confirmPasswordPasswordField" layoutX="204.0" onKeyReleased="#confirmPasswordPasswordFieldOnKeyReleased" prefHeight="44.0" prefWidth="445.0" />
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="182.0" styleClass="text-field-label" text="Confirm Password" />
-                          <TextField fx:id="confirmPasswordTextField" layoutX="204.0" onKeyReleased="#confirmPasswordTextFieldOnKeyReleased" prefHeight="44.0" prefWidth="445.0" />
+                          <TextField fx:id="confirmPasswordTextField" layoutX="204.0" onKeyReleased="#confirmPasswordTextFieldOnKeyReleased" prefHeight="44.0" prefWidth="445.0" visible="false" />
                      </children>
                   </Group>
                   <Group layoutX="80.0" layoutY="209.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="Initials" />
-                        <TextField fx:id="initialsTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="initialsTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" promptText="Required" text="J.A" />
                      </children>
                   </Group>
                   <Group layoutX="80.0" layoutY="260.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="First Name" />
-                        <TextField fx:id="firstNameTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="firstNameTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" promptText="Required" text="Weerarathna" />
                      </children>
                   </Group>
                   <Group layoutX="80.0" layoutY="310.0">
@@ -61,7 +59,7 @@
                   <Group layoutX="80.0" layoutY="360.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="NIC" />
-                        <TextField fx:id="nicTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="nicTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" promptText="Required" text="200121004758" />
                      </children>
                   </Group>
                   <Group layoutX="80.0" layoutY="410.0">
@@ -73,37 +71,37 @@
                   <Group layoutX="80.0" layoutY="460.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="Address" />
-                        <TextField fx:id="addressTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="addressTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" promptText="Required" text="No.60, Alokamawatha, Walawegama, Udawalawe" />
                      </children>
                   </Group>
                   <Group layoutX="80.0" layoutY="510.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="Birth Day" />
-                        <TextField fx:id="dobTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="dobTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" promptText="Required" text="1974/12/12" />
                      </children>
                   </Group>
                   <Group layoutX="80.0" layoutY="560.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="Salary" />
-                        <TextField fx:id="salaryTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="salaryTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" text="5000.0" />
                      </children>
                   </Group>
                   <Group layoutX="80.0" layoutY="610.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="156.0" styleClass="text-field-label" text="Job Role" />
-                        <TextField fx:id="roleTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="roleTextField" layoutX="178.0" prefHeight="44.0" prefWidth="445.0" promptText="Required" text="Cashier" />
                      </children>
                   </Group>
                   <Group layoutX="47.0" layoutY="660.0">
                      <children>
                         <Label alignment="CENTER_RIGHT" layoutY="7.0" prefHeight="30.0" prefWidth="190.0" styleClass="text-field-label" text="Admin User Name" />
-                        <TextField fx:id="adminNameTextField" layoutX="212.0" prefHeight="44.0" prefWidth="445.0" />
+                        <TextField fx:id="adminNameTextField" layoutX="212.0" prefHeight="44.0" prefWidth="445.0" text="GodXero" />
                      </children>
                   </Group>
                   <Group layoutX="55.0" layoutY="715.0">
                      <children>
-                        <CheckBox layoutX="205.0" layoutY="5.0" mnemonicParsing="false" />
-                        <Label fx:id="asAdminCheckBox" alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="190.0" styleClass="text-field-label" text="As Admin" />
+                        <CheckBox fx:id="asAdminCheckBox" layoutX="205.0" layoutY="5.0" mnemonicParsing="false" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="190.0" styleClass="text-field-label" text="As Admin" />
                      </children>
                   </Group>
                </children>
