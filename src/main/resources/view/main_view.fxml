@@ -1,16 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="544.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.MainFormController">
+<AnchorPane prefHeight="599.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.MainFormController">
    <children>
-      <AnchorPane fx:id="navPanel" prefHeight="544.0" prefWidth="65.0" style="-fx-background-color: #343434;">
+      <AnchorPane layoutY="52.0" prefHeight="47.0" prefWidth="845.0" style="-fx-background-color: #f00;" />
+      <AnchorPane fx:id="mainAnchorPane" layoutY="99.0" prefHeight="500.0" prefWidth="845.0" style="-fx-background-color: #00f;" />
+      <AnchorPane layoutY="-4.0" prefHeight="56.0" prefWidth="845.0" style="-fx-background-color: #0ff;">
          <children>
-            <Button layoutX="3.0" layoutY="14.0" mnemonicParsing="false" onAction="#navPanelOpenButtonOnAction" text="Button" />
+            <Label layoutX="330.0" layoutY="12.0" text="Clothify Store">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="dateLabel" layoutX="14.0" layoutY="18.0" prefHeight="20.0" prefWidth="151.0" text="2000 January 00">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="timeLabel" layoutX="178.0" layoutY="18.0" text="00:00">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="userNameLabel" alignment="CENTER_RIGHT" layoutX="617.0" layoutY="18.0" prefHeight="20.0" prefWidth="206.0" text="user name">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="16.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="65.0" prefHeight="544.0" prefWidth="782.0" style="-fx-background-color: #565656;" />
    </children>
 </AnchorPane>
