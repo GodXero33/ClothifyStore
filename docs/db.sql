@@ -40,21 +40,5 @@ admin_id) VALUES
     'Manager',
     null
 );
-INSERT INTO `user` (user_name, initials, first_name, last_name, nic, address, dob, password, salary, type, role,
-admin_id) VALUES
-(
-    'Neeta',
-    'B.M.W',
-    'Suk',
-    'Sip',
-    '2001210011212',
-    'No.60, Alokamawatha, Walawegama, Udawalawa, Embilipitiya',
-    '2001/07/28',
-    null,
-    400000.0,
-    2,
-    'Manager',
-    null
-);
 
 SELECT * FROM `user`;

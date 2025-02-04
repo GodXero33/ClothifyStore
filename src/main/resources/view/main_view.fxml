@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.clothifystore.ecom.controller.MainFormController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="544.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.MainFormController">
+   <children>
+      <AnchorPane fx:id="navPanel" prefHeight="544.0" prefWidth="65.0" style="-fx-background-color: #343434;">
+         <children>
+            <Button layoutX="3.0" layoutY="14.0" mnemonicParsing="false" onAction="#navPanelOpenButtonOnAction" text="Button" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="65.0" prefHeight="544.0" prefWidth="782.0" style="-fx-background-color: #565656;" />
+   </children>
 </AnchorPane>
