@@ -51,13 +51,17 @@ public class SuperFormController {
 	}
 
 	public AnchorPane openMenu (MenuType menuType) throws IOException {
+		if (this.mainContentPane == null) return null;
+
 		final AnchorPane newContent;
 
-		if (this.loadedStagesMap.containsKey(menuType)) {
-			newContent = this.loadedStagesMap.get(menuType);
-		} else {
-			newContent = FXMLLoader.load(Starter.class.getResource(String.format("../../../view/menus/%s.fxml", menuType.toString().toLowerCase())));
+		if (this.loadedStagesMap.get(menuType) == null) {
+			String m = menuType.toString();
+			newContent = FXMLLoader.load(Starter.class.getResource(String.format("../../../view/menu/%s.fxml", menuType.toString().toLowerCase())));
+
 			this.loadedStagesMap.put(menuType, newContent);
+		} else {
+			newContent = this.loadedStagesMap.get(menuType);
 		}
 
 		this.mainContentPane.getChildren().setAll(newContent);

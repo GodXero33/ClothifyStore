@@ -4,6 +4,7 @@ import edu.clothifystore.ecom.util.MenuType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -40,7 +41,9 @@ public class MainFormController implements Initializable {
 
 		this.currentActiveMenuButton = button;
 
-		SuperFormController.getInstance().openMenu(menuType); // Load new menu.
+		if (SuperFormController.getInstance().openMenu(menuType) /* Load new menu. */ == null) { // loaded AnchorPane is null means, 'mainContentPane' is not set into SuperFormController's instance.
+			new Alert(Alert.AlertType.ERROR, "Can't load target menu. May be Main  content is not loaded. May be restart application will resolve the problem.").show();
+		}
 	}
 
 	@FXML
