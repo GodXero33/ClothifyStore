@@ -1,5 +1,6 @@
-package edu.clothifystore.ecom.controller;
+package edu.clothifystore.ecom.controller.form;
 
+import edu.clothifystore.ecom.controller.FormController;
 import edu.clothifystore.ecom.util.MenuType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -32,16 +33,19 @@ public class MainFormController implements Initializable {
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		this.currentActiveMenuButton = (Button) (((Pane) this.menuPane.getChildren().get(1)).getChildren().getFirst()); // menu pane has two Panes as child. First pane is empty and make shadow. Second has 9 Buttons for all 9 menus. When application load, first menu loading is dashboard. So, among 9 buttons, first button is refer to dashboard menu. Check the FXML structure on 'main_view.fxml' in 'resources/view' directory.
 
-		SuperFormController.getInstance().setMainContentPane(this.mainContentPane);
+		FormController.getInstance().setMainContentPane(this.mainContentPane);
 	}
 
 	// Load new menu into main content pane.
 	private void openMenu (MenuType menuType, Button button) throws IOException {
 		if (button.equals(this.currentActiveMenuButton)) return; // If target menu is already opened, exit.
 
+		this.currentActiveMenuButton.getStyleClass().remove("button-active");
+		button.getStyleClass().add("button-active");
+
 		this.currentActiveMenuButton = button;
 
-		if (SuperFormController.getInstance().openMenu(menuType) /* Load new menu. */ == null) { // loaded AnchorPane is null means, 'mainContentPane' is not set into SuperFormController's instance.
+		if (FormController.getInstance().openMenu(menuType) /* Load new menu. */ == null) { // loaded AnchorPane is null means, 'mainContentPane' is not set into SuperFormController's instance.
 			new Alert(Alert.AlertType.ERROR, "Can't load target menu. May be Main  content is not loaded. May be restart application will resolve the problem.").show();
 		}
 	}

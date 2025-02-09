@@ -12,14 +12,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SuperFormController {
-	private static SuperFormController instance;
+public class FormController {
+	private static FormController instance;
 
 	@Setter
 	private AnchorPane mainContentPane;
 	private final Map<MenuType, AnchorPane> loadedStagesMap;
 
-	private SuperFormController () {
+	private FormController() {
 		this.loadedStagesMap = new HashMap<>();
 
 		this.loadedStagesMap.put(MenuType.DASHBOARD, null);
@@ -33,10 +33,10 @@ public class SuperFormController {
 		this.loadedStagesMap.put(MenuType.SETTINGS, null);
 	}
 
-	public static SuperFormController getInstance () {
-		if (SuperFormController.instance == null) SuperFormController.instance = new SuperFormController();
+	public static FormController getInstance () {
+		if (FormController.instance == null) FormController.instance = new FormController();
 
-		return SuperFormController.instance;
+		return FormController.instance;
 	}
 
 	public Stage openStage (Stage stage, String url, String title, boolean show) throws IOException {

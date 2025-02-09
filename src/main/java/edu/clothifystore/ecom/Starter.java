@@ -1,6 +1,6 @@
 package edu.clothifystore.ecom;
 
-import edu.clothifystore.ecom.controller.SuperFormController;
+import edu.clothifystore.ecom.controller.FormController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -11,7 +11,7 @@ public class Starter extends Application {
 
 	@Override
 	public void start (Stage stage) throws Exception {
-		SuperFormController.getInstance().openStage(stage, "main_view", "Login - Clothify Store", false);
+		FormController.getInstance().openStage(stage, "main_view", "Login - Clothify Store", false);
 		stage.setResizable(false);
 		stage.show();
 	}

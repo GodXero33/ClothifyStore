@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.LoginFormController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="anchor-pane" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.LoginFormController">
    <children>
       <Label alignment="CENTER" layoutX="-2.0" prefHeight="101.0" prefWidth="606.0" styleClass="title" text="Login - Clothify Store" />
       <Label alignment="CENTER" layoutX="53.0" layoutY="161.0" prefHeight="30.0" prefWidth="108.0" styleClass="text-field-label" text="Username" />

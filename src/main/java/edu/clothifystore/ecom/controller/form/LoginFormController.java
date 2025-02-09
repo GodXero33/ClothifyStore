@@ -1,5 +1,6 @@
-package edu.clothifystore.ecom.controller;
+package edu.clothifystore.ecom.controller.form;
 
+import edu.clothifystore.ecom.controller.FormController;
 import edu.clothifystore.ecom.dto.User;
 import edu.clothifystore.ecom.service.ServiceFactory;
 import edu.clothifystore.ecom.service.custom.UserService;
@@ -45,7 +46,7 @@ public class LoginFormController {
 		// Check password in loaded data and password field text is equals.
 		if (this.loadedUser.getPassword().equals(this.passwordPasswordField.getText())) { // If both strings are equal, login is success.
 			try {
-				SuperFormController.getInstance().openStage(null, "main_view", "Clothify Store", true); // Open main window.
+				FormController.getInstance().openStage(null, "main_view", "Clothify Store", true); // Open main window.
 				((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close(); // Close current login window.
 			} catch (IOException exception) {
 				new Alert(Alert.AlertType.ERROR, "Failed to load application window. Please click 'Login' button again.").show();
@@ -58,7 +59,7 @@ public class LoginFormController {
 	@FXML
 	public void signupButtonOnAction (ActionEvent actionEvent) {
 		try {
-			SuperFormController.getInstance().openStage(null, "signup_view", "Signup - Clothify Store", true); // Open signup window.
+			FormController.getInstance().openStage(null, "signup_view", "Signup - Clothify Store", true); // Open signup window.
 			((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close(); // Close current login window.
 		} catch (IOException exception) {
 			new Alert(Alert.AlertType.ERROR, "Failed to load signup window. Please click 'Signup' button again.").show();
