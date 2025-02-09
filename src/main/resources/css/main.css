@@ -48,6 +48,10 @@
     -fx-background-color: #673434;
 }
 
+.button-active:hover {
+    -fx-background-color: #673434;
+}
+
 .check-box {
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;

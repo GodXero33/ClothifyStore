@@ -46,6 +46,7 @@ public class LoginFormController {
 		// Check password in loaded data and password field text is equals.
 		if (this.loadedUser.getPassword().equals(this.passwordPasswordField.getText())) { // If both strings are equal, login is success.
 			try {
+				FormController.getInstance().setCurentUser(this.loadedUser); // Set current user that give access of current user to every form controller.
 				FormController.getInstance().openStage(null, "main_view", "Clothify Store", true); // Open main window.
 				((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close(); // Close current login window.
 			} catch (IOException exception) {

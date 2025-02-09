@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
@@ -15,17 +17,17 @@
       <AnchorPane fx:id="mainContentPane" layoutY="79.0" prefHeight="520.0" prefWidth="845.0" styleClass="nav-bar" />
       <AnchorPane layoutY="-4.0" prefHeight="72.0" prefWidth="845.0">
          <children>
-            <Label layoutX="353.0" layoutY="18.0" styleClass="title" text="Clothify Store">
+            <Label layoutX="370.0" layoutY="19.0" styleClass="title" text="Clothify Store">
                <font>
                   <Font name="Arial Rounded MT Bold" size="28.0" />
                </font>
             </Label>
-            <Label fx:id="dateLabel" layoutX="103.0" layoutY="38.0" prefHeight="20.0" prefWidth="151.0" text="2000 January 00" textFill="WHITE">
+            <Label fx:id="dateLabel" alignment="CENTER_RIGHT" layoutX="103.0" layoutY="38.0" prefHeight="20.0" prefWidth="172.0" text="2000 January 00" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="timeLabel" layoutX="267.0" layoutY="38.0" text="00:00" textFill="WHITE">
+            <Label fx:id="timeLabel" layoutX="284.0" layoutY="38.0" text="00:00" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
@@ -35,14 +37,19 @@
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </Label>
-            <Button layoutX="20.0" layoutY="25.0" mnemonicParsing="false" onAction="#menuButtonOnAction" prefHeight="44.0" prefWidth="44.0">
+            <Button layoutX="22.0" layoutY="25.0" mnemonicParsing="false" onAction="#menuButtonOnAction" prefHeight="47.0" prefWidth="44.0">
                <tooltip>
                   <Tooltip text="Menu" />
                </tooltip>
             </Button>
+            <ImageView disable="true" fitHeight="38.0" fitWidth="38.0" layoutX="25.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/menu.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuPane" layoutX="68.0" layoutY="19.0" prefHeight="504.0" prefWidth="294.0" visible="false">
+      <AnchorPane fx:id="menuPane" layoutX="20.0" layoutY="21.0" prefHeight="504.0" prefWidth="294.0" visible="false">
          <children>
             <Pane prefHeight="504.0" prefWidth="294.0" styleClass="nav-pane">
                <effect>

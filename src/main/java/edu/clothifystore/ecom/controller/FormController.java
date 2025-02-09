@@ -1,11 +1,13 @@
 package edu.clothifystore.ecom.controller;
 
 import edu.clothifystore.ecom.Starter;
+import edu.clothifystore.ecom.dto.User;
 import edu.clothifystore.ecom.util.MenuType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
@@ -22,6 +24,9 @@ public class FormController {
 
 	@Setter
 	private AnchorPane mainContentPane;
+	@Setter
+	@Getter
+	private User curentUser;
 	private final Map<MenuType, AnchorPane> loadedStagesMap;
 
 	private FormController() {
