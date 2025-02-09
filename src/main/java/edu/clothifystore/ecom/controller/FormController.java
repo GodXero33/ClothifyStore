@@ -12,6 +12,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * All common methods that required to form controller classes are implemented here.
+ * This is a singleton class. The constructor is hidden, only a one instance can be made.
+ * Authored by GodXero :)
+ */
 public class FormController {
 	private static FormController instance;
 
@@ -55,7 +60,7 @@ public class FormController {
 
 		final AnchorPane newContent;
 
-		if (this.loadedStagesMap.get(menuType) == null) {
+		if (this.loadedStagesMap.get(menuType) == null) { // If loaded stages map's target value is null, means the stage haven't loaded before. So, load the target stage and store in the map.
 			String m = menuType.toString();
 			newContent = FXMLLoader.load(Starter.class.getResource(String.format("../../../view/menu/%s.fxml", menuType.toString().toLowerCase())));
 

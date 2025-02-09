@@ -31,16 +31,23 @@ public class MainFormController implements Initializable {
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		this.currentActiveMenuButton = (Button) (((Pane) this.menuPane.getChildren().get(1)).getChildren().getFirst()); // menu pane has two Panes as child. First pane is empty and make shadow. Second has 9 Buttons for all 9 menus. When application load, first menu loading is dashboard. So, among 9 buttons, first button is refer to dashboard menu. Check the FXML structure on 'main_view.fxml' in 'resources/view' directory.
+		final Button dashboardMenuButton = (Button) (((Pane) this.menuPane.getChildren().get(1)).getChildren().getFirst()); // menu pane has two Panes as child. First pane is empty and make shadow. Second has 9 Buttons for all 9 menus. When application load, first menu loading is dashboard. So, among 9 buttons, first button is refer to dashboard menu. Check the FXML structure on 'main_view.fxml' in 'resources/view' directory.
 
 		FormController.getInstance().setMainContentPane(this.mainContentPane);
+
+		try {
+			this.openMenu(MenuType.DASHBOARD, dashboardMenuButton);
+		} catch (IOException exception) {
+			new Alert(Alert.AlertType.ERROR, "Failed to load dashboard. Please open menu and click on another menu and come back to try again.").show();
+		}
 	}
 
 	// Load new menu into main content pane.
 	private void openMenu (MenuType menuType, Button button) throws IOException {
 		if (button.equals(this.currentActiveMenuButton)) return; // If target menu is already opened, exit.
 
-		this.currentActiveMenuButton.getStyleClass().remove("button-active");
+		if (this.currentActiveMenuButton != null) this.currentActiveMenuButton.getStyleClass().remove("button-active");
+
 		button.getStyleClass().add("button-active");
 
 		this.currentActiveMenuButton = button;
