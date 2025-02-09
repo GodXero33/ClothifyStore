@@ -1,8 +1,7 @@
 package edu.clothifystore.ecom;
 
+import edu.clothifystore.ecom.controller.SuperFormController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Starter extends Application {
@@ -12,8 +11,8 @@ public class Starter extends Application {
 
 	@Override
 	public void start (Stage stage) throws Exception {
-		stage.setScene(new Scene(FXMLLoader.load(this.getClass().getResource("../../../view/main_view.fxml"))));
-		stage.setTitle("Login - Clothify Store");
+		SuperFormController.getInstance().openStage(stage, "main_view", "Login - Clothify Store", false);
+		stage.setResizable(false);
 		stage.show();
 	}
 }

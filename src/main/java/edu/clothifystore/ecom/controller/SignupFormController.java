@@ -3,7 +3,6 @@ package edu.clothifystore.ecom.controller;
 import edu.clothifystore.ecom.dto.User;
 import edu.clothifystore.ecom.service.ServiceFactory;
 import edu.clothifystore.ecom.service.custom.UserService;
-import edu.clothifystore.ecom.service.custom.impl.UserServiceImpl;
 import edu.clothifystore.ecom.util.ServiceType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -166,7 +165,7 @@ public class SignupFormController implements Initializable {
 	@FXML
 	public void backButtonOnAction (ActionEvent actionEvent) {
 		try {
-			SuperFormController.openStage(this.getClass().getResource("../../../../view/login_view.fxml"), "Login - Clothify Store", true); // Open login window.
+			SuperFormController.getInstance().openStage(null, "login_view", "Login - Clothify Store", true); // Open login window.
 			((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close(); // Close current signup window.
 		} catch (IOException exception) {
 			new Alert(Alert.AlertType.ERROR, "Failed to load login window. Please click 'Back' button again.").show();
