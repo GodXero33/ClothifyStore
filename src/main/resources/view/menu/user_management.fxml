@@ -9,6 +9,6 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="edu.clothifystore.ecom.controller.form.menu.UserManagementFormController"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="520.0" prefWidth="845.0">
 
 </AnchorPane>
