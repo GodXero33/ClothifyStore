@@ -6,6 +6,7 @@ import edu.clothifystore.ecom.util.MenuType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,24 +24,13 @@ public class FormController {
 	private static FormController instance;
 
 	@Setter
-	private AnchorPane mainContentPane;
-	@Setter
 	@Getter
-	private User curentUser;
+	public User curentUser;
 	private final Map<MenuType, FXMLLoader> loadedStagesMap;
+	private final String formFXMLPath = "../../../view";
 
 	private FormController() {
 		this.loadedStagesMap = new HashMap<>();
-
-		this.loadedStagesMap.put(MenuType.DASHBOARD, null);
-		this.loadedStagesMap.put(MenuType.USER_MANAGEMENT, null);
-		this.loadedStagesMap.put(MenuType.PRODUCT_MANAGEMENT, null);
-		this.loadedStagesMap.put(MenuType.INVENTORY_MANAGEMENT, null);
-		this.loadedStagesMap.put(MenuType.SUPPLIER_MANAGEMENT, null);
-		this.loadedStagesMap.put(MenuType.EMPLOYEE_MANAGEMENT, null);
-		this.loadedStagesMap.put(MenuType.ORDER_MANAGEMENT, null);
-		this.loadedStagesMap.put(MenuType.REPORTS, null);
-		this.loadedStagesMap.put(MenuType.SETTINGS, null);
 	}
 
 	public static FormController getInstance () {
@@ -52,7 +42,7 @@ public class FormController {
 	public FXMLLoader openStage (Stage stage, String url, String title, boolean show) throws IOException {
 		if (stage == null) stage = new Stage();
 
-		final FXMLLoader loader = new FXMLLoader(Starter.class.getResource(String.format("../../../view/%s.fxml", url)));
+		final FXMLLoader loader = new FXMLLoader(Starter.class.getResource(String.format("%s/%s.fxml", this.formFXMLPath, url)));
 		stage.setScene(new Scene(loader.load()));
 		stage.setTitle(title);
 		stage.setResizable(false);
@@ -62,14 +52,14 @@ public class FormController {
 		return loader;
 	}
 
-	public FXMLLoader openMenu (MenuType menuType) throws IOException {
-		if (this.mainContentPane == null) return null;
+	public FXMLLoader openMenu (MenuType menuType, Pane pane) throws IOException {
+		if (pane == null) return null;
 
 		final AnchorPane newContent;
-		FXMLLoader loader = null;
+		FXMLLoader loader;
 
-		if (this.loadedStagesMap.get(menuType) == null) { // If loaded stages map's target value is null, means the stage haven't loaded before. So, load the target stage and store in the map.
-			loader = new FXMLLoader(Starter.class.getResource(String.format("../../../view/menu/%s.fxml", menuType.toString().toLowerCase())));
+		if (!this.loadedStagesMap.containsKey(menuType) || this.loadedStagesMap.get(menuType) == null) { // If loaded stages map's target value is null, means the stage haven't loaded before. So, load the target stage and store in the map.
+			loader = new FXMLLoader(Starter.class.getResource(String.format("%s/menu/%s.fxml", this.formFXMLPath, menuType.toString())));
 			newContent = loader.load();
 
 			this.loadedStagesMap.put(menuType, loader);
@@ -78,7 +68,7 @@ public class FormController {
 			newContent = loader.getRoot();
 		}
 
-		this.mainContentPane.getChildren().setAll(newContent);
+		pane.getChildren().setAll(newContent);
 
 		return loader;
 	}

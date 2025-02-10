@@ -1,6 +1,6 @@
-package edu.clothifystore.ecom.controller.form.menu;
+package edu.clothifystore.ecom.controller.form.menu.main;
 
-import edu.clothifystore.ecom.controller.form.MenuForm;
+import edu.clothifystore.ecom.controller.form.menu.MenuForm;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -45,6 +45,6 @@ public class DashboardFormController implements Initializable, MenuForm {
 
 	@Override
 	public void update () {
-		System.out.println(true);
+
 	}
 }

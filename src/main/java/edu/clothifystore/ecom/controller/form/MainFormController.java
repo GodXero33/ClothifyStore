@@ -1,6 +1,7 @@
 package edu.clothifystore.ecom.controller.form;
 
 import edu.clothifystore.ecom.controller.FormController;
+import edu.clothifystore.ecom.controller.form.menu.MenuForm;
 import edu.clothifystore.ecom.dto.User;
 import edu.clothifystore.ecom.util.MenuType;
 import javafx.animation.Animation;
@@ -42,8 +43,6 @@ public class MainFormController implements Initializable {
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		final Button dashboardMenuButton = (Button) (((Pane) this.menuPane.getChildren().get(1)).getChildren().getFirst()); // menu pane has two Panes as child. First pane is empty and make shadow. Second has 9 Buttons for all 9 menus. When application load, first menu loading is dashboard. So, among 9 buttons, first button is refer to dashboard menu. Check the FXML structure on 'main_view.fxml' in 'resources/view' directory.
 		final User currentUser = FormController.getInstance().getCurentUser();
-
-		FormController.getInstance().setMainContentPane(this.mainContentPane);
 
 		try {
 			this.openMenu(MenuType.DASHBOARD, dashboardMenuButton);
@@ -93,9 +92,9 @@ public class MainFormController implements Initializable {
 		button.getStyleClass().add("button-active");
 
 		this.currentActiveMenuButton = button;
-		final FXMLLoader loader = FormController.getInstance().openMenu(menuType); // Load new menu.
+		final FXMLLoader loader = FormController.getInstance().openMenu(menuType, this.mainContentPane); // Load new menu.
 
-		if (loader == null) { // loaded AnchorPane is null means, 'mainContentPane' is not set into SuperFormController's instance.
+		if (loader == null) {
 			new Alert(Alert.AlertType.ERROR, "Can't load target menu. May be Main  content is not loaded. May be restart application will resolve the problem.").show();
 		} else {
 			((MenuForm) loader.getController()).update();
@@ -113,8 +112,8 @@ public class MainFormController implements Initializable {
 	}
 
 	@FXML
-	public void userManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.USER_MANAGEMENT, (Button) actionEvent.getTarget());
+	public void employeeManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
+		this.openMenu(MenuType.EMPLOYEE_MANAGEMENT, (Button) actionEvent.getTarget());
 	}
 
 	@FXML
@@ -130,11 +129,6 @@ public class MainFormController implements Initializable {
 	@FXML
 	public void supplierManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
 		this.openMenu(MenuType.SUPPLIER_MANAGEMENT, (Button) actionEvent.getTarget());
-	}
-
-	@FXML
-	public void employeeManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.EMPLOYEE_MANAGEMENT, (Button) actionEvent.getTarget());
 	}
 
 	@FXML
