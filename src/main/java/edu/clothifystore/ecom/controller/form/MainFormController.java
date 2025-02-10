@@ -8,10 +8,13 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -90,9 +93,12 @@ public class MainFormController implements Initializable {
 		button.getStyleClass().add("button-active");
 
 		this.currentActiveMenuButton = button;
+		final FXMLLoader loader = FormController.getInstance().openMenu(menuType); // Load new menu.
 
-		if (FormController.getInstance().openMenu(menuType) /* Load new menu. */ == null) { // loaded AnchorPane is null means, 'mainContentPane' is not set into SuperFormController's instance.
+		if (loader == null) { // loaded AnchorPane is null means, 'mainContentPane' is not set into SuperFormController's instance.
 			new Alert(Alert.AlertType.ERROR, "Can't load target menu. May be Main  content is not loaded. May be restart application will resolve the problem.").show();
+		} else {
+			((MenuForm) loader.getController()).update();
 		}
 	}
 
@@ -144,5 +150,13 @@ public class MainFormController implements Initializable {
 	@FXML
 	public void settingsButtonOnAction (ActionEvent actionEvent) throws IOException {
 		this.openMenu(MenuType.SETTINGS, (Button) actionEvent.getTarget());
+	}
+
+	public void menuPaneOnMouseClicked (MouseEvent mouseEvent) {
+		this.menuPane.setVisible(false);
+	}
+
+	public void menuPaneOnTouchPressed (TouchEvent touchEvent) {
+		this.menuPane.setVisible(false);
 	}
 }

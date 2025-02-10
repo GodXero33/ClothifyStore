@@ -34,6 +34,7 @@
 
 .button {
     -fx-background-color: #232323;
+    -fx-background-radius: 10px;
     -fx-text-fill: #ffffff;
     -fx-font-size: 20px;
     -fx-font-weight: bold;
@@ -65,4 +66,9 @@
 
 .nav-pane {
     -fx-background-color: #121212;
+    -fx-background-radius: 10px;
+}
+
+.menu-anchor-pane {
+    -fx-background-color: #23232388;
 }

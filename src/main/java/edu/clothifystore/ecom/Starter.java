@@ -11,8 +11,6 @@ public class Starter extends Application {
 
 	@Override
 	public void start (Stage stage) throws Exception {
-		FormController.getInstance().openStage(stage, "login_view", "Login - Clothify Store", false);
-		stage.setResizable(false);
-		stage.show();
+		FormController.getInstance().openStage(stage, "login_view", "Login - Clothify Store", true);
 	}
 }

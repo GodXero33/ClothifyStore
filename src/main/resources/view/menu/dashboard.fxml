@@ -1,8 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-
-<AnchorPane prefHeight="520.0" prefWidth="845.0" style="-fx-background-color: #000;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.DashboardFormController">
-
+<AnchorPane prefHeight="520.0" prefWidth="845.0" style="-fx-background-color: #000;" stylesheets="@../../css/dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.DashboardFormController">
+   <children>
+      <Pane prefHeight="211.0" prefWidth="845.0">
+         <children>
+            <Pane layoutX="88.0" layoutY="27.0" prefHeight="157.0" prefWidth="216.0" styleClass="summary-card">
+               <children>
+                  <Label layoutX="44.0" layoutY="8.0" styleClass="summary-card-head" text="Today Summery" />
+                  <Label layoutX="8.0" layoutY="58.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Total Sales" />
+                  <Label layoutX="8.0" layoutY="90.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Total Orders" />
+                  <Label layoutX="8.0" layoutY="122.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Best Product">
+                     <tooltip>
+                        <Tooltip text="Mostly selled product of last 24 hour" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="todayTotalSalesLabel" layoutX="99.0" layoutY="58.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="0 Rs" />
+                  <Label fx:id="todayBestProductLabel" layoutX="99.0" layoutY="122.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="-" />
+                  <Label fx:id="todayTotalOrdersLabel" layoutX="99.0" layoutY="90.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="0" />
+               </children>
+            </Pane>
+            <Pane layoutX="317.0" layoutY="27.0" prefHeight="157.0" prefWidth="216.0" styleClass="summary-card">
+               <children>
+                  <Label layoutX="28.0" layoutY="7.0" styleClass="summary-card-head" text="Last Week Summery" />
+                  <Label layoutX="8.0" layoutY="58.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Total Sales" />
+                  <Label layoutX="8.0" layoutY="90.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Total Orders" />
+                  <Label layoutX="8.0" layoutY="122.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Best Product">
+                     <tooltip>
+                        <Tooltip text="Mostly selled product of last 7 days" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="lastWeekTotalSalesLabel" layoutX="99.0" layoutY="58.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="0 Rs" />
+                  <Label fx:id="lastWeekBestProductLabel" layoutX="99.0" layoutY="122.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="-" />
+                  <Label fx:id="lastWeekTotalOrdersLabel" layoutX="99.0" layoutY="90.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="0" />
+               </children>
+            </Pane>
+            <Pane layoutX="546.0" layoutY="27.0" prefHeight="157.0" prefWidth="216.0" styleClass="summary-card">
+               <children>
+                  <Label layoutX="18.0" layoutY="8.0" styleClass="summary-card-head" text="Last Month Summery" />
+                  <Label layoutX="8.0" layoutY="58.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Total Sales" />
+                  <Label layoutX="8.0" layoutY="90.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Total Orders" />
+                  <Label layoutX="8.0" layoutY="122.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="Best Product">
+                     <tooltip>
+                        <Tooltip text="Mostly selled product of last 30 days" />
+                     </tooltip>
+                  </Label>
+                  <Label fx:id="lastMonthTotalSalesLabel" layoutX="99.0" layoutY="58.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="0 Rs" />
+                  <Label fx:id="lastMonthBestProductLabel" layoutX="99.0" layoutY="122.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="-" />
+                  <Label fx:id="lastMonthTotalOrdersLabel" layoutX="99.0" layoutY="90.0" prefHeight="21.0" prefWidth="91.0" styleClass="summary-card-text" text="0" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Pane layoutY="211.0" prefHeight="165.0" prefWidth="845.0">
+         <children>
+            <Pane layoutX="114.0" layoutY="15.0" prefHeight="63.0" prefWidth="304.0" styleClass="count-card">
+               <children>
+                  <Label layoutX="14.0" layoutY="17.0" prefHeight="30.0" prefWidth="147.0" styleClass="count-card-head" text="Total Products" />
+                  <Label fx:id="totalProductLabel" alignment="CENTER_RIGHT" layoutX="170.0" layoutY="19.0" prefHeight="27.0" prefWidth="120.0" styleClass="count-card-text" text="0" />
+               </children>
+            </Pane>
+            <Pane layoutX="428.0" layoutY="15.0" prefHeight="63.0" prefWidth="304.0" styleClass="count-card">
+               <children>
+                  <Label layoutX="14.0" layoutY="17.0" prefHeight="30.0" prefWidth="161.0" styleClass="count-card-head" text="Total Employees" />
+                  <Label fx:id="totalEmployeesLabel" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="19.0" prefHeight="27.0" prefWidth="103.0" styleClass="count-card-text" text="0" />
+               </children>
+            </Pane>
+            <Pane layoutX="114.0" layoutY="88.0" prefHeight="63.0" prefWidth="304.0" styleClass="count-card">
+               <children>
+                  <Label layoutX="14.0" layoutY="17.0" prefHeight="30.0" prefWidth="161.0" styleClass="count-card-head" text="Total Suppliers" />
+                  <Label fx:id="totalSuppliersLabel" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="19.0" prefHeight="27.0" prefWidth="103.0" styleClass="count-card-text" text="0" />
+               </children>
+            </Pane>
+            <Pane layoutX="428.0" layoutY="88.0" prefHeight="63.0" prefWidth="304.0" styleClass="count-card">
+               <children>
+                  <Label layoutX="14.0" layoutY="17.0" prefHeight="30.0" prefWidth="161.0" styleClass="count-card-head" text="Total Orders" />
+                  <Label fx:id="totalOrdersLabel" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="19.0" prefHeight="27.0" prefWidth="103.0" styleClass="count-card-text" text="0" />
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Label fx:id="alertDisplayLabel" layoutX="82.0" layoutY="382.0" prefHeight="124.0" prefWidth="682.0" styleClass="alerts-container" text="Nothing here today." textOverrun="WORD_ELLIPSIS" wrapText="true" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="382.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </Label>
+   </children>
 </AnchorPane>

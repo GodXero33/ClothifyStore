@@ -27,7 +27,7 @@ public class FormController {
 	@Setter
 	@Getter
 	private User curentUser;
-	private final Map<MenuType, AnchorPane> loadedStagesMap;
+	private final Map<MenuType, FXMLLoader> loadedStagesMap;
 
 	private FormController() {
 		this.loadedStagesMap = new HashMap<>();
@@ -49,33 +49,37 @@ public class FormController {
 		return FormController.instance;
 	}
 
-	public Stage openStage (Stage stage, String url, String title, boolean show) throws IOException {
+	public FXMLLoader openStage (Stage stage, String url, String title, boolean show) throws IOException {
 		if (stage == null) stage = new Stage();
 
-		stage.setScene(new Scene(FXMLLoader.load(Starter.class.getResource(String.format("../../../view/%s.fxml", url)))));
+		final FXMLLoader loader = new FXMLLoader(Starter.class.getResource(String.format("../../../view/%s.fxml", url)));
+		stage.setScene(new Scene(loader.load()));
 		stage.setTitle(title);
+		stage.setResizable(false);
 
 		if (show) stage.show();
 
-		return stage;
+		return loader;
 	}
 
-	public AnchorPane openMenu (MenuType menuType) throws IOException {
+	public FXMLLoader openMenu (MenuType menuType) throws IOException {
 		if (this.mainContentPane == null) return null;
 
 		final AnchorPane newContent;
+		FXMLLoader loader = null;
 
 		if (this.loadedStagesMap.get(menuType) == null) { // If loaded stages map's target value is null, means the stage haven't loaded before. So, load the target stage and store in the map.
-			String m = menuType.toString();
-			newContent = FXMLLoader.load(Starter.class.getResource(String.format("../../../view/menu/%s.fxml", menuType.toString().toLowerCase())));
+			loader = new FXMLLoader(Starter.class.getResource(String.format("../../../view/menu/%s.fxml", menuType.toString().toLowerCase())));
+			newContent = loader.load();
 
-			this.loadedStagesMap.put(menuType, newContent);
+			this.loadedStagesMap.put(menuType, loader);
 		} else {
-			newContent = this.loadedStagesMap.get(menuType);
+			loader = this.loadedStagesMap.get(menuType);
+			newContent = loader.getRoot();
 		}
 
 		this.mainContentPane.getChildren().setAll(newContent);
 
-		return newContent;
+		return loader;
 	}
 }

@@ -1,4 +1,10 @@
 package edu.clothifystore.ecom.controller.form.menu;
 
-public class ProductManagementFormController {
+import edu.clothifystore.ecom.controller.form.MenuForm;
+
+public class ProductManagementFormController implements MenuForm {
+	@Override
+	public void update () {
+
+	}
 }
