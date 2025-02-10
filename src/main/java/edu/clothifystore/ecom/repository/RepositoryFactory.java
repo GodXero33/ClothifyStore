@@ -1,6 +1,6 @@
 package edu.clothifystore.ecom.repository;
 
-import edu.clothifystore.ecom.repository.custom.impl.UserRepositoryImpl;
+import edu.clothifystore.ecom.repository.custom.impl.EmployeeRepositoryImpl;
 import edu.clothifystore.ecom.util.RepositoryType;
 
 public class RepositoryFactory {
@@ -17,7 +17,7 @@ public class RepositoryFactory {
 	@SuppressWarnings("unchecked")
 	public <T extends SuperRepository> T getRepositoryType (RepositoryType repositoryType) {
 		return switch (repositoryType) {
-			case USER -> (T) UserRepositoryImpl.getInstance();
+			case USER -> (T) EmployeeRepositoryImpl.getInstance();
 		};
 	}
 }

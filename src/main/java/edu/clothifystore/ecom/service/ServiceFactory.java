@@ -1,6 +1,6 @@
 package edu.clothifystore.ecom.service;
 
-import edu.clothifystore.ecom.service.custom.impl.UserServiceImpl;
+import edu.clothifystore.ecom.service.custom.impl.EmployeeServiceImpl;
 import edu.clothifystore.ecom.util.ServiceType;
 
 public class ServiceFactory {
@@ -17,7 +17,7 @@ public class ServiceFactory {
 	@SuppressWarnings("unchecked")
 	public <T extends SuperService> T getServiceType (ServiceType serviceType) {
 		return switch (serviceType) {
-			case USER -> (T) UserServiceImpl.getInstance();
+			case USER -> (T) EmployeeServiceImpl.getInstance();
 		};
 	}
 }

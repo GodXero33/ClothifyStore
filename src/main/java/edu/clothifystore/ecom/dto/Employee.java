@@ -1,4 +1,4 @@
-package edu.clothifystore.ecom.entity;
+package edu.clothifystore.ecom.dto;
 
 import lombok.*;
 
@@ -8,12 +8,9 @@ import lombok.*;
 @ToString
 @Getter
 @Setter
-public class UserEntity {
-	private Integer id;
+public class Employee {
 	private String userName;
-	private String initials;
-	private String firstName;
-	private String lastName;
+	private String fullName;
 	private String NIC;
 	private String email;
 	private String address;

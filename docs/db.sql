@@ -2,12 +2,10 @@ DROP DATABASE IF EXISTS clothify_store;
 CREATE DATABASE clothify_store;
 USE clothify_store;
 
-CREATE TABLE `user` (
+CREATE TABLE employee (
     id INT AUTO_INCREMENT,
-    user_name VARCHAR(50) UNIQUE NOT NULL,
-    initials VARCHAR(10) NOT NULL,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50),
+    user_name VARCHAR(15) UNIQUE NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
     nic VARCHAR(14) UNIQUE NOT NULL,
     email VARCHAR(255),
     address VARCHAR(255) NOT NULL,
@@ -20,16 +18,14 @@ CREATE TABLE `user` (
     PRIMARY KEY (id)
 );
 
-DESC `user`;
+DESC employee;
 
 
-INSERT INTO `user` (user_name, initials, first_name, last_name, nic, email, address, dob, password, salary, type, role,
+INSERT INTO employee (user_name, full_name, nic, email, address, dob, password, salary, type, role,
 admin_id) VALUES
 (
     'GodXero',
-    'H.R',
-    'Sathish',
-    'Shan',
+    'H.R Sathish Shan',
     '200121001975',
     'shansathish38@gmail.com',
     'No.60, Alokamawatha, Walawegama, Udawalawa, Embilipitiya',
@@ -41,4 +37,4 @@ admin_id) VALUES
     null
 );
 
-SELECT * FROM `user`;
+SELECT * FROM employee;

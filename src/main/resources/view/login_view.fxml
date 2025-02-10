@@ -16,7 +16,6 @@
       <TextField fx:id="passwordTextField" layoutX="172.0" layoutY="203.0" onKeyReleased="#passwordTextFieldOnKeyReleased" prefHeight="30.0" prefWidth="374.0" text="1111" visible="false" />
       <PasswordField fx:id="passwordPasswordField" layoutX="172.0" layoutY="203.0" onKeyReleased="#passwordPasswordFieldOnKeyReleased" prefHeight="44.0" prefWidth="374.0" text="1111" />
       <Button layoutX="467.0" layoutY="305.0" mnemonicParsing="false" onAction="#loginButtonOnAction" text="Login" />
-      <Button layoutX="53.0" layoutY="305.0" mnemonicParsing="false" onAction="#signupButtonOnAction" text="Signup" />
       <CheckBox layoutX="425.0" layoutY="258.0" mnemonicParsing="false" onAction="#showPasswordCheckBoxOnAction" text="Show Password" />
    </children>
 </AnchorPane>

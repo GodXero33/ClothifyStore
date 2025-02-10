@@ -1,7 +1,7 @@
 package edu.clothifystore.ecom.controller;
 
 import edu.clothifystore.ecom.Starter;
-import edu.clothifystore.ecom.dto.User;
+import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.util.MenuType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,7 +25,7 @@ public class FormController {
 
 	@Setter
 	@Getter
-	public User curentUser;
+	public Employee curentEmployee;
 	private final Map<MenuType, FXMLLoader> loadedStagesMap;
 	private final String formFXMLPath = "../../../view";
 
