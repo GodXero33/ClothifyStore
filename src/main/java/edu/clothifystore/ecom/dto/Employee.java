@@ -1,13 +1,12 @@
 package edu.clothifystore.ecom.dto;
 
 import lombok.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
-@Getter
-@Setter
+@Data
 public class Employee {
 	private String userName;
 	private String fullName;
@@ -20,4 +19,5 @@ public class Employee {
 	private String type;
 	private String role;
 	private Integer adminID;
+	private List<EmployeePhone> phone;
 }
