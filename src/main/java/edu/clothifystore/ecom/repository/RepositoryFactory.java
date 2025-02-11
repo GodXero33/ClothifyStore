@@ -17,7 +17,14 @@ public class RepositoryFactory {
 	@SuppressWarnings("unchecked")
 	public <T extends SuperRepository> T getRepositoryType (RepositoryType repositoryType) {
 		return switch (repositoryType) {
-			case USER -> (T) EmployeeRepositoryImpl.getInstance();
+			case CUSTOMER -> null;
+			case EMPLOYEE -> (T) EmployeeRepositoryImpl.getInstance();
+			case ORDER -> null;
+			case ORDER_ITEM -> null;
+			case PRODUCT -> null;
+			case PRODUCT_SUPPLIER -> null;
+			case SUPPLIER -> null;
+			case REPORT -> null;
 		};
 	}
 }

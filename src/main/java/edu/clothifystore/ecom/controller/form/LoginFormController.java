@@ -22,7 +22,7 @@ public class LoginFormController {
 	@FXML
 	public PasswordField passwordPasswordField;
 
-	private final EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.USER);
+	private final EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
 	private Employee loadedEmployee;
 
 	@FXML

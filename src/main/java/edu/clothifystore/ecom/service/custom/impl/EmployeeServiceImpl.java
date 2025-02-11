@@ -2,22 +2,23 @@ package edu.clothifystore.ecom.service.custom.impl;
 
 import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.entity.EmployeeEntity;
-import edu.clothifystore.ecom.mapper.EmployeeMapper;
+import edu.clothifystore.ecom.mapper.Mapper;
+import edu.clothifystore.ecom.mapper.MapperFactory;
 import edu.clothifystore.ecom.repository.RepositoryFactory;
 import edu.clothifystore.ecom.repository.custom.EmployeeRepository;
 import edu.clothifystore.ecom.service.custom.EmployeeService;
+import edu.clothifystore.ecom.util.MapperType;
 import edu.clothifystore.ecom.util.RepositoryType;
-import edu.clothifystore.ecom.util.UtilFactory;
 
 public class EmployeeServiceImpl implements EmployeeService {
 	private static EmployeeServiceImpl instance;
 
-	private final EmployeeMapper mapper;
+	private final Mapper<Employee, EmployeeEntity> mapper;
 
-	private final EmployeeRepository employeeRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.USER);
+	private final EmployeeRepository employeeRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.EMPLOYEE);
 
 	private EmployeeServiceImpl () {
-		this.mapper = UtilFactory.getInstance().getObject(EmployeeMapper.class);
+		this.mapper = MapperFactory.getInstance().getMapperType(MapperType.EMPLOYEE);
 	}
 
 	public static EmployeeServiceImpl getInstance () {

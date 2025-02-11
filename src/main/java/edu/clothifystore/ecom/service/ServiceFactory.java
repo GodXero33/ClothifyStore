@@ -17,7 +17,14 @@ public class ServiceFactory {
 	@SuppressWarnings("unchecked")
 	public <T extends SuperService> T getServiceType (ServiceType serviceType) {
 		return switch (serviceType) {
-			case USER -> (T) EmployeeServiceImpl.getInstance();
+			case CUSTOMER -> null;
+			case EMPLOYEE -> (T) EmployeeServiceImpl.getInstance();
+			case ORDER -> null;
+			case ORDER_ITEM -> null;
+			case PRODUCT -> null;
+			case PRODUCT_SUPPLIER -> null;
+			case SUPPLIER -> null;
+			case REPORT -> null;
 		};
 	}
 }

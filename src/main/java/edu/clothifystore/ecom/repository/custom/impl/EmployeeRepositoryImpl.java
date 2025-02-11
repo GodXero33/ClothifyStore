@@ -26,9 +26,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		try {
 			final Connection connection = DBConnection.getInstance().getConnection();
 
-			connection.setAutoCommit(false);
+			connection.setAutoCommit(false); // Start transaction.
 
-			final PreparedStatement employeeInsertStatement = connection.prepareStatement("INSERT INTO employee (user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+			final PreparedStatement employeeInsertStatement = connection.prepareStatement("INSERT INTO employee (user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS); // Insert new record into employee table and get auto generated id value.
 
 			employeeInsertStatement.setString(1, entity.getUserName());
 			employeeInsertStatement.setString(2, entity.getFullName());
@@ -51,17 +51,18 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 			if (!generatedKeys.next()) throw new SQLException("Creating order failed, no ID obtained.");
 
 			final int employeeID = generatedKeys.getInt(1);
-			final PreparedStatement employeePhoneInsertStatement = connection.prepareStatement("INSERT INTO employee_phone phone, employee_id, type VALUES (?, ?, ?)");
+			final PreparedStatement employeePhoneInsertStatement = connection.prepareStatement("INSERT INTO employee_phone phone, employee_id, type VALUES (?, ?, ?)"); // Insert new records into employee_phone table.
 			final List<EmployeePhoneEntity> phoneEntities = entity.getPhone();
 
 			employeePhoneInsertStatement.setInt(2, employeeID);
 
+			// For each phone in employee entity phone field, insert into employee_phone table as records.
 			for (final EmployeePhoneEntity phoneEntity : phoneEntities) {
 				employeePhoneInsertStatement.setString(1, phoneEntity.getPhone());
 				employeePhoneInsertStatement.setString(3, phoneEntity.getType());
 				employeePhoneInsertStatement.executeUpdate();
 			}
-		} catch (SQLException exception) {
+		} catch (SQLException exception) { // Any failure happens while executing or inserting records, rollback(delete buffer) changes.
 			try {
 				DBConnection.getInstance().getConnection().rollback();
 			} catch (SQLException rollbackException) {
@@ -69,7 +70,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 			}
 
 			System.out.println(exception.getMessage());
-		} finally {
+		} finally { // Either transaction success or fail, turn on auto commit to stop transaction.
 			try {
 				DBConnection.getInstance().getConnection().setAutoCommit(true);
 			} catch (SQLException exception) {
@@ -121,6 +122,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 			final ResultSet emloyeePhoneResultSet = CrudUtil.execute("SELECT phone, type FROM employee_phone WHERE employee_id = ?", employeeID);
 
+			// Add each phone records into 'employeePhone' list.
 			while (emloyeePhoneResultSet.next())
 				employeePhone.add(EmployeePhoneEntity.builder().
 					phone(emloyeePhoneResultSet.getString(1)).

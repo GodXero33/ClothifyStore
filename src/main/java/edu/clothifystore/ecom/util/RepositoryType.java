@@ -1,5 +1,5 @@
 package edu.clothifystore.ecom.util;
 
 public enum RepositoryType {
-	USER
+	CUSTOMER, EMPLOYEE, ORDER, ORDER_ITEM, PRODUCT, PRODUCT_SUPPLIER, SUPPLIER, REPORT;
 }
