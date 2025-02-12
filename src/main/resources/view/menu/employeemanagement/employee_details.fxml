@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.clothifystore.ecom.controller.form.menu.usermanagement.EmployeeDetailsFormController"
+            fx:controller="edu.clothifystore.ecom.controller.form.menu.employeemanagement.EmployeeDetailsFormController"
             prefHeight="520.0" prefWidth="619.0">
 
 </AnchorPane>

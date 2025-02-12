@@ -1,4 +1,4 @@
-package edu.clothifystore.ecom.controller.form.menu.usermanagement;
+package edu.clothifystore.ecom.controller.form.menu.employeemanagement;
 
 import edu.clothifystore.ecom.controller.form.menu.MenuForm;
 

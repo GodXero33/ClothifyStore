@@ -21,6 +21,38 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		return EmployeeRepositoryImpl.instance;
 	}
 
+	private String getInsertQueryBuilder (EmployeeEntity entity) {
+		final StringBuilder builder = new StringBuilder();
+		int optionalParams = 0;
+
+		builder.append("INSERT INTO employee (user_name, full_name, nic, address, dob, type, role");
+
+		if (entity.getEmail() != null) {
+			builder.append(", email");
+			optionalParams++;
+		}
+
+		if (entity.getSalary() != null) {
+			builder.append(", salary");
+			optionalParams++;
+		}
+
+		if (entity.getAdminID() != null) {
+			builder.append(", admin_id");
+			optionalParams++;
+		}
+
+		builder.append(") VALUES (");
+
+		final int paramsLength = optionalParams + 7;
+
+		for (int a = 0; a < paramsLength; a++) builder.append(a == paramsLength - 1 ? "?" : "?, ");
+
+		builder.append(")");
+
+		return builder.toString();
+	}
+
 	@Override
 	public boolean add (EmployeeEntity entity) {
 		try {
@@ -28,19 +60,22 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 			connection.setAutoCommit(false); // Start transaction.
 
-			final PreparedStatement employeeInsertStatement = connection.prepareStatement("INSERT INTO employee (user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS); // Insert new record into employee table and get auto generated id value.
+
+			final PreparedStatement employeeInsertStatement = connection.prepareStatement(this.getInsertQueryBuilder(entity), Statement.RETURN_GENERATED_KEYS); // Insert new record into employee table and get auto generated id value.
 
 			employeeInsertStatement.setString(1, entity.getUserName());
 			employeeInsertStatement.setString(2, entity.getFullName());
 			employeeInsertStatement.setString(3, entity.getNIC());
-			employeeInsertStatement.setString(4, entity.getEmail());
-			employeeInsertStatement.setString(5, entity.getAddress());
-			employeeInsertStatement.setString(6, entity.getDOB());
-			employeeInsertStatement.setString(7, entity.getPassword());
-			employeeInsertStatement.setDouble(8, entity.getSalary());
-			employeeInsertStatement.setString(9, entity.getType());
-			employeeInsertStatement.setString(10, entity.getRole());
-			employeeInsertStatement.setInt(11, entity.getAdminID());
+			employeeInsertStatement.setString(4, entity.getAddress());
+			employeeInsertStatement.setString(5, entity.getDOB());
+			employeeInsertStatement.setString(6, entity.getType());
+			employeeInsertStatement.setString(7, entity.getRole());
+
+			int optionalParams = 8; // There is 7 required values are already have bind. Now start with 8.
+
+			if (entity.getEmail() != null) employeeInsertStatement.setString(optionalParams++, entity.getEmail()); // 8
+			if (entity.getSalary() != null) employeeInsertStatement.setDouble(optionalParams++, entity.getSalary()); // 9
+			if (entity.getAdminID() != null) employeeInsertStatement.setInt(optionalParams, entity.getAdminID()); // 10
 
 			final int affectedRows = employeeInsertStatement.executeUpdate();
 
@@ -50,11 +85,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 			if (!generatedKeys.next()) throw new SQLException("Creating order failed, no ID obtained.");
 
-			final int employeeID = generatedKeys.getInt(1);
-			final PreparedStatement employeePhoneInsertStatement = connection.prepareStatement("INSERT INTO employee_phone phone, employee_id, type VALUES (?, ?, ?)"); // Insert new records into employee_phone table.
 			final List<EmployeePhoneEntity> phoneEntities = entity.getPhone();
 
-			employeePhoneInsertStatement.setInt(2, employeeID);
+			if (phoneEntities.isEmpty()) return true;
+
+			final PreparedStatement employeePhoneInsertStatement = connection.prepareStatement("INSERT INTO employee_phone (phone, employee_id, type) VALUES (?, ?, ?)"); // Insert new records into employee_phone table.
+
+			employeePhoneInsertStatement.setInt(2, generatedKeys.getInt(1));
 
 			// For each phone in employee entity phone field, insert into employee_phone table as records.
 			for (final EmployeePhoneEntity phoneEntity : phoneEntities) {
@@ -62,6 +99,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				employeePhoneInsertStatement.setString(3, phoneEntity.getType());
 				employeePhoneInsertStatement.executeUpdate();
 			}
+
+			return true;
 		} catch (SQLException exception) { // Any failure happens while executing or inserting records, rollback(delete buffer) changes.
 			try {
 				DBConnection.getInstance().getConnection().rollback();

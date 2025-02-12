@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/add-employee.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.employeemanagement.AddEmployeeFormController">
+   <children>
+      <Label alignment="CENTER" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="Add Employee" />
+      <ScrollPane hbarPolicy="NEVER" layoutY="53.0" prefHeight="401.0" prefWidth="619.0" style="-fx-background-color: #121212;">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="818.0" prefWidth="618.0" style="-fx-background-color: #121212;">
+               <children>
+                  <Pane layoutX="14.0" layoutY="26.0" prefHeight="41.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="User Name" />
+                        <TextField fx:id="userNameTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="User Name" styleClass="text-field-normal" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="77.0" prefHeight="41.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Full Name" />
+                        <TextField fx:id="fullNameTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Full Name" styleClass="text-field-normal" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="127.0" prefHeight="41.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="NIC No" />
+                        <TextField fx:id="nicTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="National Identity Card Number" styleClass="text-field-normal" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="177.0" prefHeight="41.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="E-Mail" />
+                        <TextField fx:id="emailTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="E-Mail address" styleClass="text-field-normal" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="229.0" prefHeight="41.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Address" />
+                        <TextField fx:id="addressTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Home Address" styleClass="text-field-normal" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="282.0" prefHeight="53.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="13.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Birth Day" />
+                        <ComboBox fx:id="dobDateComboBox" editable="true" layoutX="187.0" layoutY="6.0" prefHeight="41.0" prefWidth="107.0" promptText="Date" />
+                        <ComboBox fx:id="dobMonthComboBox" editable="true" layoutX="302.0" layoutY="6.0" prefHeight="41.0" prefWidth="130.0" promptText="Month" />
+                        <ComboBox fx:id="dobYearComboBox" editable="true" layoutX="440.0" layoutY="6.0" prefHeight="41.0" prefWidth="123.0" promptText="Year" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="344.0" prefHeight="41.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Salary" />
+                        <TextField fx:id="salaryTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Salary (Rs)" styleClass="text-field-normal" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="397.0" prefHeight="41.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Role" />
+                        <TextField fx:id="roleTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Job Role" styleClass="text-field-normal" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="448.0" prefHeight="77.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="63.0" prefWidth="162.0" styleClass="text-field-label" text="Supervisor Username" wrapText="true" />
+                        <TextField fx:id="supervisorUsernameTextField" layoutX="182.0" layoutY="18.0" prefHeight="41.0" prefWidth="380.0" promptText="Supervisor's User Name" styleClass="text-field-normal" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="561.0" prefHeight="53.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="13.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Phone" />
+                        <TextField fx:id="phone1TextField" layoutX="184.0" layoutY="6.0" prefHeight="41.0" prefWidth="248.0" promptText="Phone 1" styleClass="text-field-normal" />
+                        <ComboBox fx:id="phone1TypeComboBox" layoutX="437.0" layoutY="6.0" prefHeight="41.0" prefWidth="128.0" promptText="Mobile" styleClass="combo-box-contact" />
+                     </children>
+                  </Pane>
+                  <Line endX="362.0" endY="8.0" layoutX="236.0" layoutY="532.0" startX="-236.0" startY="8.0" stroke="#9e9e9e" />
+                  <Pane layoutX="14.0" layoutY="614.0" prefHeight="53.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="13.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Phone" />
+                        <TextField fx:id="phone2TextField" layoutX="184.0" layoutY="6.0" prefHeight="41.0" prefWidth="248.0" promptText="phone 2" styleClass="text-field-normal" />
+                        <ComboBox fx:id="phone2TypeComboBox" layoutX="437.0" layoutY="6.0" prefHeight="41.0" prefWidth="127.0" promptText="Home" styleClass="combo-box-contact" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="667.0" prefHeight="53.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="13.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Phone" />
+                        <TextField fx:id="phone3TextField" layoutX="184.0" layoutY="6.0" prefHeight="41.0" prefWidth="248.0" promptText="phone 3" styleClass="text-field-normal" />
+                        <ComboBox fx:id="phone3TypeComboBox" layoutX="437.0" layoutY="6.0" prefHeight="41.0" prefWidth="127.0" promptText="WhatsApp" styleClass="combo-box-contact" />
+                     </children>
+                  </Pane>
+                  <Line endX="362.0" endY="8.0" layoutX="236.0" layoutY="720.0" startX="-236.0" startY="8.0" stroke="#9e9e9e" />
+                  <Pane layoutX="14.0" layoutY="741.0" prefHeight="41.0" prefWidth="570.0">
+                     <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="As Admin" />
+                        <CheckBox fx:id="asAdminCheckBox" layoutX="199.0" layoutY="5.0" mnemonicParsing="false" />
+                     </children>
+                  </Pane>
+               </children></AnchorPane>
+        </content>
+      </ScrollPane>
+      <Button layoutX="511.0" layoutY="461.0" mnemonicParsing="false" onAction="#employeeAddButtonOnAction" text="Add" />
+   </children>
+</AnchorPane>
