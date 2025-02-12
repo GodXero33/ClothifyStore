@@ -1,14 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.clothifystore.ecom.controller.form.menu.employeemanagement.EmployeeDetailsFormController"
-            prefHeight="520.0" prefWidth="619.0">
-
+<AnchorPane prefHeight="520.0" prefWidth="624.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/employee-edit.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.employeemanagement.EmployeeDetailsFormController">
+   <children>
+      <Label alignment="CENTER" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="Employee Details" />
+      <Pane layoutX="5.0" layoutY="82.0" prefHeight="219.0" prefWidth="619.0">
+         <children>
+            <Pane layoutX="28.0" layoutY="54.0">
+               <children>
+                  <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="User Name" />
+                  <TextField fx:id="userNameTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="User Name" styleClass="text-field-normal" />
+               </children>
+            </Pane>
+            <Pane layoutX="28.0" layoutY="106.0">
+               <children>
+                  <TextField fx:id="nicTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="National Identity Card Number" styleClass="text-field-normal" />
+                  <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="NIC No" />
+               </children>
+            </Pane>
+            <Label layoutX="235.0" layoutY="8.0" prefHeight="27.0" prefWidth="149.0" styleClass="text-field-label" text="Search Employee" />
+            <Button layoutX="488.0" layoutY="156.0" mnemonicParsing="false" onAction="#employeeSearchButtonOnAction" text="Search" />
+         </children>
+      </Pane>
+      <Line endX="362.0" endY="8.0" layoutX="246.0" layoutY="74.0" startX="-236.0" startY="8.0" stroke="#9e9e9e" />
+   </children>
 </AnchorPane>

@@ -79,4 +79,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public boolean update (Employee employee) {
 		return this.employeeRepository.update(this.mapper.toEntity(employee));
 	}
+
+	@Override
+	public boolean delete (Integer employeeID) {
+		return this.employeeRepository.delete(employeeID);
+	}
 }

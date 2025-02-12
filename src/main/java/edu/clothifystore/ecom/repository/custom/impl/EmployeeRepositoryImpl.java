@@ -58,7 +58,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		if (employeeID == null || employeeID < 1) return false;
 
 		try {
-			return (Integer) CrudUtil.execute("DELETE FROM employee_phone WHERE employee_id = ?", employeeID) == 1;
+			CrudUtil.execute("DELETE FROM employee_phone WHERE employee_id = ?", employeeID);
+			return true;
 		} catch (SQLException exception) {
 			System.out.println(exception.getMessage());
 			return false;
@@ -209,6 +210,31 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 	@Override
 	public boolean delete (Integer id) {
+		try {
+			final Connection connection = DBConnection.getInstance().getConnection();
+
+			connection.setAutoCommit(false); // Start transaction.
+
+			if (!this.deletePhonesByEmployeeID(id) /* Delete all phones from employee_phone table. */) return false;
+
+			CrudUtil.execute("DELETE FROM employee WHERE id = ?", id);
+			return true;
+		} catch (SQLException exception) { // Any failure happens while executing or inserting records, rollback(delete buffer) changes.
+			try {
+				DBConnection.getInstance().getConnection().rollback();
+			} catch (SQLException rollbackException) {
+				System.out.println(rollbackException.getMessage());
+			}
+
+			System.out.println(exception.getMessage());
+		} finally { // Either transaction success or fail, turn on auto commit to stop transaction.
+			try {
+				DBConnection.getInstance().getConnection().setAutoCommit(true);
+			} catch (SQLException exception) {
+				System.out.println(exception.getMessage());
+			}
+		}
+
 		return false;
 	}
 
