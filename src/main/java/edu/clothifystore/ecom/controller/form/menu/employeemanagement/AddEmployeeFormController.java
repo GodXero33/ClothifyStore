@@ -220,15 +220,50 @@ public class AddEmployeeFormController implements Initializable, MenuForm {
 		return false;
 	}
 
+	private boolean isPhoneNumberAlreadyTaken (int index, String phone, Control targetController) {
+		if (this.employeeService.isPhoneAvailable(phone)) {
+			this.invalidInputValueOnEmployeeAdd("The phone " + index + " (" + phone + ") has already in the system. Can't add again.", targetController);
+			return true;
+		}
+
+		return false;
+	}
+
+	private boolean validatePhoneNumbers (String phone1, String phone2, String phone3, String phone1Type, String phone2Type, String phone3Type, InputValidator inputValidator) {
+		if (
+			(!phone1.isEmpty() && this.isInvalidPhoneNumber(1, phone1, phone1Type, this.phone1TextField, inputValidator)) ||
+			(!phone2.isEmpty() && this.isInvalidPhoneNumber(2, phone2, phone2Type, this.phone2TextField, inputValidator)) ||
+			(!phone3.isEmpty() && this.isInvalidPhoneNumber(3, phone3, phone3Type, this.phone3TextField, inputValidator))
+		) return false;
+
+		if (
+			this.isPhoneNumberAlreadyTaken(1, phone1, this.phone1TextField) ||
+			this.isPhoneNumberAlreadyTaken(2, phone2, this.phone2TextField) ||
+			this.isPhoneNumberAlreadyTaken(3, phone3, this.phone3TextField)
+		) return false;
+
+		if (!phone1.isEmpty() && (phone1.equals(phone2) || phone1.equals(phone3))) {
+			this.invalidInputValueOnEmployeeAdd("Two phone numbers can't be the same.", this.phone1TextField);
+			return false;
+		}
+
+		if (!phone2.isEmpty() && phone2.equals(phone3)) {
+			this.invalidInputValueOnEmployeeAdd("Two phone numbers can't be the same.", this.phone2TextField);
+			return false;
+		}
+
+		return true;
+	}
+
 	private Employee validateInputsAndGetNewEmployee () {
-		final String userName = this.userNameTextField.getText().trim();
-		final String fullName = this.fullNameTextField.getText().trim();
-		final String nic = this.nicTextField.getText().trim();
-		final String email = this.emailTextField.getText().trim();
-		final String address = this.addressTextField.getText().trim();
+		final String userName = this.userNameTextField.getText().trim().toLowerCase();
+		final String fullName = this.fullNameTextField.getText().trim().toLowerCase();
+		final String nic = this.nicTextField.getText().trim().toLowerCase();
+		final String email = this.emailTextField.getText().trim().toLowerCase();
+		final String address = this.addressTextField.getText().trim().toLowerCase();
 		final String salary = this.salaryTextField.getText().trim();
-		final String role = this.roleTextField.getText().trim();
-		final String supervisorUsername = this.supervisorUsernameTextField.getText().trim();
+		final String role = this.roleTextField.getText().trim().toLowerCase();
+		final String supervisorUsername = this.supervisorUsernameTextField.getText().trim().toLowerCase();
 		final String phone1 = this.phone1TextField.getText().trim();
 		final String phone2 = this.phone2TextField.getText().trim();
 		final String phone3 = this.phone3TextField.getText().trim();
@@ -257,7 +292,7 @@ public class AddEmployeeFormController implements Initializable, MenuForm {
 			return null;
 		}
 
-		if (this.employeeService.get(userName) != null) {
+		if (this.employeeService.isUsernameAvailable(userName)) {
 			this.invalidInputValueOnEmployeeAdd("The user name (" + userName + ") has already taken. Try another.", this.userNameTextField);
 			return null;
 		}
@@ -269,6 +304,16 @@ public class AddEmployeeFormController implements Initializable, MenuForm {
 
 		if (nic.isEmpty()) {
 			this.invalidInputValueOnEmployeeAdd("NIC can't be empty.", this.nicTextField);
+			return null;
+		}
+
+		if (!inputValidator.isValidNIC(nic)) {
+			this.invalidInputValueOnEmployeeAdd("Invalid NIC format.", this.nicTextField);
+			return null;
+		}
+
+		if (this.employeeService.isNICAvailable(nic)) {
+			this.invalidInputValueOnEmployeeAdd("The NIC (" + nic + ") is already in the system.", this.nicTextField);
 			return null;
 		}
 
@@ -297,11 +342,7 @@ public class AddEmployeeFormController implements Initializable, MenuForm {
 			return null;
 		}
 
-		if (
-			(!phone1.isEmpty() && this.isInvalidPhoneNumber(1, phone1, phone1Type, this.phone1TextField, inputValidator)) ||
-			(!phone2.isEmpty() && this.isInvalidPhoneNumber(2, phone2, phone2Type, this.phone2TextField, inputValidator)) ||
-			(!phone3.isEmpty() && this.isInvalidPhoneNumber(3, phone3, phone3Type, this.phone3TextField, inputValidator))
-		) return null;
+		if (!this.validatePhoneNumbers(phone1, phone2, phone3, phone1Type, phone2Type, phone3Type, inputValidator)) return null;
 
 		int supervisorID = -1;
 
@@ -355,6 +396,7 @@ public class AddEmployeeFormController implements Initializable, MenuForm {
 
 		if (this.employeeService.add(newEmployee)) {
 			new Alert(Alert.AlertType.INFORMATION, "New employee added successfully.").show();
+			this.clearInputData();
 		} else {
 			new Alert(Alert.AlertType.ERROR, "Failed to add new employee.").show();
 		}

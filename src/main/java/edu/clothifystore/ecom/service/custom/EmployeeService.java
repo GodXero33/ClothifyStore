@@ -7,4 +7,7 @@ public interface EmployeeService extends SuperService {
 	Employee get (String userName);
 	Integer getAdminID (String adminUserName);
 	boolean add (Employee employee);
+	boolean isUsernameAvailable (String username);
+	boolean isNICAvailable (String nic);
+	boolean isPhoneAvailable (String phone);
 }

@@ -45,4 +45,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public boolean add (Employee employee) {
 		return this.employeeRepository.add(this.mapper.toEntity(employee));
 	}
+
+	@Override
+	public boolean isUsernameAvailable (String username) {
+		return this.employeeRepository.isUsernameAvailable(username);
+	}
+
+	@Override
+	public boolean isNICAvailable (String nic) {
+		return this.employeeRepository.isNICAvailable(nic);
+	}
+
+	@Override
+	public boolean isPhoneAvailable (String phone) {
+		return this.employeeRepository.isPhoneAvailable(phone);
+	}
 }

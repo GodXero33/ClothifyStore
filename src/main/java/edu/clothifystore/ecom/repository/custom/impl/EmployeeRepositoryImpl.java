@@ -191,6 +191,31 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		return -1;
 	}
 
+	private boolean isPrimaryFieldValueAvailable (String query, Object data) {
+		try {
+			return ((ResultSet) CrudUtil.execute(query, data)).next();
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean isUsernameAvailable (String username) {
+		return this.isPrimaryFieldValueAvailable("SELECT id FROM employee WHERE user_name = ?", username);
+	}
+
+	@Override
+	public boolean isNICAvailable (String nic) {
+		return this.isPrimaryFieldValueAvailable("SELECT id FROM employee WHERE nic = ?", nic);
+	}
+
+	@Override
+	public boolean isPhoneAvailable (String phone) {
+		return this.isPrimaryFieldValueAvailable("SELECT phone FROM employee_phone WHERE phone = ?", phone);
+	}
+
 	@Override
 	public List<EmployeeEntity> getAll () {
 		return List.of();

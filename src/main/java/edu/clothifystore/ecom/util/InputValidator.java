@@ -32,4 +32,8 @@ public class InputValidator {
 	public boolean isValidUsername (String str) {
 		return str.matches("^(?=[a-zA-Z_]*\\d{0,4}[a-zA-Z_])[a-zA-Z0-9_]{1,10}$");
 	}
+
+	public boolean isValidNIC (String str) {
+		return str.matches("^(?:\\d{2}(?:[0-3]\\d{2}|[5-8]\\d{2})\\d{3}\\d[VvXx]|\\d{4}(?:[0-3]\\d{2}|[5-8]\\d{2})\\d{4}\\d)$");
+	}
 }

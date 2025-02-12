@@ -12,7 +12,7 @@
       <Label alignment="CENTER" layoutX="-2.0" prefHeight="101.0" prefWidth="606.0" styleClass="title" text="Login - Clothify Store" />
       <Label alignment="CENTER" layoutX="53.0" layoutY="161.0" prefHeight="30.0" prefWidth="108.0" styleClass="text-field-label" text="Username" />
       <Label alignment="CENTER" layoutX="53.0" layoutY="210.0" prefHeight="30.0" prefWidth="108.0" styleClass="text-field-label" text="Password" />
-      <TextField fx:id="userNameTextField" layoutX="172.0" layoutY="154.0" onKeyReleased="#userNameTextFieldOnKeyReleased" prefHeight="30.0" prefWidth="374.0" text="GodXero" />
+      <TextField fx:id="userNameTextField" layoutX="172.0" layoutY="154.0" onKeyReleased="#userNameTextFieldOnKeyReleased" prefHeight="30.0" prefWidth="374.0" text="god_xero" />
       <TextField fx:id="passwordTextField" layoutX="172.0" layoutY="203.0" onKeyReleased="#passwordTextFieldOnKeyReleased" prefHeight="30.0" prefWidth="374.0" text="1111" visible="false" />
       <PasswordField fx:id="passwordPasswordField" layoutX="172.0" layoutY="203.0" onKeyReleased="#passwordPasswordFieldOnKeyReleased" prefHeight="44.0" prefWidth="374.0" text="1111" />
       <Button layoutX="467.0" layoutY="305.0" mnemonicParsing="false" onAction="#loginButtonOnAction" text="Login" />
