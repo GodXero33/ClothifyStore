@@ -134,6 +134,8 @@ public class EmployeeEditController implements Initializable, MenuForm {
 		this.phone1TypeComboBox.setValue(PhoneType.MOBILE);
 		this.phone2TypeComboBox.setValue(PhoneType.HOME);
 		this.phone3TypeComboBox.setValue(PhoneType.WHATSAPP);
+
+		this.asAdminCheckBox.setSelected(false);
 	}
 
 	private boolean isLeapYear (int year) {

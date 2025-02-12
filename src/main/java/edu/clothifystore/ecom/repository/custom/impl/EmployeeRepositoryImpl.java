@@ -158,11 +158,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				employeeUpdateStatement.setString(8, entity.getEmail());
 			}
 
-			if (entity.getSalary() == null) {
-				employeeUpdateStatement.setNull(9, Types.DECIMAL); // Set salary to NULL
-			} else {
-				employeeUpdateStatement.setDouble(9, entity.getSalary());
-			}
+			employeeUpdateStatement.setDouble(9, entity.getSalary() == null ? 0.0 : entity.getSalary());
 
 			if (entity.getAdminID() == null) {
 				employeeUpdateStatement.setNull(10, Types.INTEGER); // Set admin_id to NULL

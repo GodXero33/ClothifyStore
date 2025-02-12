@@ -65,9 +65,9 @@ public class UpdateEmployeeFormController extends EmployeeEditController {
 		this.userNameTextField.setText(employee.getUserName());
 		this.fullNameTextField.setText(employee.getFullName());
 		this.nicTextField.setText(employee.getNIC());
-		this.emailTextField.setText(employee.getEmail());
+		this.emailTextField.setText(employee.getEmail() == null ? "" : employee.getEmail());
 		this.addressTextField.setText(employee.getAddress());
-		this.salaryTextField.setText(employee.getSalary().toString());
+		this.salaryTextField.setText(employee.getSalary() == null || employee.getSalary() == 0.0 ? "" : employee.getSalary().toString());
 		this.roleTextField.setText(employee.getRole());
 		this.asAdminCheckBox.setSelected(employee.getType().equalsIgnoreCase("ADMIN"));
 		this.dobYearComboBox.setValue(datePieces[0]);
@@ -153,6 +153,7 @@ public class UpdateEmployeeFormController extends EmployeeEditController {
 		if (this.employeeService.update(newEmployee)) {
 			new Alert(Alert.AlertType.INFORMATION, "Employee updated successfully.").show();
 			this.clearInputData();
+			this.changeStatusToSearch();
 		} else {
 			new Alert(Alert.AlertType.ERROR, "Failed to update new employee.").show();
 		}
