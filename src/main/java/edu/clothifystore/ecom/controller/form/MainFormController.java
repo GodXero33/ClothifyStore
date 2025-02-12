@@ -38,11 +38,12 @@ public class MainFormController implements Initializable {
 	public AnchorPane menuPane;
 
 	private Button currentActiveMenuButton;
+	private Employee currentEmployee;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		final Button dashboardMenuButton = (Button) (((Pane) this.menuPane.getChildren().get(1)).getChildren().getFirst()); // menu pane has two Panes as child. First pane is empty and make shadow. Second has 9 Buttons for all 9 menus. When application load, first menu loading is dashboard. So, among 9 buttons, first button is refer to dashboard menu. Check the FXML structure on 'main_view.fxml' in 'resources/view' directory.
-		final Employee currentEmployee = FormController.getInstance().getCurentEmployee();
+		this.currentEmployee = FormController.getInstance().getCurentEmployee();
 
 		try {
 			this.openMenu(MenuType.DASHBOARD, dashboardMenuButton);
@@ -52,7 +53,7 @@ public class MainFormController implements Initializable {
 
 		this.initTime();
 
-		if (currentEmployee != null) this.userNameLabel.setText(currentEmployee.getUserName());
+		if (this.currentEmployee != null) this.userNameLabel.setText(this.currentEmployee.getUserName());
 	}
 
 	private void initTime () {
@@ -101,6 +102,16 @@ public class MainFormController implements Initializable {
 		}
 	}
 
+	private boolean isCurrentUserEmployee () {
+		if (this.currentEmployee == null || this.currentEmployee.getType() == null || this.currentEmployee.getType().equalsIgnoreCase("employee")) {
+			new Alert(Alert.AlertType.WARNING, "You are not allowed to this feature. Please contact your supervisor.").show();
+			this.menuPane.setVisible(false);
+			return true;
+		}
+
+		return false;
+	}
+
 	@FXML
 	public void menuButtonOnAction (ActionEvent actionEvent) {
 		this.menuPane.setVisible(!this.menuPane.isVisible());
@@ -113,21 +124,22 @@ public class MainFormController implements Initializable {
 
 	@FXML
 	public void employeeManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
+		if (this.isCurrentUserEmployee()) return;
+
 		this.openMenu(MenuType.EMPLOYEE_MANAGEMENT, (Button) actionEvent.getTarget());
 	}
 
 	@FXML
 	public void productManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
+		if (this.isCurrentUserEmployee()) return;
+
 		this.openMenu(MenuType.PRODUCT_MANAGEMENT, (Button) actionEvent.getTarget());
 	}
 
 	@FXML
-	public void inventoryManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.INVENTORY_MANAGEMENT, (Button) actionEvent.getTarget());
-	}
-
-	@FXML
 	public void supplierManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
+		if (this.isCurrentUserEmployee()) return;
+
 		this.openMenu(MenuType.SUPPLIER_MANAGEMENT, (Button) actionEvent.getTarget());
 	}
 
@@ -138,6 +150,8 @@ public class MainFormController implements Initializable {
 
 	@FXML
 	public void reportsButtonOnAction (ActionEvent actionEvent) throws IOException {
+		if (this.isCurrentUserEmployee()) return;
+
 		this.openMenu(MenuType.REPORTS, (Button) actionEvent.getTarget());
 	}
 

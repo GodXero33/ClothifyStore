@@ -4,7 +4,6 @@ public enum MenuType {
 	DASHBOARD("main"),
 	EMPLOYEE_MANAGEMENT("main"),
 	PRODUCT_MANAGEMENT("main"),
-	INVENTORY_MANAGEMENT("main"),
 	SUPPLIER_MANAGEMENT("main"),
 	ORDER_MANAGEMENT("main"),
 	REPORTS("main"),
