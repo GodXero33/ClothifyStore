@@ -118,10 +118,16 @@ DESC report;
 INSERT INTO employee (user_name, full_name, nic, email, address, dob, password, salary, type, role,
 admin_id) VALUES
 ('god_xero', 'h.r.sathish shan', '200121001975', 'shansathish38@gmail.com', 'no.60,alokamawatha,walawegama,udawalawa,embilipitiya', '2001/07/28', '1111', 400000.0, 2, 'Manager', null
+),
+('saman', 'b.d.saman', '200121001976', 'samansaman@gmail.com', 'no.62,smagimawatha,walawegama,udawalawa,embilipitiya',
+'2001/06/22', '2323', 100000.0, 1, 'Cashier', 1
 );
 
 INSERT INTO employee_phone (phone, employee_id) VALUES
 ('0770110488', 1),
-('0728045217', 1);
+('0728045123', 1),
+('0728045217', 2);
 
 SELECT * FROM employee;
+SELECT * FROM employee_phone;
+

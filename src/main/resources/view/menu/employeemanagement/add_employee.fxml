@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/add-employee.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.employeemanagement.AddEmployeeFormController">
+<AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/employee-management-sub-menu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.employeemanagement.AddEmployeeFormController">
    <children>
       <Label alignment="CENTER" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="Add Employee" />
       <ScrollPane hbarPolicy="NEVER" layoutY="53.0" prefHeight="401.0" prefWidth="619.0" style="-fx-background-color: #121212;">
@@ -58,7 +58,8 @@
                   <Pane layoutX="14.0" layoutY="344.0" prefHeight="41.0" prefWidth="570.0">
                      <children>
                         <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Salary" />
-                        <TextField fx:id="salaryTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Salary (Rs)" styleClass="text-field-normal" />
+                        <TextField fx:id="salaryTextField" layoutX="184.0" prefHeight="41.0" prefWidth="357.0" promptText="Salary (Rs)" styleClass="text-field-normal" />
+                        <Label layoutX="544.0" layoutY="7.0" prefHeight="27.0" prefWidth="25.0" styleClass="text-field-label" text="Rs" />
                      </children>
                   </Pane>
                   <Pane layoutX="14.0" layoutY="397.0" prefHeight="41.0" prefWidth="570.0">
@@ -105,6 +106,6 @@
                </children></AnchorPane>
         </content>
       </ScrollPane>
-      <Button layoutX="511.0" layoutY="461.0" mnemonicParsing="false" onAction="#employeeAddButtonOnAction" text="Add" />
+      <Button fx:id="employeeEditFormActionButton" layoutX="511.0" layoutY="461.0" mnemonicParsing="false" onAction="#employeeEditFormActionButtonOnAction" text="Add" />
    </children>
 </AnchorPane>

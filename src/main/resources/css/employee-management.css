@@ -10,9 +10,9 @@
 }
 
 .button-active {
-    -fx-background-color: #773434;
+    -fx-background-color: #34aaaa;
 }
 
 .button-active:hover {
-    -fx-background-color: #773434;
+    -fx-background-color: #34aaaa;
 }

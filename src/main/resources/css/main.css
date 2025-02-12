@@ -10,28 +10,6 @@
     -fx-font-weight: bold;
 }
 
-.text-field-label {
-    -fx-background-color: #000000;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-}
-
-.text-field {
-    -fx-background-color: #121212;
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-}
-
-.text-field:hover {
-    -fx-background-color: #343434;
-}
-
-.text-field:focused  {
-    -fx-background-color: #565555;
-}
-
 .button {
     -fx-background-color: #232323;
     -fx-background-radius: 10px;
@@ -46,11 +24,11 @@
 }
 
 .button-active {
-    -fx-background-color: #673434;
+    -fx-background-color: #34aaaa;
 }
 
 .button-active:hover {
-    -fx-background-color: #673434;
+    -fx-background-color: #34aaaa;
 }
 
 .check-box {

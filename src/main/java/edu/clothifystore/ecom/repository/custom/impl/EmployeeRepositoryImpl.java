@@ -1,5 +1,6 @@
 package edu.clothifystore.ecom.repository.custom.impl;
 
+import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.entity.EmployeeEntity;
 import edu.clothifystore.ecom.entity.EmployeePhoneEntity;
 import edu.clothifystore.ecom.repository.custom.EmployeeRepository;
@@ -53,13 +54,23 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		return builder.toString();
 	}
 
+	private boolean deletePhonesByEmployeeID (Integer employeeID) {
+		if (employeeID == null || employeeID < 1) return false;
+
+		try {
+			return (Integer) CrudUtil.execute("DELETE FROM employee_phone WHERE employee_id = ?", employeeID) == 1;
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+			return false;
+		}
+	}
+
 	@Override
 	public boolean add (EmployeeEntity entity) {
 		try {
 			final Connection connection = DBConnection.getInstance().getConnection();
 
 			connection.setAutoCommit(false); // Start transaction.
-
 
 			final PreparedStatement employeeInsertStatement = connection.prepareStatement(this.getInsertQueryBuilder(entity), Statement.RETURN_GENERATED_KEYS); // Insert new record into employee table and get auto generated id value.
 
@@ -122,6 +133,81 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 	@Override
 	public boolean update (EmployeeEntity entity) {
+		final Integer employeeID = entity.getId();
+
+		if (employeeID == null) return false; // Assume any case if corrupted entity record passed while mapping process.
+
+		try {
+			final Connection connection = DBConnection.getInstance().getConnection();
+
+			connection.setAutoCommit(false); // Start transaction.
+
+			final PreparedStatement employeeUpdateStatement = connection.prepareStatement("UPDATE employee SET user_name = ?, full_name = ?, nic = ?, address = ?, dob = ?, type = ?, role = ?, email = ?, salary = ?, admin_id = ? WHERE id = ?"); // Update record from employee table.
+
+			employeeUpdateStatement.setString(1, entity.getUserName());
+			employeeUpdateStatement.setString(2, entity.getFullName());
+			employeeUpdateStatement.setString(3, entity.getNIC());
+			employeeUpdateStatement.setString(4, entity.getAddress());
+			employeeUpdateStatement.setString(5, entity.getDOB());
+			employeeUpdateStatement.setString(6, entity.getType());
+			employeeUpdateStatement.setString(7, entity.getRole());
+
+			if (entity.getEmail() == null) {
+				employeeUpdateStatement.setNull(8, Types.VARCHAR); // Set email to NULL
+			} else {
+				employeeUpdateStatement.setString(8, entity.getEmail());
+			}
+
+			if (entity.getSalary() == null) {
+				employeeUpdateStatement.setNull(9, Types.DECIMAL); // Set salary to NULL
+			} else {
+				employeeUpdateStatement.setDouble(9, entity.getSalary());
+			}
+
+			if (entity.getAdminID() == null) {
+				employeeUpdateStatement.setNull(10, Types.INTEGER); // Set admin_id to NULL
+			} else {
+				employeeUpdateStatement.setInt(10, entity.getAdminID());
+			}
+
+			employeeUpdateStatement.setInt(11, employeeID); // Set id. in condition (... WHERE id = ?)
+
+			if (!this.deletePhonesByEmployeeID(employeeID) /* Delete all phones from employee_phone table. So, simply delete all and add as new. :) */) return false; // Failed to delete phone numbers. Can't go further.
+
+			if (employeeUpdateStatement.executeUpdate() == 0) return false; // Update employee failed. no rows affected.
+
+			final List<EmployeePhoneEntity> phoneEntities = entity.getPhone();
+
+			if (phoneEntities.isEmpty()) return true;
+
+			final PreparedStatement employeePhoneInsertStatement = connection.prepareStatement("INSERT INTO employee_phone (phone, employee_id, type) VALUES (?, ?, ?)"); // Insert new records into employee_phone table.
+
+			employeePhoneInsertStatement.setInt(2, employeeID);
+
+			// For each phone in employee entity phone field, insert into employee_phone table as records.
+			for (final EmployeePhoneEntity phoneEntity : phoneEntities) {
+				employeePhoneInsertStatement.setString(1, phoneEntity.getPhone());
+				employeePhoneInsertStatement.setString(3, phoneEntity.getType());
+				employeePhoneInsertStatement.executeUpdate();
+			}
+
+			return true;
+		} catch (SQLException exception) { // Any failure happens while executing or inserting records, rollback(delete buffer) changes.
+			try {
+				DBConnection.getInstance().getConnection().rollback();
+			} catch (SQLException rollbackException) {
+				System.out.println(rollbackException.getMessage());
+			}
+
+			System.out.println(exception.getMessage());
+		} finally { // Either transaction success or fail, turn on auto commit to stop transaction.
+			try {
+				DBConnection.getInstance().getConnection().setAutoCommit(true);
+			} catch (SQLException exception) {
+				System.out.println(exception.getMessage());
+			}
+		}
+
 		return false;
 	}
 
@@ -135,10 +221,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		return null;
 	}
 
-	@Override
-	public EmployeeEntity get (String username) {
+	private EmployeeEntity getByField (String fieldName, Object value) {
 		try {
-			final ResultSet employeeDataResultSet = CrudUtil.execute("SELECT id, user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id FROM employee WHERE user_name = ?", username);
+			final ResultSet employeeDataResultSet = CrudUtil.execute("SELECT id, user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id FROM employee WHERE " + fieldName + " = ?", value);
 
 			if (!employeeDataResultSet.next()) return null;
 
@@ -179,16 +264,37 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	}
 
 	@Override
-	public Integer getAdminID (String adminUserName) {
-		try {
-			final ResultSet resultSet = CrudUtil.execute("SELECT id FROM employee WHERE user_name = ? AND type = 'ADMIN'", adminUserName);
+	public EmployeeEntity get (String username) {
+		return this.getByField("user_name", username);
+	}
 
-			if (resultSet.next()) return resultSet.getInt(1);
+	@SuppressWarnings("unchecked")
+	private <T, U> T getAdminFieldValue (String searchFieldName, String targetFieldName, U value) {
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT " + targetFieldName + " FROM employee WHERE " + searchFieldName + " = ? AND type = 'ADMIN'", value);
+
+			if (resultSet.next()) return (T) resultSet.getObject(1);
 		} catch (SQLException exception) {
 			System.out.println(exception.getMessage());
 		}
 
-		return -1;
+		return null;
+	}
+
+	@Override
+	public Integer getAdminID (String adminUserName) {
+		final Integer id = this.getAdminFieldValue("user_name", "id", adminUserName);
+		return id == null ? -1 : id;
+	}
+
+	@Override
+	public String getAdminName (Integer adminID) {
+		return this.getAdminFieldValue("id", "user_name", adminID);
+	}
+
+	@Override
+	public EmployeeEntity getByNIC (String nic) {
+		return this.getByField("nic", nic);
 	}
 
 	private boolean isPrimaryFieldValueAvailable (String query, Object data) {

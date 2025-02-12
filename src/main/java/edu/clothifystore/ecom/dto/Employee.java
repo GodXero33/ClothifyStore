@@ -8,6 +8,7 @@ import java.util.List;
 @Builder
 @Data
 public class Employee {
+	private Integer id;
 	private String userName;
 	private String fullName;
 	private String NIC;

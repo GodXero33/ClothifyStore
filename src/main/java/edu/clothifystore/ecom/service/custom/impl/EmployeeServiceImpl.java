@@ -29,16 +29,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee get (String userName) {
-		final EmployeeEntity user = this.employeeRepository.get(userName);
+		final EmployeeEntity employee = this.employeeRepository.get(userName);
 
-		if (user == null) return null;
+		if (employee == null) return null;
 
-		return this.mapper.toDTO(user);
+		return this.mapper.toDTO(employee);
+	}
+
+	@Override
+	public Employee getByNIC (String nic) {
+		final EmployeeEntity employee = this.employeeRepository.getByNIC(nic);
+
+		if (employee == null) return null;
+
+		return this.mapper.toDTO(employee);
 	}
 
 	@Override
 	public Integer getAdminID (String adminUserName) {
 		return this.employeeRepository.getAdminID(adminUserName);
+	}
+
+	@Override
+	public String getAdminName (Integer adminID) {
+		return this.employeeRepository.getAdminName(adminID);
 	}
 
 	@Override
@@ -59,5 +73,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public boolean isPhoneAvailable (String phone) {
 		return this.employeeRepository.isPhoneAvailable(phone);
+	}
+
+	@Override
+	public boolean update (Employee employee) {
+		return this.employeeRepository.update(this.mapper.toEntity(employee));
 	}
 }
