@@ -43,6 +43,12 @@ public class UpdateEmployeeFormController extends EmployeeEditController {
 		this.asAdminCheckBox.setDisable(status);
 	}
 
+	@Override
+	public void update () {
+		super.update();
+		this.changeStatusToSearch();
+	}
+
 	private void changeStatusToSearch () {
 		this.isInSearchMode = true;
 
