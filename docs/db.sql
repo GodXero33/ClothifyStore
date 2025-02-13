@@ -15,6 +15,7 @@ CREATE TABLE employee (
     type ENUM('EMPLOYEE', 'ADMIN') DEFAULT 'EMPLOYEE',
     role VARCHAR(30) NOT NULL,
     admin_id INT,
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
@@ -22,6 +23,7 @@ CREATE TABLE employee_phone (
     phone VARCHAR(12),
     employee_id INT NOT NULL,
     type ENUM('MOBILE', 'HOME', 'WHATSAPP') NOT NULL,
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (phone),
     FOREIGN KEY (employee_id) REFERENCES employee (id)
 );
@@ -32,6 +34,7 @@ CREATE TABLE customer (
     phone VARCHAR(12),
     email VARCHAR(255),
     address VARCHAR(255),
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
@@ -46,6 +49,7 @@ CREATE TABLE product (
     discount DECIMAL(10, 2) DEFAULT 0.0,
     stock INT(10) NOT NULL,
     description VARCHAR(255),
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
@@ -57,6 +61,7 @@ CREATE TABLE supplier (
     address VARCHAR(255) NOT NUll,
     type ENUM('BUSINESS', 'INDIVIDUAL') NOT NULL,
     description VARCHAR(255),
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)
 );
 
@@ -67,6 +72,7 @@ CREATE TABLE `order` (
     amount DECIMAL(10, 2),
     employee_id INT NOT NULL,
     customer_id INT NOT NULL,
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id),
     FOREIGN KEY (employee_id) REFERENCES employee (id),
     FOREIGN KEY (customer_id) REFERENCES customer (id)
@@ -76,6 +82,7 @@ CREATE TABLE order_item (
     order_id INT,
     product_id INT,
     discount DECIMAL(10, 2),
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (order_id, product_id),
     FOREIGN KEY (order_id) REFERENCES `order` (id),
     FOREIGN KEY (product_id) REFERENCES product (id)
@@ -90,6 +97,7 @@ CREATE TABLE product_supplier (
     supplier_price DECIMAL(10, 2) NOT NULL,
     payment_status ENUM('PENDING', 'PAID') DEFAULT 'PENDING',
     payment_date DATE,
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (supplier_id, product_id, `date`, `time`),
     FOREIGN KEY (supplier_id) REFERENCES supplier (id),
     FOREIGN KEY (product_id) REFERENCES product (id)
@@ -100,6 +108,7 @@ CREATE TABLE report (
     `date` DATE NOT NULL,
     `time` TIME NOT NULL,
     employee_id INT,
+    is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id),
     FOREIGN KEY (employee_id) REFERENCES employee (id)
 );

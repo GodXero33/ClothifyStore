@@ -58,7 +58,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		if (employeeID == null || employeeID < 1) return false;
 
 		try {
-			CrudUtil.execute("DELETE FROM employee_phone WHERE employee_id = ?", employeeID);
+			CrudUtil.execute("UPDATE employee_phone SET is_deleted = TRUE WHERE employee_id = ?", employeeID);
 			return true;
 		} catch (SQLException exception) {
 			System.out.println(exception.getMessage());
@@ -217,7 +217,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 			if (!this.deletePhonesByEmployeeID(id) /* Delete all phones from employee_phone table. */) return false;
 
-			CrudUtil.execute("DELETE FROM employee WHERE id = ?", id);
+			CrudUtil.execute("UPDATE employee SET is_deleted = TRUE WHERE id = ?", id);
 			return true;
 		} catch (SQLException exception) { // Any failure happens while executing or inserting records, rollback(delete buffer) changes.
 			try {
@@ -245,7 +245,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 	private EmployeeEntity getByField (String fieldName, Object value) {
 		try {
-			final ResultSet employeeDataResultSet = CrudUtil.execute("SELECT id, user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id FROM employee WHERE " + fieldName + " = ?", value);
+			final ResultSet employeeDataResultSet = CrudUtil.execute("SELECT id, user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id FROM employee WHERE " + fieldName + " = ? AND is_deleted = FALSE", value);
 
 			if (!employeeDataResultSet.next()) return null;
 
@@ -266,7 +266,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				build();
 			final List<EmployeePhoneEntity> employeePhone = new ArrayList<>();
 
-			final ResultSet emloyeePhoneResultSet = CrudUtil.execute("SELECT phone, type FROM employee_phone WHERE employee_id = ?", employeeID);
+			final ResultSet emloyeePhoneResultSet = CrudUtil.execute("SELECT phone, type FROM employee_phone WHERE employee_id = ? AND is_deleted = FALSE", employeeID);
 
 			// Add each phone records into 'employeePhone' list.
 			while (emloyeePhoneResultSet.next())
@@ -293,7 +293,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	@SuppressWarnings("unchecked")
 	private <T, U> T getAdminFieldValue (String searchFieldName, String targetFieldName, U value) {
 		try {
-			final ResultSet resultSet = CrudUtil.execute("SELECT " + targetFieldName + " FROM employee WHERE " + searchFieldName + " = ? AND type = 'ADMIN'", value);
+			final ResultSet resultSet = CrudUtil.execute("SELECT " + targetFieldName + " FROM employee WHERE " + searchFieldName + " = ? AND type = 'ADMIN' AND is_deleted = FALSE", value);
 
 			if (resultSet.next()) return (T) resultSet.getObject(1);
 		} catch (SQLException exception) {
@@ -331,17 +331,17 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 	@Override
 	public boolean isUsernameAvailable (String username) {
-		return this.isPrimaryFieldValueAvailable("SELECT id FROM employee WHERE user_name = ?", username);
+		return this.isPrimaryFieldValueAvailable("SELECT id FROM employee WHERE user_name = ? AND is_deleted = FALSE", username);
 	}
 
 	@Override
 	public boolean isNICAvailable (String nic) {
-		return this.isPrimaryFieldValueAvailable("SELECT id FROM employee WHERE nic = ?", nic);
+		return this.isPrimaryFieldValueAvailable("SELECT id FROM employee WHERE nic = ? AND is_deleted = FALSE", nic);
 	}
 
 	@Override
 	public boolean isPhoneAvailable (String phone) {
-		return this.isPrimaryFieldValueAvailable("SELECT phone FROM employee_phone WHERE phone = ?", phone);
+		return this.isPrimaryFieldValueAvailable("SELECT phone FROM employee_phone WHERE phone = ? AND is_deleted = FALSE", phone);
 	}
 
 	@Override
