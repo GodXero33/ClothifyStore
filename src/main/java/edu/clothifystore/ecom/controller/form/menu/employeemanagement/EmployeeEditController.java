@@ -353,6 +353,11 @@ public class EmployeeEditController implements Initializable, MenuForm {
 		int supervisorID = -1;
 
 		if (!supervisorUsername.isEmpty()) {
+			if (userName.equals(supervisorUsername)) {
+				this.invalidInputValueOnEmployeeAdd("Supervisor can't have same name as username.", this.supervisorUsernameTextField);
+				return null;
+			}
+
 			supervisorID = this.employeeService.getAdminID(supervisorUsername);
 
 			if (supervisorID == -1) {
