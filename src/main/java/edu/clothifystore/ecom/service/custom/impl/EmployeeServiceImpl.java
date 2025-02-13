@@ -9,22 +9,15 @@ import edu.clothifystore.ecom.repository.custom.EmployeeRepository;
 import edu.clothifystore.ecom.service.custom.EmployeeService;
 import edu.clothifystore.ecom.util.MapperType;
 import edu.clothifystore.ecom.util.RepositoryType;
+import edu.clothifystore.ecom.util.UtilFactory;
 
 public class EmployeeServiceImpl implements EmployeeService {
-	private static EmployeeServiceImpl instance;
-
 	private final Mapper<Employee, EmployeeEntity> mapper;
+	private final EmployeeRepository employeeRepository;
 
-	private final EmployeeRepository employeeRepository = RepositoryFactory.getInstance().getRepositoryType(RepositoryType.EMPLOYEE);
-
-	private EmployeeServiceImpl () {
-		this.mapper = MapperFactory.getInstance().getMapperType(MapperType.EMPLOYEE);
-	}
-
-	public static EmployeeServiceImpl getInstance () {
-		if (EmployeeServiceImpl.instance == null) EmployeeServiceImpl.instance = new EmployeeServiceImpl();
-
-		return EmployeeServiceImpl.instance;
+	public EmployeeServiceImpl () {
+		this.mapper = UtilFactory.getObject(MapperFactory.class).getMapperType(MapperType.EMPLOYEE);
+		this.employeeRepository = UtilFactory.getObject(RepositoryFactory.class).getRepositoryType(RepositoryType.EMPLOYEE);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package edu.clothifystore.ecom.repository.custom.impl;
 
-import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.entity.EmployeeEntity;
 import edu.clothifystore.ecom.entity.EmployeePhoneEntity;
 import edu.clothifystore.ecom.repository.custom.EmployeeRepository;
@@ -12,16 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeRepositoryImpl implements EmployeeRepository {
-	private static EmployeeRepositoryImpl instance;
-
-	private EmployeeRepositoryImpl () {}
-
-	public static EmployeeRepository getInstance () {
-		if (EmployeeRepositoryImpl.instance == null) EmployeeRepositoryImpl.instance = new EmployeeRepositoryImpl();
-
-		return EmployeeRepositoryImpl.instance;
-	}
-
 	private String getInsertQueryBuilder (EmployeeEntity entity) {
 		final StringBuilder builder = new StringBuilder();
 		int optionalParams = 0;

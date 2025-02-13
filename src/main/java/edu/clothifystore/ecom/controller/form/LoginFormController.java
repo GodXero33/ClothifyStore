@@ -5,6 +5,7 @@ import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.service.ServiceFactory;
 import edu.clothifystore.ecom.service.custom.EmployeeService;
 import edu.clothifystore.ecom.util.ServiceType;
+import edu.clothifystore.ecom.util.UtilFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -22,7 +23,7 @@ public class LoginFormController {
 	@FXML
 	public PasswordField passwordPasswordField;
 
-	private final EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
+	private final EmployeeService employeeService = UtilFactory.getObject(ServiceFactory.class).getServiceType(ServiceType.EMPLOYEE);
 	private Employee loadedEmployee;
 
 	@FXML

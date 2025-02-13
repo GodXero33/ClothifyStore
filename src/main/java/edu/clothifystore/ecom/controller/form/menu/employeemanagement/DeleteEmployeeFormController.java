@@ -26,7 +26,7 @@ public class DeleteEmployeeFormController implements Initializable, MenuForm {
 	@FXML
 	public Button employeeDeleteButton;
 
-	private final EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
+	private final EmployeeService employeeService = UtilFactory.getObject(ServiceFactory.class).getServiceType(ServiceType.EMPLOYEE);
 	private Employee loadedEmployee;
 
 	@Override
@@ -41,7 +41,7 @@ public class DeleteEmployeeFormController implements Initializable, MenuForm {
 	public void employeeSearchButtonOnAction (ActionEvent actionEvent) {
 		final String username = this.userNameTextField.getText().trim().toLowerCase();
 		final String nic = this.nicTextField.getText().trim().toLowerCase();
-		final InputValidator inputValidator = UtilFactory.getInstance().getObject(InputValidator.class);
+		final InputValidator inputValidator = UtilFactory.getObject(InputValidator.class);
 
 		if (username.equals(FormController.getInstance().getCurentEmployee().getUserName()) || nic.equals(FormController.getInstance().getCurentEmployee().getNIC())) { // A user can't delete himself.
 			new Alert(Alert.AlertType.WARNING, "You can't delete yourself. Please contact another supervisor or logged in as admin.").show();

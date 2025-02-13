@@ -118,7 +118,7 @@ public class EditEmployeeFormController extends AddEditEmployeeFormController {
 	private void searchEmployee () {
 		final String userName = this.userNameTextField.getText().trim().toLowerCase();
 		final String nic = this.nicTextField.getText().trim().toLowerCase();
-		final InputValidator inputValidator = UtilFactory.getInstance().getObject(InputValidator.class);
+		final InputValidator inputValidator = UtilFactory.getObject(InputValidator.class);
 
 		if (!userName.isEmpty() && !inputValidator.isValidUsername(userName)) {
 			this.invalidInputValueOnEmployeeAdd("Incorrect user name. Please check the user name before search.", this.userNameTextField);

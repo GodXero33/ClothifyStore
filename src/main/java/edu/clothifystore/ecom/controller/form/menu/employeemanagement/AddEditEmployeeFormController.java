@@ -59,7 +59,7 @@ public class AddEditEmployeeFormController implements Initializable, MenuForm {
 	public Button employeeEditFormActionButton;
 
 	protected String dobValue;
-	protected final EmployeeService employeeService = ServiceFactory.getInstance().getServiceType(ServiceType.EMPLOYEE);
+	protected final EmployeeService employeeService = UtilFactory.getObject(ServiceFactory.class).getServiceType(ServiceType.EMPLOYEE);
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
@@ -278,7 +278,7 @@ public class AddEditEmployeeFormController implements Initializable, MenuForm {
 		final PhoneType phone3Type = this.phone3TypeComboBox.getValue();
 		final String type = this.asAdminCheckBox.isSelected() ? "ADMIN" : "EMPLOYEE";
 
-		final InputValidator inputValidator = UtilFactory.getInstance().getObject(InputValidator.class);
+		final InputValidator inputValidator = UtilFactory.getObject(InputValidator.class);
 
 		if (userName.isEmpty()) {
 			this.invalidInputValueOnEmployeeAdd("User name can't be empty.", this.userNameTextField);
