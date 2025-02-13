@@ -69,9 +69,4 @@ public class EmployeeManagementFormController implements Initializable, MenuForm
 	public void deleteEmployeeButtonOnAction (ActionEvent actionEvent) throws IOException {
 		this.openMenu(MenuType.DELETE_EMPLOYEE, (Button) actionEvent.getTarget());
 	}
-
-	@FXML
-	public void employeeDetailsButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.EMPLOYEE_DETAILS, (Button) actionEvent.getTarget());
-	}
 }

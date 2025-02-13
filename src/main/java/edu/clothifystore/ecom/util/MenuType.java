@@ -10,8 +10,7 @@ public enum MenuType {
 	SETTINGS("main"),
 	ADD_EMPLOYEE("employeemanagement"),
 	UPDATE_EMPLOYEE("employeemanagement"),
-	DELETE_EMPLOYEE("employeemanagement"),
-	EMPLOYEE_DETAILS("employeemanagement");
+	DELETE_EMPLOYEE("employeemanagement");
 
 	private final String path;
 
