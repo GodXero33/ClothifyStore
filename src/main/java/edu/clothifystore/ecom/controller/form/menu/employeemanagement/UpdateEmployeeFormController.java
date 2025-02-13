@@ -8,13 +8,20 @@ import edu.clothifystore.ecom.util.UtilFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class UpdateEmployeeFormController extends EmployeeEditController {
+	@FXML
+	public Button employeeEditFormClearButton;
+	@FXML
+	public Label titleLabel;
+
 	private boolean isInSearchMode;
 	private Integer searchedEmployeeID;
 
@@ -54,6 +61,8 @@ public class UpdateEmployeeFormController extends EmployeeEditController {
 
 		this.updateToggleTypeControllersDisableStatus(true);
 		this.employeeEditFormActionButton.setText("Search");
+		this.titleLabel.setText("Search Employee");
+		this.employeeEditFormClearButton.setDisable(true);
 	}
 
 	private void changeStatusToUpdate () {
@@ -61,6 +70,8 @@ public class UpdateEmployeeFormController extends EmployeeEditController {
 
 		this.updateToggleTypeControllersDisableStatus(false);
 		this.employeeEditFormActionButton.setText("Update");
+		this.titleLabel.setText("Update Employee");
+		this.employeeEditFormClearButton.setDisable(false);
 	}
 
 	private void updateFieldsWithEmployee (Employee employee) {
@@ -172,5 +183,10 @@ public class UpdateEmployeeFormController extends EmployeeEditController {
 		} else {
 			this.updateEmployee();
 		}
+	}
+
+	public void employeeEditFormClearButtonOnAction (ActionEvent actionEvent) {
+		this.clearInputData();
+		this.changeStatusToSearch();
 	}
 }
