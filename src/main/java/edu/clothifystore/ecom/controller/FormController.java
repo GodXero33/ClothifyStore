@@ -25,7 +25,7 @@ public class FormController {
 
 	@Setter
 	@Getter
-	public Employee curentEmployee;
+	private Employee curentEmployee;
 	private final Map<MenuType, FXMLLoader> loadedStagesMap;
 	private final String formFXMLPath = "../../../view";
 

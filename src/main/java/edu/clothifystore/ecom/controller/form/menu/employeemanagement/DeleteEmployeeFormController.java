@@ -1,5 +1,6 @@
 package edu.clothifystore.ecom.controller.form.menu.employeemanagement;
 
+import edu.clothifystore.ecom.controller.FormController;
 import edu.clothifystore.ecom.controller.form.menu.MenuForm;
 import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.service.ServiceFactory;
@@ -41,6 +42,13 @@ public class DeleteEmployeeFormController implements Initializable, MenuForm {
 		final String username = this.userNameTextField.getText().trim().toLowerCase();
 		final String nic = this.nicTextField.getText().trim().toLowerCase();
 		final InputValidator inputValidator = UtilFactory.getInstance().getObject(InputValidator.class);
+
+		if (username.equals(FormController.getInstance().getCurentEmployee().getUserName()) || nic.equals(FormController.getInstance().getCurentEmployee().getNIC())) { // A user can't delete himself.
+			new Alert(Alert.AlertType.WARNING, "You can't delete yourself. Please contact another supervisor or logged in as admin.").show();
+			this.userNameTextField.clear();
+			this.nicTextField.clear();
+			return;
+		}
 
 		if (!username.isEmpty() && !inputValidator.isValidUsername(username)) {
 			new Alert(Alert.AlertType.WARNING, "Invalid Username.").show();
