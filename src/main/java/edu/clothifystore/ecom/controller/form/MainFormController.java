@@ -27,6 +27,8 @@ import java.util.ResourceBundle;
 
 public class MainFormController implements Initializable {
 	@FXML
+	public Label titleLabel;
+	@FXML
 	public AnchorPane mainContentPane;
 	@FXML
 	public Label dateLabel;
@@ -88,18 +90,21 @@ public class MainFormController implements Initializable {
 
 		if (button.equals(this.currentActiveMenuButton)) return; // If target menu is already opened, exit.
 
+		final FXMLLoader loader = FormController.getInstance().openMenu(menuType, this.mainContentPane); // Load new menu.
+
+		if (loader == null) {
+			new Alert(Alert.AlertType.ERROR, "Can't load target menu. May be Main  content is not loaded. May be restart application will resolve the problem.").show();
+			return;
+		}
+
 		if (this.currentActiveMenuButton != null) this.currentActiveMenuButton.getStyleClass().remove("button-active");
 
 		button.getStyleClass().add("button-active");
 
 		this.currentActiveMenuButton = button;
-		final FXMLLoader loader = FormController.getInstance().openMenu(menuType, this.mainContentPane); // Load new menu.
 
-		if (loader == null) {
-			new Alert(Alert.AlertType.ERROR, "Can't load target menu. May be Main  content is not loaded. May be restart application will resolve the problem.").show();
-		} else {
-			((MenuForm) loader.getController()).update();
-		}
+		this.titleLabel.setText(menuType.getDisplayName());
+		((MenuForm) loader.getController()).update();
 	}
 
 	private boolean isCurrentUserEmployee () {

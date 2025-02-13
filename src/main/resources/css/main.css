@@ -5,8 +5,7 @@
 .title {
     -fx-background-color: #000000;
     -fx-text-fill: #ffffff;
-    -fx-font-size: 40px;
-    -fx-font-style: italic;
+    -fx-font-size: 25px;
     -fx-font-weight: bold;
 }
 

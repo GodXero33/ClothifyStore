@@ -17,7 +17,7 @@
       <AnchorPane fx:id="mainContentPane" layoutY="79.0" prefHeight="520.0" prefWidth="845.0" styleClass="nav-bar" />
       <AnchorPane layoutY="-4.0" prefHeight="72.0" prefWidth="845.0">
          <children>
-            <Label layoutX="370.0" layoutY="19.0" styleClass="title" text="Clothify Store">
+            <Label fx:id="titleLabel" alignment="CENTER" layoutX="380.0" layoutY="30.0" prefHeight="36.0" prefWidth="229.0" styleClass="title" text="Clothify Store">
                <font>
                   <Font name="Arial Rounded MT Bold" size="28.0" />
                </font>
@@ -27,7 +27,7 @@
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
             </Label>
-            <Label fx:id="timeLabel" layoutX="284.0" layoutY="38.0" text="00:00" textFill="WHITE">
+            <Label fx:id="timeLabel" layoutX="284.0" layoutY="38.0" prefHeight="20.0" prefWidth="54.0" text="00:00" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="16.0" />
                </font>
