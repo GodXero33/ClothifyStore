@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class EmployeeEditController implements Initializable, MenuForm {
+public class AddEditEmployeeFormController implements Initializable, MenuForm {
 	@FXML
 	public TextField userNameTextField;
 	@FXML

@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class UpdateEmployeeFormController extends EmployeeEditController {
+public class EditEmployeeFormController extends AddEditEmployeeFormController {
 	@FXML
 	public Button employeeEditFormClearButton;
 	@FXML

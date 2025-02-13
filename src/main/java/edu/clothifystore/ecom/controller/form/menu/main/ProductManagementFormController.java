@@ -1,10 +1,74 @@
 package edu.clothifystore.ecom.controller.form.menu.main;
 
+import edu.clothifystore.ecom.controller.FormController;
 import edu.clothifystore.ecom.controller.form.menu.MenuForm;
+import edu.clothifystore.ecom.util.MenuType;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
-public class ProductManagementFormController implements MenuForm {
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ProductManagementFormController implements Initializable, MenuForm {
+	@FXML
+	public AnchorPane contentPane;
+
+	private Button currentActiveMenuButton;
+
+	@Override
+	public void initialize (URL url, ResourceBundle resourceBundle) {
+		final Button addProductMenuButton = (Button) (((Pane) ((Pane) this.contentPane.getParent()).getChildren().getFirst()).getChildren().getFirst()); // content pane's parent is root anchor pane. Root anchor pane has two child anchor panes. One is content pane and other is hold buttons. So, from content pane, go parent anchor pane and get first child gives the anchor pane where buttons are holds. From that anchor pane add employee button is the first one.
+
+		try {
+			this.openMenu(MenuType.ADD_PRODUCT, addProductMenuButton);
+		} catch (IOException exception) {
+			new Alert(Alert.AlertType.ERROR, "Failed to load dashboard. Please open menu and click on another menu and come back to try again.").show();
+		}
+	}
+
 	@Override
 	public void update () {
 
+	}
+
+	// Load new menu into content pane.
+	private void openMenu (MenuType menuType, Button button) throws IOException {
+		if (button.equals(this.currentActiveMenuButton)) return; // If target menu is already opened, exit.
+
+		final FXMLLoader loader = FormController.getInstance().openMenu(menuType, this.contentPane); // Load new menu.
+
+		if (loader == null) {
+			new Alert(Alert.AlertType.ERROR, "Can't load target menu.").show();
+			return;
+		}
+
+		if (this.currentActiveMenuButton != null) this.currentActiveMenuButton.getStyleClass().remove("button-active");
+
+		this.currentActiveMenuButton = button;
+
+		button.getStyleClass().add("button-active");
+		((MenuForm) loader.getController()).update();
+	}
+
+	@FXML
+	public void addProductButtonOnAction (ActionEvent actionEvent) throws IOException {
+		this.openMenu(MenuType.ADD_PRODUCT, (Button) actionEvent.getTarget());
+	}
+
+	@FXML
+	public void editProductButtonOnAction (ActionEvent actionEvent) throws IOException {
+		this.openMenu(MenuType.EDIT_PRODUCT, (Button) actionEvent.getTarget());
+	}
+
+	@FXML
+	public void deleteProductButtonOnAction (ActionEvent actionEvent) throws IOException {
+		this.openMenu(MenuType.DELETE_PRODUCT, (Button) actionEvent.getTarget());
 	}
 }

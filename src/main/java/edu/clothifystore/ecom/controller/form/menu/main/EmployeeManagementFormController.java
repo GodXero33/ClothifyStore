@@ -36,18 +36,19 @@ public class EmployeeManagementFormController implements Initializable, MenuForm
 	private void openMenu (MenuType menuType, Button button) throws IOException {
 		if (button.equals(this.currentActiveMenuButton)) return; // If target menu is already opened, exit.
 
-		if (this.currentActiveMenuButton != null) this.currentActiveMenuButton.getStyleClass().remove("button-active");
-
-		button.getStyleClass().add("button-active");
-
-		this.currentActiveMenuButton = button;
 		final FXMLLoader loader = FormController.getInstance().openMenu(menuType, this.contentPane); // Load new menu.
 
 		if (loader == null) {
 			new Alert(Alert.AlertType.ERROR, "Can't load target menu.").show();
-		} else {
-			((MenuForm) loader.getController()).update();
+			return;
 		}
+
+		if (this.currentActiveMenuButton != null) this.currentActiveMenuButton.getStyleClass().remove("button-active");
+
+		this.currentActiveMenuButton = button;
+
+		button.getStyleClass().add("button-active");
+		((MenuForm) loader.getController()).update();
 	}
 
 	@Override
@@ -61,8 +62,8 @@ public class EmployeeManagementFormController implements Initializable, MenuForm
 	}
 
 	@FXML
-	public void updateEmployeeButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.UPDATE_EMPLOYEE, (Button) actionEvent.getTarget());
+	public void editEmployeeButtonOnAction (ActionEvent actionEvent) throws IOException {
+		this.openMenu(MenuType.EDIT_EMPLOYEE, (Button) actionEvent.getTarget());
 	}
 
 	@FXML

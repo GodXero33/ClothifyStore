@@ -11,8 +11,11 @@ public enum MenuType {
 	REPORTS("main", "Reports"),
 	SETTINGS("main", "Settings"),
 	ADD_EMPLOYEE("employeemanagement", null),
-	UPDATE_EMPLOYEE("employeemanagement", null),
-	DELETE_EMPLOYEE("employeemanagement", null);
+	EDIT_EMPLOYEE("employeemanagement", null),
+	DELETE_EMPLOYEE("employeemanagement", null),
+	ADD_PRODUCT("productmanagement", null),
+	EDIT_PRODUCT("productmanagement", null),
+	DELETE_PRODUCT("productmanagement", null);
 
 	private final String path;
 	@Getter

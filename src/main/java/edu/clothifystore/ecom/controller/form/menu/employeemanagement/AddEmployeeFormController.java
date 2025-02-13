@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-public class AddEmployeeFormController extends EmployeeEditController {
+public class AddEmployeeFormController extends AddEditEmployeeFormController {
 	@FXML
 	public void employeeEditFormActionButtonOnAction (ActionEvent actionEvent) {
 		final Employee newEmployee = this.validateInputsAndGetNewEmployee(false);

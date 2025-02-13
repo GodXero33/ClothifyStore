@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/employee-edit.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.employeemanagement.UpdateEmployeeFormController">
+<AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/employee-edit.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.employeemanagement.EditEmployeeFormController">
    <children>
       <Label fx:id="titleLabel" alignment="CENTER" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="Search Employee" />
       <ScrollPane hbarPolicy="NEVER" layoutY="53.0" prefHeight="401.0" prefWidth="619.0" style="-fx-background-color: #121212;">

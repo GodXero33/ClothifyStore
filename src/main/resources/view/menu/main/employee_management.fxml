@@ -13,7 +13,9 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button alignment="CENTER" layoutX="13.0" layoutY="69.0" mnemonicParsing="false" onAction="#updateEmployeeButtonOnAction" prefHeight="71.0" prefWidth="201.0" text="Search or Update Employee" textAlignment="CENTER" wrapText="true">
+                <Button alignment="CENTER" layoutX="13.0" layoutY="69.0" mnemonicParsing="false"
+                        onAction="#editEmployeeButtonOnAction" prefHeight="71.0" prefWidth="201.0"
+                        text="Search or Update Employee" textAlignment="CENTER" wrapText="true">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
