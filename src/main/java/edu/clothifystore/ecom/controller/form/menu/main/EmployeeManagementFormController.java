@@ -23,12 +23,12 @@ public class EmployeeManagementFormController implements Initializable, MenuForm
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		final Button addEmployeeMenuButton = (Button) (((Pane) ((Pane) this.contentPane.getParent()).getChildren().getFirst()).getChildren().getFirst()); // content pane's parent is root anchor pane. Root anchor pane has two child anchor panes. One is content pane and other is hold buttons. So, from content pane, go parent anchor pane and get first child gives the anchor pane where buttons are holds. From that anchor pane add employee button is the first one.
+		final Button addEmployeeMenuButton = (Button) (((Pane) ((Pane) this.contentPane.getParent()).getChildren().getFirst()).getChildren().getFirst());
 
 		try {
 			this.openMenu(MenuType.ADD_EMPLOYEE, addEmployeeMenuButton);
 		} catch (IOException exception) {
-			new Alert(Alert.AlertType.ERROR, "Failed to load dashboard. Please open menu and click on another menu and come back to try again.").show();
+			new Alert(Alert.AlertType.ERROR, "Failed to load add employee menu. Please open menu and click on another menu and come back to try again.").show();
 		}
 	}
 
@@ -62,7 +62,7 @@ public class EmployeeManagementFormController implements Initializable, MenuForm
 	}
 
 	@FXML
-	public void editEmployeeButtonOnAction (ActionEvent actionEvent) throws IOException {
+	public void updateEmployeeButtonOnAction (ActionEvent actionEvent) throws IOException {
 		this.openMenu(MenuType.EDIT_EMPLOYEE, (Button) actionEvent.getTarget());
 	}
 

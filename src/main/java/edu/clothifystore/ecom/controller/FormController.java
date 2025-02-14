@@ -29,7 +29,7 @@ public class FormController {
 	private final Map<MenuType, FXMLLoader> loadedStagesMap;
 	private final String formFXMLPath = "../../../view";
 
-	private FormController() {
+	private FormController () {
 		this.loadedStagesMap = new HashMap<>();
 	}
 

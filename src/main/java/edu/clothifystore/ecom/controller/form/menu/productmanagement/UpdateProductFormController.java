@@ -6,14 +6,14 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AddEditProductFormController implements Initializable, MenuForm {
+public class UpdateProductFormController implements Initializable, MenuForm {
 	@Override
-	public void initialize (URL url, ResourceBundle resourceBundle) {
+	public void update() {
 
 	}
 
 	@Override
-	public void update () {
+	public void initialize(URL url, ResourceBundle resourceBundle) {
 
 	}
 }

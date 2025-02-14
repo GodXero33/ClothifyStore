@@ -24,12 +24,12 @@ public class ProductManagementFormController implements Initializable, MenuForm 
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		final Button addProductMenuButton = (Button) (((Pane) ((Pane) this.contentPane.getParent()).getChildren().getFirst()).getChildren().getFirst()); // content pane's parent is root anchor pane. Root anchor pane has two child anchor panes. One is content pane and other is hold buttons. So, from content pane, go parent anchor pane and get first child gives the anchor pane where buttons are holds. From that anchor pane add employee button is the first one.
+		final Button addProductMenuButton = (Button) (((Pane) ((Pane) this.contentPane.getParent()).getChildren().getFirst()).getChildren().getFirst());
 
 		try {
 			this.openMenu(MenuType.ADD_PRODUCT, addProductMenuButton);
 		} catch (IOException exception) {
-			new Alert(Alert.AlertType.ERROR, "Failed to load dashboard. Please open menu and click on another menu and come back to try again.").show();
+			new Alert(Alert.AlertType.ERROR, "Failed to load add product menu. Please open menu and click on another menu and come back to try again.").show();
 		}
 	}
 
@@ -64,7 +64,7 @@ public class ProductManagementFormController implements Initializable, MenuForm 
 
 	@FXML
 	public void editProductButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.EDIT_PRODUCT, (Button) actionEvent.getTarget());
+		this.openMenu(MenuType.UPDATE_PRODUCT, (Button) actionEvent.getTarget());
 	}
 
 	@FXML
