@@ -5,16 +5,21 @@ import edu.clothifystore.ecom.util.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
-import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class ReportsFormController implements MenuForm {
+	private static final String REPORT_SAVE_DIRECTORY = "C:/ClothifyStore/Reports/";
+
 	@Override
 	public void update () {}
 
@@ -26,17 +31,32 @@ public class ReportsFormController implements MenuForm {
 			final JasperDesign design = JRXmlLoader.load("src/main/resources/report/employee_daily_report.jrxml");
 			final JasperReport report = JasperCompileManager.compileReport(design);
 			final JasperPrint print = JasperFillManager.fillReport(report, null, DBConnection.getInstance().getConnection());
-
 			final LocalDateTime time = LocalDateTime.now();
 			final String now = String.format("%d%02d%02d_%02d%02d", time.getYear(), time.getMonthValue(), time.getDayOfMonth(), time.getHour(), time.getMinute());
-			pdfPath = String.format("E:\\Downloads\\employee-%s.pdf", now);
+			pdfPath = String.format("%semployee-%s.pdf", ReportsFormController.REPORT_SAVE_DIRECTORY, now);
+			final Path directoryPath = Path.of(ReportsFormController.REPORT_SAVE_DIRECTORY);
+
+			if (!Files.exists(directoryPath)) Files.createDirectories(directoryPath);
+
 			JasperExportManager.exportReportToPdfFile(print, pdfPath);
 
-			/*new Alert(Alert.AlertType.INFORMATION, "Report has saved as (" + pdfPath + ")").show();
-			Runtime.getRuntime().exec("rundll32.exe shell32.dll ShellExec_RunDLL " + pdfPath);
-			JasperViewer.viewReport(print, false);*/
-			ProcessBuilder processBuilder = new ProcessBuilder("explorer.exe", "/select,", pdfPath);
-			processBuilder.start();
+			final File pdfFile = new File(pdfPath);
+
+			if (pdfFile.exists()) {
+				final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+				alert.setTitle("Report");
+				alert.setHeaderText("Report generated");
+				alert.setContentText("The report has generated on location (" + pdfPath + ").'\n\nDo you want to open it now?");
+
+				if (alert.showAndWait().get() != ButtonType.OK) return;
+
+				final ProcessBuilder processBuilder = new ProcessBuilder("explorer.exe", "/select,", pdfFile.getAbsolutePath());
+				processBuilder.start();
+			} else {
+				new Alert(Alert.AlertType.ERROR, "PDF file wasn't created").show();
+				throw new IOException("PDF file wasn't created");
+			}
 		} catch (JRException | SQLException exception) {
 			System.out.println(exception.getMessage());
 			new Alert(Alert.AlertType.WARNING, "Failed to generate PDF report.").show();
