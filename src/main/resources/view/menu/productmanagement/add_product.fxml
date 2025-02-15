@@ -64,7 +64,7 @@
                   <Pane layoutX="14.0" layoutY="462.0" prefHeight="53.0" prefWidth="570.0">
                      <children>
                         <Label layoutY="13.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Type" />
-                        <ComboBox fx:id="typeComboBox" editable="true" layoutX="187.0" layoutY="6.0" prefHeight="41.0" prefWidth="155.0" promptText="Type" />
+                        <TextField fx:id="typeTextField" layoutX="183.0" layoutY="6.0" prefHeight="41.0" prefWidth="380.0" promptText="Type" styleClass="text-field-normal" />
                      </children>
                   </Pane>
                   <Pane layoutX="14.0" layoutY="14.0" prefHeight="73.0" prefWidth="570.0">
@@ -89,7 +89,6 @@
                     </children></AnchorPane>
             </content>
         </ScrollPane>
-        <Button fx:id="productEditFormActionButton" layoutX="511.0" layoutY="461.0" mnemonicParsing="false"
-                onAction="#productEditFormActionButtonOnAction" text="Add" />
+        <Button fx:id="productEditFormActionButton" layoutX="511.0" layoutY="461.0" mnemonicParsing="false" onAction="#productEditFormActionButtonOnAction" text="Add" />
     </children>
 </AnchorPane>

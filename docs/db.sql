@@ -47,7 +47,7 @@ CREATE TABLE product (
     brand VARCHAR(60) NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     discount DECIMAL(10, 2) DEFAULT 0.0,
-    stock INT(10) NOT NULL,
+    quantity INT(10) NOT NULL,
     description VARCHAR(255),
     is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)

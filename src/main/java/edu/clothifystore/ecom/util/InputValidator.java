@@ -1,6 +1,10 @@
 package edu.clothifystore.ecom.util;
 
 public class InputValidator {
+	public boolean isValid (String str) {
+		return true;
+	}
+
 	public boolean isNonZeroPositiveInteger (String str) {
 		return str.matches("^\\d+$") && Integer.parseInt(str) != 0;
 	}
