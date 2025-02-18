@@ -2,6 +2,7 @@ package edu.clothifystore.ecom.controller.form.menu.main;
 
 import edu.clothifystore.ecom.controller.form.menu.MenuForm;
 import edu.clothifystore.ecom.util.DBConnection;
+import edu.clothifystore.ecom.util.UserConfig;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -18,8 +19,6 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class ReportsFormController implements MenuForm {
-	private static final String REPORT_SAVE_DIRECTORY = "C:/ClothifyStore/Reports/";
-
 	@Override
 	public void update () {}
 
@@ -33,8 +32,8 @@ public class ReportsFormController implements MenuForm {
 			final JasperPrint print = JasperFillManager.fillReport(report, null, DBConnection.getInstance().getConnection());
 			final LocalDateTime time = LocalDateTime.now();
 			final String now = String.format("%d%02d%02d_%02d%02d", time.getYear(), time.getMonthValue(), time.getDayOfMonth(), time.getHour(), time.getMinute());
-			pdfPath = String.format("%semployee-%s.pdf", ReportsFormController.REPORT_SAVE_DIRECTORY, now);
-			final Path directoryPath = Path.of(ReportsFormController.REPORT_SAVE_DIRECTORY);
+			pdfPath = String.format("%semployee-%s.pdf", UserConfig.getConfiguration("report_save_directory"), now);
+			final Path directoryPath = Path.of(UserConfig.getConfiguration("report_save_directory"));
 
 			if (!Files.exists(directoryPath)) Files.createDirectories(directoryPath);
 

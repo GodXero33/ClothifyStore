@@ -66,9 +66,4 @@ public class ProductManagementFormController implements Initializable, MenuForm 
 	public void editProductButtonOnAction (ActionEvent actionEvent) throws IOException {
 		this.openMenu(MenuType.UPDATE_PRODUCT, (Button) actionEvent.getTarget());
 	}
-
-	@FXML
-	public void deleteProductButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.DELETE_PRODUCT, (Button) actionEvent.getTarget());
-	}
 }

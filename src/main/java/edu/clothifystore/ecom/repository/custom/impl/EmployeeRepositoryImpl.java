@@ -88,7 +88,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 			final List<EmployeePhoneEntity> phoneEntities = entity.getPhone();
 
-			if (phoneEntities.isEmpty()) return true;
+			if (phoneEntities.isEmpty()) {
+				connection.commit();
+
+				return true;
+			}
 
 			final PreparedStatement employeePhoneInsertStatement = connection.prepareStatement("INSERT INTO employee_phone (phone, employee_id, type) VALUES (?, ?, ?)"); // Insert new records into employee_phone table.
 
@@ -100,6 +104,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				employeePhoneInsertStatement.setString(3, phoneEntity.getType());
 				employeePhoneInsertStatement.executeUpdate();
 			}
+
+			connection.commit();
 
 			return true;
 		} catch (SQLException exception) { // Any failure happens while executing or inserting records, rollback(delete buffer) changes.
@@ -164,7 +170,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 			final List<EmployeePhoneEntity> phoneEntities = entity.getPhone();
 
-			if (phoneEntities.isEmpty()) return true;
+			if (phoneEntities.isEmpty()) {
+				connection.commit();
+
+				return true;
+			}
 
 			final PreparedStatement employeePhoneInsertStatement = connection.prepareStatement("INSERT INTO employee_phone (phone, employee_id, type) VALUES (?, ?, ?)"); // Insert new records into employee_phone table.
 
@@ -176,6 +186,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 				employeePhoneInsertStatement.setString(3, phoneEntity.getType());
 				employeePhoneInsertStatement.executeUpdate();
 			}
+
+			connection.commit();
 
 			return true;
 		} catch (SQLException exception) { // Any failure happens while executing or inserting records, rollback(delete buffer) changes.
@@ -207,6 +219,8 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 			if (!this.deletePhonesByEmployeeID(id) /* Delete all phones from employee_phone table. */) return false;
 
 			CrudUtil.execute("UPDATE employee SET is_deleted = TRUE WHERE id = ?", id);
+			connection.commit();
+
 			return true;
 		} catch (SQLException exception) { // Any failure happens while executing or inserting records, rollback(delete buffer) changes.
 			try {

@@ -13,12 +13,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button alignment="CENTER" layoutX="13.0" layoutY="69.0" mnemonicParsing="false" onAction="#editProductButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Update" textAlignment="CENTER" wrapText="true">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="13.0" layoutY="123.0" mnemonicParsing="false" onAction="#deleteProductButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Delete Product">
+            <Button alignment="CENTER" layoutX="13.0" layoutY="69.0" mnemonicParsing="false" onAction="#editProductButtonOnAction" prefHeight="79.0" prefWidth="201.0" text="Update / Delete Product" textAlignment="CENTER" wrapText="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -1,7 +1,6 @@
 package edu.clothifystore.ecom.controller.form.menu.productmanagement;
 
 import edu.clothifystore.ecom.controller.form.menu.MenuForm;
-import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.dto.Product;
 import edu.clothifystore.ecom.service.ServiceFactory;
 import edu.clothifystore.ecom.service.custom.ProductService;
@@ -26,9 +25,6 @@ import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
 public class AddProductFormController implements Initializable, MenuForm {
-	private static final String IMAGE_SAVE_DIRECTORY = "C:/ClothifyStore/ProductImages/";
-	private static final String DEFAULT_SHOW_IMAGE = "img/add-image.png";
-
 	@FXML
 	public TextField productNameTextField;
 	@FXML
@@ -79,7 +75,7 @@ public class AddProductFormController implements Initializable, MenuForm {
 		this.sizeComboBox.setValue(ProductSize.XS);
 		this.genderComboBox.setValue(ProductGender.MALE);
 
-		this.imageView.setImage(new Image(getClass().getResourceAsStream("/" + AddProductFormController.DEFAULT_SHOW_IMAGE))); // Reset loaded image to the default.
+		this.imageView.setImage(new Image(getClass().getResourceAsStream("/" + UserConfig.getConfiguration("default_show_image")))); // Reset loaded image to the default.
 	}
 
 	private boolean isInvalidateTextField (String str, String message, TextField textField, Predicate<String> validationCallback) {
@@ -133,11 +129,11 @@ public class AddProductFormController implements Initializable, MenuForm {
 
 		try {
 			String fileExtension = selectedImageFile.getName().substring(selectedImageFile.getName().lastIndexOf('.'));
-			final Path directoryPath = Path.of(AddProductFormController.IMAGE_SAVE_DIRECTORY);
+			final Path directoryPath = Path.of(UserConfig.getConfiguration("image_save_directory"));
 
 			if (!Files.exists(directoryPath)) Files.createDirectories(directoryPath);
 
-			final Path destinationPath = Path.of(AddProductFormController.IMAGE_SAVE_DIRECTORY, String.format("%06d", id) + fileExtension);
+			final Path destinationPath = Path.of(UserConfig.getConfiguration("image_save_directory"), String.format("%06d", id) + fileExtension);
 			Files.copy(this.selectedImageFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException exception) {
 			System.out.println(exception.getMessage());
