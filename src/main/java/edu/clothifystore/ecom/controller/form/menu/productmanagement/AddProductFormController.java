@@ -170,7 +170,7 @@ public class AddProductFormController implements Initializable, MenuForm {
 		final FileChooser fileChooser = new FileChooser();
 
 		fileChooser.setTitle("Select Product Image");
-		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+		fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png"));
 
 		this.selectedImageFile = fileChooser.showOpenDialog(null);
 

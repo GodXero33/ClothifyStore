@@ -21,7 +21,31 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public boolean add (Product product) {
+		return this.productRepository.add(this.mapper.toEntity(product));
+	}
+
+	@Override
 	public int addAndGetID (Product product) {
 		return this.productRepository.addAndGetID(this.mapper.toEntity(product));
+	}
+
+	@Override
+	public boolean update (Product product) {
+		return this.productRepository.update(this.mapper.toEntity(product));
+	}
+
+	@Override
+	public Product get (int id) {
+		final ProductEntity productEntity = this.productRepository.get(id);
+
+		if (productEntity == null) return null;
+
+		return this.mapper.toDTO(productEntity);
+	}
+
+	@Override
+	public boolean delete (int id) {
+		return this.productRepository.delete(id);
 	}
 }
