@@ -9,4 +9,5 @@ public interface ProductService extends SuperService {
 	boolean update (Product product);
 	Product get (int id);
 	boolean delete (int id);
+	int getCount ();
 }

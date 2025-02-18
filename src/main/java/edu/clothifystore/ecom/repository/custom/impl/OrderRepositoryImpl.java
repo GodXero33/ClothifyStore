@@ -2,7 +2,10 @@ package edu.clothifystore.ecom.repository.custom.impl;
 
 import edu.clothifystore.ecom.entity.OrderEntity;
 import edu.clothifystore.ecom.repository.custom.OrderRepository;
+import edu.clothifystore.ecom.util.CrudUtil;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class OrderRepositoryImpl implements OrderRepository {
@@ -29,5 +32,19 @@ public class OrderRepositoryImpl implements OrderRepository {
 	@Override
 	public List<OrderEntity> getAll () {
 		return List.of();
+	}
+
+	@Override
+	public int getCount () {
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT COUNT(*) FROM `order`");
+
+			if (resultSet.next()) return resultSet.getInt(1);
+
+			return -1;
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+			return -1;
+		}
 	}
 }

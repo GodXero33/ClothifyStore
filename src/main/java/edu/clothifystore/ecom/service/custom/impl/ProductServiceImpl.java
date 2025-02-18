@@ -48,4 +48,9 @@ public class ProductServiceImpl implements ProductService {
 	public boolean delete (int id) {
 		return this.productRepository.delete(id);
 	}
+
+	@Override
+	public int getCount () {
+		return this.productRepository.getCount();
+	}
 }

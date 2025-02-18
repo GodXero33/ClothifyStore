@@ -14,4 +14,5 @@ public interface EmployeeService extends SuperService {
 	boolean isPhoneAvailable (String phone);
 	boolean update (Employee employee);
 	boolean delete (Integer employeeID);
+	int getCount ();
 }

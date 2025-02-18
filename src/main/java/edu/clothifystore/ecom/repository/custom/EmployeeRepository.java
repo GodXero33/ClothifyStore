@@ -12,4 +12,5 @@ public interface EmployeeRepository extends CrudRepository<EmployeeEntity> {
 	boolean isUsernameAvailable (String username);
 	boolean isNICAvailable (String nic);
 	boolean isPhoneAvailable (String phone);
+	int getCount ();
 }

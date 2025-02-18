@@ -2,6 +2,7 @@ package edu.clothifystore.ecom.repository.custom.impl;
 
 import edu.clothifystore.ecom.entity.EmployeeEntity;
 import edu.clothifystore.ecom.entity.EmployeePhoneEntity;
+import edu.clothifystore.ecom.entity.ProductEntity;
 import edu.clothifystore.ecom.repository.custom.EmployeeRepository;
 import edu.clothifystore.ecom.util.CrudUtil;
 import edu.clothifystore.ecom.util.DBConnection;
@@ -345,6 +346,20 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	@Override
 	public boolean isPhoneAvailable (String phone) {
 		return this.isPrimaryFieldValueAvailable("SELECT phone FROM employee_phone WHERE phone = ? AND is_deleted = FALSE", phone);
+	}
+
+	@Override
+	public int getCount () {
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT COUNT(*) FROM employee");
+
+			if (resultSet.next()) return resultSet.getInt(1);
+
+			return -1;
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+			return -1;
+		}
 	}
 
 	@Override

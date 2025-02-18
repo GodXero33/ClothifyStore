@@ -4,7 +4,6 @@ import edu.clothifystore.ecom.entity.ProductEntity;
 import edu.clothifystore.ecom.repository.custom.ProductRepository;
 import edu.clothifystore.ecom.util.CrudUtil;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -116,6 +115,20 @@ public class ProductRepositoryImpl implements ProductRepository {
 			);
 
 			return productID;
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+			return -1;
+		}
+	}
+
+	@Override
+	public int getCount () {
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT COUNT(*) FROM product");
+
+			if (resultSet.next()) return resultSet.getInt(1);
+
+			return -1;
 		} catch (SQLException exception) {
 			System.out.println(exception.getMessage());
 			return -1;

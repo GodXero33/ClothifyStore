@@ -77,4 +77,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public boolean delete (Integer employeeID) {
 		return this.employeeRepository.delete(employeeID);
 	}
+
+	@Override
+	public int getCount () {
+		return this.employeeRepository.getCount();
+	}
 }
