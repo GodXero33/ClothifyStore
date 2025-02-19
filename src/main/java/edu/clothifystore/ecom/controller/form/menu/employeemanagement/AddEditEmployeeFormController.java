@@ -263,7 +263,7 @@ public class AddEditEmployeeFormController implements Initializable, MenuForm {
 
 	protected Employee validateInputsAndGetNewEmployee (boolean asUpdate) {
 		final String userName = this.userNameTextField.getText().trim().toLowerCase();
-		final String fullName = this.fullNameTextField.getText().trim().toLowerCase();
+		final String fullName = this.fullNameTextField.getText().trim();
 		final String nic = this.nicTextField.getText().trim().toLowerCase();
 		final String email = this.emailTextField.getText().trim().toLowerCase();
 		final String address = this.addressTextField.getText().trim().toLowerCase();

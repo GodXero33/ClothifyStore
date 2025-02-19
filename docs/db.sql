@@ -281,8 +281,8 @@ INSERT INTO supplier (name, phone, email, address, type, description) VALUES
 
 INSERT INTO `order` (`date`, `time`, amount, employee_id, customer_id) VALUES
 ('2025-02-01', '10:30:00', 150.00, 1, 1),
-('2025-02-02', '11:00:00', 200.00, 2, 2),
-('2025-02-03', '14:15:00', 75.50, 3, 3);
+('2025-02-02', '11:00:00', 200.00, 1, 2),
+('2025-02-03', '14:15:00', 75.50, 1, 3);
 
 INSERT INTO order_item (order_id, product_id, discount) VALUES
 (1, 1, 10.00),
@@ -340,3 +340,20 @@ LEFT JOIN (
 ) ep ON e.id = ep.employee_id
 WHERE e.is_deleted = FALSE
 GROUP BY e.id;
+
+
+SELECT
+    e.full_name,
+    e.role,
+    e.salary,
+    COUNT(o.id) AS orders_handled,
+    COALESCE(SUM(o.amount), 0) AS total_sales
+FROM employee e
+LEFT JOIN `order` o
+    ON e.id = o.employee_id
+    AND o.is_deleted = FALSE
+    AND o.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)  -- Last 30 days filter
+WHERE e.is_deleted = FALSE
+AND e.id = 1
+GROUP BY e.id;
+

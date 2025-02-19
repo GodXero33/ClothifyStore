@@ -30,6 +30,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
+	public Employee get (Integer id) {
+		final EmployeeEntity employee = this.employeeRepository.get(id);
+
+		if (employee == null) return null;
+
+		return this.mapper.toDTO(employee);
+	}
+
+	@Override
 	public Employee getByNIC (String nic) {
 		final EmployeeEntity employee = this.employeeRepository.getByNIC(nic);
 

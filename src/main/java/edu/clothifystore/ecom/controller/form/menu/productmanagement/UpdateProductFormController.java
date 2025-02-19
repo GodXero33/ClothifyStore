@@ -64,6 +64,8 @@ public class UpdateProductFormController implements Initializable, MenuForm {
 		this.genderComboBox.getItems().addAll(new ArrayList<>(Arrays.asList(ProductGender.values())));
 		this.sizeComboBox.setValue(ProductSize.XS);
 		this.genderComboBox.setValue(ProductGender.MALE);
+
+		this.toggleInputFieldsDisable(true);
 	}
 
 	@Override

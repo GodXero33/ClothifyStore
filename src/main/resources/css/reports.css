@@ -1,0 +1,18 @@
+.button {
+    -fx-background-color: #343434;
+    -fx-background-radius: 10px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+}
+
+.button:hover {
+    -fx-background-color: #565656;
+}
+
+.button-active {
+    -fx-background-color: #34aaaa;
+}
+
+.button-active:hover {
+    -fx-background-color: #34aaaa;
+}

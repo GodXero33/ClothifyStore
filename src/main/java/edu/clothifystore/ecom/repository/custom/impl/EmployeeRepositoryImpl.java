@@ -242,11 +242,6 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		return false;
 	}
 
-	@Override
-	public EmployeeEntity get (Integer id) {
-		return null;
-	}
-
 	private EmployeeEntity getByField (String fieldName, Object value) {
 		try {
 			final ResultSet employeeDataResultSet = CrudUtil.execute("SELECT id, user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id FROM employee WHERE " + fieldName + " = ? AND is_deleted = FALSE", value);
@@ -287,6 +282,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		}
 
 		return null;
+	}
+
+	@Override
+	public EmployeeEntity get (Integer id) {
+		return this.getByField("id", id);
 	}
 
 	@Override

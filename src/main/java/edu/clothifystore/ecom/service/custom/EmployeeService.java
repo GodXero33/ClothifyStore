@@ -5,6 +5,7 @@ import edu.clothifystore.ecom.service.SuperService;
 
 public interface EmployeeService extends SuperService {
 	Employee get (String userName);
+	Employee get (Integer id);
 	Employee getByNIC (String nic);
 	Integer getAdminID (String adminUserName);
 	String getAdminName (Integer adminID);
