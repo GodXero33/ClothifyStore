@@ -1,11 +1,13 @@
 package edu.clothifystore.ecom.controller.form.menu.main;
 
+import edu.clothifystore.ecom.controller.FormController;
 import edu.clothifystore.ecom.controller.form.menu.MenuForm;
 import edu.clothifystore.ecom.service.ServiceFactory;
 import edu.clothifystore.ecom.service.custom.EmployeeService;
 import edu.clothifystore.ecom.service.custom.OrderService;
 import edu.clothifystore.ecom.service.custom.ProductService;
 import edu.clothifystore.ecom.service.custom.SupplierService;
+import edu.clothifystore.ecom.util.DailyAlertGenerator;
 import edu.clothifystore.ecom.util.ServiceType;
 import edu.clothifystore.ecom.util.UtilFactory;
 import javafx.fxml.FXML;
@@ -53,6 +55,7 @@ public class DashboardFormController implements Initializable, MenuForm {
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
 		this.update();
+		new DailyAlertGenerator(this.alertDisplayLabel, FormController.getInstance().getCurentEmployee().getUserName());
 	}
 
 	@Override

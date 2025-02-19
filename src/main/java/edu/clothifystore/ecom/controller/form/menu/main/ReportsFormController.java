@@ -1,5 +1,6 @@
 package edu.clothifystore.ecom.controller.form.menu.main;
 
+import edu.clothifystore.ecom.controller.FormController;
 import edu.clothifystore.ecom.controller.form.menu.MenuForm;
 import edu.clothifystore.ecom.util.DBConnection;
 import edu.clothifystore.ecom.util.UserConfig;
@@ -20,19 +21,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReportsFormController implements MenuForm {
 	@Override
 	public void update () {}
 
-	private String generateReport (String source, String folder, String fileName) throws JRException, SQLException, IOException {
+	private String generateReport (String source, String folder, String fileName, Map<String, Object> parameters) throws JRException, SQLException, IOException {
 		String pdfPath = "";
 
 		final JasperDesign design = JRXmlLoader.load("src/main/resources/report/" + source + ".jrxml");
 		final JasperReport report = JasperCompileManager.compileReport(design);
-		final JasperPrint print = JasperFillManager.fillReport(report, null, DBConnection.getInstance().getConnection());
-		final LocalDateTime time = LocalDateTime.now();
-		final String now = String.format("%d%02d%02d_%02d%02d", time.getYear(), time.getMonthValue(), time.getDayOfMonth(), time.getHour(), time.getMinute());
+		final JasperPrint print = JasperFillManager.fillReport(report, parameters, DBConnection.getInstance().getConnection());
+		final LocalDateTime timeNow = LocalDateTime.now();
+		final String now = String.format("%d%02d%02d_%02d%02d", timeNow.getYear(), timeNow.getMonthValue(), timeNow.getDayOfMonth(), timeNow.getHour(), timeNow.getMinute());
 		pdfPath = String.format("%s%s%s-%s.pdf", UserConfig.getConfiguration("report_save_directory"), folder, fileName, now);
 		final Path directoryPath = Path.of(UserConfig.getConfiguration("report_save_directory") + folder);
 
@@ -63,7 +66,7 @@ public class ReportsFormController implements MenuForm {
 		}
 	}
 
-	private void startGenerateReport(String source, String folder, String fileName) {
+	private void startGenerateReport(String source, String folder, String fileName, Map<String, Object> parameters) {
 		Alert loadingAlert = new Alert(Alert.AlertType.INFORMATION);
 		loadingAlert.setTitle("Generating Report...");
 		loadingAlert.setHeaderText("Please Wait...");
@@ -79,7 +82,7 @@ public class ReportsFormController implements MenuForm {
 		loadingAlert.show();
 
 		try {
-			String pdfPath = this.generateReport(source, folder, fileName); // Generate report
+			String pdfPath = this.generateReport(source, folder, fileName, parameters); // Generate report
 
 			loadingAlert.close();
 			this.requestOpenFolderLocation(pdfPath);
@@ -94,6 +97,14 @@ public class ReportsFormController implements MenuForm {
 
 	@FXML
 	public void dailyEmployeeReportOnAction (ActionEvent actionEvent) {
-		this.startGenerateReport("employee_daily_report", "employee/", "employee");
+		final Map<String, Object> parameters = new HashMap<>();
+		final LocalDateTime timeNow = LocalDateTime.now();
+
+		parameters.put("time", String.format("%02d : %02d", timeNow.getHour(), timeNow.getMinute()));
+		parameters.put("date", String.format("%d/%02d/%02d", timeNow.getYear(), timeNow.getMonthValue(), timeNow.getDayOfMonth()));
+		parameters.put("generatedBy", FormController.getInstance().getCurentEmployee().getUserName());
+		parameters.put("employeeID", 1);
+
+		this.startGenerateReport("employee_daily_report", "employee/", "employee", parameters);
 	}
 }

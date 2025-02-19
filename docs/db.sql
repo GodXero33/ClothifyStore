@@ -103,16 +103,6 @@ CREATE TABLE product_supplier (
     FOREIGN KEY (product_id) REFERENCES product (id)
 );
 
-CREATE TABLE report (
-    id INT AUTO_INCREMENT,
-    `date` DATE NOT NULL,
-    `time` TIME NOT NULL,
-    employee_id INT,
-    is_deleted BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (id),
-    FOREIGN KEY (employee_id) REFERENCES employee (id)
-);
-
 DESC employee;
 DESC employee_phone;
 DESC customer;
@@ -121,11 +111,11 @@ DESC supplier;
 DESC `order`;
 DESC order_item;
 DESC product_supplier;
-DESC report;
 
 INSERT INTO employee (user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id) VALUES
 ('god_xero', 'Sathish Shan', '200121001975', 'shansathish38@gmail.com', 'No.60, Alokamawatha, Walawegama, Udawalawa, Embilipitiya', '2001-07-28', '1111', 400000.00, 'ADMIN', 'Manager', NULL),
-('shan123', 'Kavinda Perera', '199305205678', 'kavinda.perera@email.com', 'Colombo, Sri Lanka', '1993-05-20', '1234', 50000.00, 'EMPLOYEE', 'Software Engineer', 1),
+('kavinda123', 'Kavinda Perera', '199305205678', 'kavinda.perera@email.com', 'Colombo, Sri Lanka', '1993-05-20', '1234',
+ 50000.00, 'EMPLOYEE', 'Software Engineer', 1),
 ('nimali22', 'Nimali Karunaratne', '199812045678', 'nimali.karuna@email.com', 'Kandy, Sri Lanka', '1998-12-04', '1234', 60000.00, 'EMPLOYEE', 'HR Executive', 1),
 ('dinesh90', 'Dinesh Rajapaksha', '199002205678', 'dinesh.rajapaksha@email.com', 'Galle, Sri Lanka', '1990-02-20', '1234', 55000.00, 'EMPLOYEE', 'Data Analyst', 1),
 ('pasindu01', 'Pasindu Fernando', '199711105678', 'pasindu.fernando@email.com', 'Anuradhapura, Sri Lanka', '1997-11-10', '1234', 45000.00, 'EMPLOYEE', 'Project Manager', 1),
@@ -249,13 +239,78 @@ INSERT INTO product (name, gender, size, type, brand, price, discount, quantity,
 ('Printed Hoodie', 'COMMON', 'M', 'Hoodie', 'Supreme', 6200.00, 0.0, 18, 'Limited edition hoodie'),
 ('Denim Overalls', 'FEMALE', 'L', 'Overalls', 'Levi\'s', 6800.00, 0.0, 12, 'Trendy denim overalls');
 
+INSERT INTO customer (name, phone, email, address) VALUES
+('John Doe', '1234567890', 'john@example.com', '123 Main St'),
+('Jane Smith', '9876543210', 'jane@example.com', '456 Elm St'),
+('Alice Brown', '5551234567', 'alice@example.com', '789 Oak St'),
+('Michael Johnson', '1112223333', 'michael@example.com', '101 Pine St'),
+('Emily Davis', '2223334444', 'emily@example.com', '202 Maple St'),
+('David Wilson', '3334445555', 'david@example.com', '303 Birch St'),
+('Sophia Martinez', '4445556666', 'sophia@example.com', '404 Cedar St'),
+('James Anderson', '5556667777', 'james@example.com', '505 Spruce St'),
+('Olivia Thomas', '6667778888', 'olivia@example.com', '606 Fir St'),
+('Benjamin Harris', '7778889999', 'benjamin@example.com', '707 Oak St'),
+('Charlotte White', '8889990000', 'charlotte@example.com', '808 Walnut St'),
+('Daniel Clark', '9990001111', 'daniel@example.com', '909 Chestnut St'),
+('Ava Lewis', '0001112222', 'ava@example.com', '1010 Redwood St'),
+('Henry Walker', '1112223333', 'henry@example.com', '1111 Sequoia St'),
+('Mia Hall', '2223334444', 'mia@example.com', '1212 Ash St'),
+('Samuel Allen', '3334445555', 'samuel@example.com', '1313 Magnolia St'),
+('Isabella Young', '4445556666', 'isabella@example.com', '1414 Cypress St'),
+('Lucas King', '5556667777', 'lucas@example.com', '1515 Palm St'),
+('Amelia Wright', '6667778888', 'amelia@example.com', '1616 Willow St');
+
+INSERT INTO supplier (name, phone, email, address, type, description) VALUES
+('ABC Textiles', '1112223333', 'abc@textiles.com', '10 Fabric St', 'BUSINESS', 'Wholesale fabric supplier'),
+('XYZ Garments', '4445556666', 'xyz@garments.com', '20 Fashion Ave', 'BUSINESS', 'Premium garment supplier'),
+('Tom Taylor', '7778889999', 'tom@taylor.com', '5 Handmade Ln', 'INDIVIDUAL', 'Independent tailor'),
+('Global Fabrics', '8889990000', 'global@fabrics.com', '30 Linen St', 'BUSINESS', 'Export quality fabrics'),
+('Elite Threads', '9990001111', 'elite@threads.com', '40 Cotton Rd', 'BUSINESS', 'High-end garments'),
+('Vintage Apparel', '0001112222', 'vintage@apparel.com', '50 Retro Ln', 'BUSINESS', 'Classic fashion supplier'),
+('Smart Stitches', '1112223333', 'smart@stitches.com', '60 Designer St', 'INDIVIDUAL', 'Bespoke tailoring service'),
+('Trend Weavers', '2223334444', 'trend@weavers.com', '70 Knit Rd', 'BUSINESS', 'Modern clothing trends'),
+('Royal Fabrics', '3334445555', 'royal@fabrics.com', '80 Silk Blvd', 'BUSINESS', 'Luxury fabric supplier'),
+('Nova Textiles', '4445556666', 'nova@textiles.com', '90 Denim Ave', 'BUSINESS', 'Denim specialist'),
+('Fine Tailors', '5556667777', 'fine@tailors.com', '100 Tailor St', 'INDIVIDUAL', 'Personalized tailoring'),
+('Urban Wear', '6667778888', 'urban@wear.com', '110 Streetwear Ln', 'BUSINESS', 'Street fashion brand'),
+('Classic Cuts', '7778889999', 'classic@cuts.com', '120 Suit Ave', 'BUSINESS', 'Premium suits and coats'),
+('Modern Stitch', '8889990000', 'modern@stitch.com', '130 Couture Rd', 'BUSINESS', 'Haute couture supplier'),
+('Blue Weave', '9990001111', 'blue@weave.com', '140 Fashion St', 'BUSINESS', 'Casual wear fabrics'),
+('Silken Dreams', '0001112222', 'silken@dreams.com', '150 Silk St', 'BUSINESS', 'Exclusive silk textiles'),
+('Pioneer Garments', '1112223333', 'pioneer@garments.com', '160 Uniform Rd', 'BUSINESS', 'Workwear and uniforms');
+
+INSERT INTO `order` (`date`, `time`, amount, employee_id, customer_id) VALUES
+('2025-02-01', '10:30:00', 150.00, 1, 1),
+('2025-02-02', '11:00:00', 200.00, 2, 2),
+('2025-02-03', '14:15:00', 75.50, 3, 3);
+
+INSERT INTO order_item (order_id, product_id, discount) VALUES
+(1, 1, 10.00),
+(1, 2, 5.00),
+(2, 3, 0.00),
+(3, 1, 15.00);
+
+INSERT INTO product_supplier (supplier_id, product_id, `date`, `time`, quantity, supplier_price, payment_status, payment_date) VALUES
+(1, 1, '2025-01-15', '09:00:00', 100, 10.50, 'PAID', '2025-01-16'),
+(2, 2, '2025-01-16', '10:30:00', 200, 15.75, 'PENDING', NULL),
+(3, 3, '2025-01-17', '12:45:00', 50, 8.25, 'PAID', '2025-01-18');
+
 SELECT * FROM employee;
 SELECT * FROM employee_phone;
 SELECT * FROM product;
+SELECT * FROM supplier;
+SELECT * FROM product_supplier;
+SELECT * FROM `order`;
+SELECT * FROM order_item;
+
 
 SELECT COUNT(*) FROM employee;
 SELECT COUNT(*) FROM employee_phone;
 SELECT COUNT(*) FROM product;
+SELECT COUNT(*) FROM supplier;
+SELECT COUNT(*) FROM product_supplier;
+SELECT COUNT(*) FROM `order`;
+SELECT COUNT(*) FROM order_item;
 
 SELECT
     e.id,

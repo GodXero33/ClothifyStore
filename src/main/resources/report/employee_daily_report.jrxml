@@ -5,6 +5,10 @@
 	<dataset name="Dataset1" uuid="e730591a-181b-4216-be24-702ca6fea222">
 		<query language="sql"><![CDATA[]]></query>
 	</dataset>
+	<parameter name="time" class="java.lang.String"/>
+	<parameter name="date" class="java.lang.String"/>
+	<parameter name="generatedBy" class="java.lang.String"/>
+	<parameter name="employeeID" class="java.lang.Integer"/>
 	<query language="SQL"><![CDATA[SELECT
     e.id,
     e.user_name,
@@ -29,9 +33,9 @@ LEFT JOIN (
         employee_id,
         ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY phone) AS row_num
     FROM employee_phone
-    WHERE is_deleted = FALSE
+    WHERE is_deleted = FALSE AND employee_id = $P{employeeID}
 ) ep ON e.id = ep.employee_id
-WHERE e.is_deleted = FALSE
+WHERE e.is_deleted = FALSE AND e.id = $P{employeeID}
 GROUP BY e.id;
 ]]></query>
 	<field name="id" class="java.lang.Integer">
@@ -112,66 +116,152 @@ GROUP BY e.id;
 		<property name="com.jaspersoft.studio.field.label" value="phone3"/>
 	</field>
 	<background splitType="Stretch"/>
-	<title height="75" splitType="Stretch">
+	<title height="79" splitType="Stretch">
 		<element kind="staticText" uuid="b6c35e68-7efc-4d0e-a63d-9ad30585c439" x="-20" y="0" width="595" height="30" fontSize="19.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[Employee Report]]></text>
 		</element>
-		<element kind="staticText" uuid="b38d121f-ac59-4ae8-82e8-f2daf3d2ab81" x="-20" y="30" width="595" height="30" fontSize="16.0" italic="false" bold="false" hTextAlign="Center" vTextAlign="Middle">
+		<element kind="staticText" uuid="b38d121f-ac59-4ae8-82e8-f2daf3d2ab81" x="-20" y="30" width="595" height="30" fontSize="16.0" bold="false" italic="false" hTextAlign="Center" vTextAlign="Middle">
 			<text><![CDATA[ClothifyStore]]></text>
 		</element>
+		<element kind="line" uuid="457a92fb-aa36-4494-a09b-a8f1b75a76b3" x="-20" y="73" width="595" height="1"/>
 	</title>
-	<columnHeader height="70">
-		<element kind="staticText" uuid="8e09e0a9-fb57-4d04-97b0-c4ded3b963bd" mode="Opaque" x="490" y="20" width="70" height="30" forecolor="#000000" backcolor="#82E6FA" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[Phone2]]></text>
-		</element>
-		<element kind="staticText" uuid="1a9a86ce-92ad-4c4b-bfc9-2e0136426ff1" mode="Opaque" x="180" y="20" width="100" height="30" forecolor="#000000" backcolor="#82E6FA" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[NIC]]></text>
-		</element>
-		<element kind="staticText" uuid="3547f86b-cd5f-4dc3-923c-7b21c3a8ad94" mode="Opaque" x="400" y="20" width="80" height="30" forecolor="#000000" backcolor="#82E6FA" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[Phone1]]></text>
-		</element>
-		<element kind="staticText" uuid="e44a1fe3-6bda-4cee-b1ff-623e3b2c6bf8" mode="Opaque" x="290" y="20" width="100" height="30" forecolor="#000000" backcolor="#82E6FA" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[Salary]]></text>
-		</element>
-		<element kind="staticText" uuid="f3acfff9-2e9b-4e45-9e77-0cbf2f96912a" mode="Opaque" x="0" y="20" width="60" height="30" forecolor="#000000" backcolor="#82E6FA" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[ID]]></text>
-		</element>
-		<element kind="staticText" uuid="d03cbd64-49de-409c-810c-1de25484157e" mode="Opaque" x="70" y="20" width="100" height="30" forecolor="#000000" backcolor="#82E6FA" fontSize="14.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
-			<text><![CDATA[User Name]]></text>
-		</element>
-	</columnHeader>
 	<detail>
-		<band height="36" splitType="Stretch">
-			<element kind="textField" uuid="eaf5ea68-cbf4-453a-993f-2d23671c9bc2" mode="Opaque" x="0" y="0" width="60" height="30" backcolor="#CAE7FC" linkType="None" linkTarget="Self" hTextAlign="Left" vTextAlign="Middle">
+		<band height="457" splitType="Stretch">
+			<element kind="textField" uuid="1433473e-da09-4695-9736-80c1f1a410a6" mode="Transparent" x="130" y="0" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" vTextAlign="Middle">
 				<paragraph leftIndent="5"/>
 				<expression><![CDATA[$F{id}]]></expression>
 				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 			</element>
-			<element kind="textField" uuid="24ed4241-e63d-4c97-8951-b88ec20559b4" mode="Opaque" x="70" y="0" width="100" height="30" backcolor="#CAE7FC" hTextAlign="Left" vTextAlign="Middle">
+			<element kind="staticText" uuid="40840848-93c7-45ff-8bce-2ace01a248e1" x="30" y="0" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[ID]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="3f64382f-5f57-4903-ab1c-3faad92f97fd" mode="Transparent" x="130" y="30" width="380" height="30" backcolor="#FFFFFF" markup="html" fontSize="12.0" vTextAlign="Middle">
 				<paragraph leftIndent="5"/>
 				<expression><![CDATA[$F{user_name}]]></expression>
 				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 			</element>
-			<element kind="textField" uuid="44327211-ea59-451e-8d85-7ab9378abd08" mode="Opaque" x="180" y="0" width="100" height="30" backcolor="#CAE7FC" hTextAlign="Left" vTextAlign="Middle">
+			<element kind="staticText" uuid="6e4e9342-2a48-4d24-8d45-9793c9d3959a" x="30" y="30" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[User Name]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="ac7de7ec-dc75-4e7e-a45c-42afe1827251" mode="Transparent" x="130" y="90" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" vTextAlign="Middle">
 				<paragraph leftIndent="5"/>
 				<expression><![CDATA[$F{nic}]]></expression>
 				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 			</element>
-			<element kind="textField" uuid="7ad8baae-9529-43f4-b0a3-566bc223d804" mode="Opaque" x="290" y="0" width="100" height="30" backcolor="#CAE7FC" hTextAlign="Left" vTextAlign="Middle">
+			<element kind="staticText" uuid="cc138a02-a165-4387-8c09-d86018bb8ad8" x="30" y="90" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[NIC]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="3b879a31-b679-4ff6-9622-d46a33b0b4cd" mode="Transparent" x="130" y="120" width="380" height="30" forecolor="#2A61F7" backcolor="#FFFFFF" fontSize="12.0" linkType="None" linkTarget="Self" blankWhenNull="true" underline="true" vTextAlign="Middle">
+				<paragraph leftIndent="5"/>
+				<expression><![CDATA[$F{email}]]></expression>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="staticText" uuid="be723f6f-e6a9-4824-bc5f-b9a4f5bb3919" x="30" y="120" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[E-Mail]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="f91e76c6-d8af-4dee-b500-07ce44dfd9ac" mode="Transparent" x="130" y="150" width="380" height="59" backcolor="#FFFFFF" fontSize="12.0" vTextAlign="Middle">
+				<paragraph leftIndent="5"/>
+				<expression><![CDATA[$F{address}]]></expression>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="staticText" uuid="05ac0f6b-8f44-4345-8048-b70846dc510e" x="30" y="164" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[Address]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="c9698c89-29b5-4462-a0d0-6eaa638c33c0" mode="Transparent" x="130" y="210" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" vTextAlign="Middle">
+				<paragraph leftIndent="5"/>
+				<expression><![CDATA[$F{dob}]]></expression>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="staticText" uuid="aa275a2d-8def-437b-ae2f-11cda914dfbb" x="30" y="210" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[Birthday]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="206d57f0-c69d-4c35-b588-b8486f2a0cd5" mode="Transparent" x="130" y="240" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" vTextAlign="Middle">
 				<paragraph leftIndent="5"/>
 				<expression><![CDATA[$F{salary}]]></expression>
 				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 			</element>
-			<element kind="textField" uuid="c9f7ad86-d038-442b-874d-5f976a0cec9c" mode="Opaque" x="400" y="0" width="80" height="30" backcolor="#CAE7FC" hTextAlign="Left" vTextAlign="Middle">
+			<element kind="staticText" uuid="4e8df688-3487-4b5e-b175-9bde0da651e4" x="30" y="240" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[Salary]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="6c8e95a4-2a4e-4ea0-ae51-a5b765d42020" mode="Transparent" x="130" y="270" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" vTextAlign="Middle">
+				<paragraph leftIndent="5"/>
+				<expression><![CDATA[$F{type}]]></expression>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="staticText" uuid="c4cd97b3-5506-4f34-913a-7b9b9270f098" x="30" y="270" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[Type]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="79c485b2-0c9e-4f11-936e-22eec7753bee" mode="Transparent" x="130" y="300" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" vTextAlign="Middle">
+				<paragraph leftIndent="5"/>
+				<expression><![CDATA[$F{role}]]></expression>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="staticText" uuid="7d358742-9826-4504-b126-158784dd3915" x="30" y="300" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[Role]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="90f29410-1203-4a25-9e5b-bee1a0f3320e" mode="Transparent" x="130" y="330" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" blankWhenNull="true" vTextAlign="Middle">
 				<paragraph leftIndent="5"/>
 				<expression><![CDATA[$F{phone1}]]></expression>
 				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 			</element>
-			<element kind="textField" uuid="1c1ca2fa-4b11-4d88-9338-abe2ad3943ea" mode="Opaque" x="490" y="0" width="70" height="30" backcolor="#CAE7FC" hTextAlign="Left" vTextAlign="Middle">
+			<element kind="staticText" uuid="00aa1be4-01de-4252-a3fc-6a85fc2cec21" x="30" y="330" width="100" height="30" fontSize="12.0" bold="true" italic="false" hTextAlign="Left" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[Contact]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="textField" uuid="8fc05af1-7849-426f-90b5-6d72c918ca24" mode="Transparent" x="130" y="360" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" blankWhenNull="true" vTextAlign="Middle">
 				<paragraph leftIndent="5"/>
 				<expression><![CDATA[$F{phone2}]]></expression>
 				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 			</element>
+			<element kind="textField" uuid="0e4bd356-f46b-4ee8-8426-e572f56343cb" mode="Transparent" x="130" y="390" width="380" height="30" backcolor="#FFFFFF" fontSize="12.0" blankWhenNull="true" vTextAlign="Middle">
+				<paragraph leftIndent="5"/>
+				<expression><![CDATA[$F{phone3}]]></expression>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="line" uuid="e792a08a-59c3-4640-8fff-985fc5fdf8cf" x="-20" y="430" width="595" height="1"/>
+			<element kind="textField" uuid="2aa024c9-0439-4f38-be37-1efc360925b1" x="130" y="60" width="380" height="30" fontSize="12.0" vTextAlign="Middle">
+				<paragraph leftIndent="5"/>
+				<expression><![CDATA[$F{full_name}]]></expression>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
+			<element kind="staticText" uuid="888d1399-19e5-4b0a-9e8f-cb24ea5724b7" x="30" y="60" width="100" height="30" fontSize="12.0" bold="true" vTextAlign="Middle">
+				<paragraph leftIndent="10"/>
+				<text><![CDATA[Full Name]]></text>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+			</element>
 		</band>
 	</detail>
+	<columnFooter height="50">
+		<element kind="textField" uuid="e335cfdd-495e-4874-9ad5-692a9bc1c8f1" x="170" y="20" width="100" height="30" fontSize="10.0" vTextAlign="Middle">
+			<expression><![CDATA[$P{time}]]></expression>
+		</element>
+		<element kind="textField" uuid="0cb84d4b-ce10-4bbe-9164-e873b107b14d" x="270" y="20" width="100" height="30" vTextAlign="Middle">
+			<expression><![CDATA[$P{date}]]></expression>
+		</element>
+		<element kind="textField" uuid="8e0ae51b-ad73-439e-a998-3579c23f04ae" x="370" y="20" width="140" height="30" vTextAlign="Middle">
+			<expression><![CDATA[$P{generatedBy}]]></expression>
+		</element>
+		<element kind="textField" uuid="9e93f66f-447d-4ae2-bf78-716e2e84127a" x="30" y="20" width="90" height="30" bold="true" vTextAlign="Middle">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+	</columnFooter>
 </jasperReport>
