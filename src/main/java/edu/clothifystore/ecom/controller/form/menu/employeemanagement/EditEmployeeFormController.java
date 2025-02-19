@@ -31,6 +31,12 @@ public class EditEmployeeFormController extends AddEditEmployeeFormController {
 		this.changeStatusToSearch();
 	}
 
+	@Override
+	public void update () {
+		super.update();
+		this.changeStatusToSearch();
+	}
+
 	private void updateToggleTypeControllersDisableStatus (boolean status) {
 		this.fullNameTextField.setDisable(status);
 		this.emailTextField.setDisable(status);
@@ -48,12 +54,6 @@ public class EditEmployeeFormController extends AddEditEmployeeFormController {
 		this.phone3TextField.setDisable(status);
 		this.phone3TypeComboBox.setDisable(status);
 		this.asAdminCheckBox.setDisable(status);
-	}
-
-	@Override
-	public void update () {
-		super.update();
-		this.changeStatusToSearch();
 	}
 
 	private void changeStatusToSearch () {

@@ -11,33 +11,31 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AllEmployeesReportFormController implements Initializable, MenuForm {
-	@Override
-	public void initialize (URL url, ResourceBundle resourceBundle) {
-
-	}
+	private final ReportGenerator reportGenerator = UtilFactory.getObject(ReportGenerator.class);
 
 	@Override
-	public void update () {
+	public void initialize (URL url, ResourceBundle resourceBundle) {}
 
-	}
+	@Override
+	public void update () {}
 
 	@FXML
 	public void activeEmployeesButtonOnAction (ActionEvent actionEvent) {
-		UtilFactory.getObject(ReportGenerator.class).startGenerateReport("active_employees_report", "employee/active-employees/", "active-employees", null);
+		this.reportGenerator.startGenerateReport("active_employees_report", "employee/active-employees/", "active-employees", null);
 	}
 
 	@FXML
 	public void deletedEmployeesButtonOnAction (ActionEvent actionEvent) {
-		UtilFactory.getObject(ReportGenerator.class).startGenerateReport("deleted_employees_report", "employee/deleted-employees/", "deleted-employees", null);
+		this.reportGenerator.startGenerateReport("deleted_employees_report", "employee/deleted-employees/", "deleted-employees", null);
 	}
 
 	@FXML
 	public void adminsButtonOnAction (ActionEvent actionEvent) {
-		UtilFactory.getObject(ReportGenerator.class).startGenerateReport("admin_employees_report", "employee/admins/", "admins", null);
+		this.reportGenerator.startGenerateReport("admin_employees_report", "employee/admins/", "admins", null);
 	}
 
 	@FXML
 	public void employeesByRoleButtonOnAction (ActionEvent actionEvent) {
-		UtilFactory.getObject(ReportGenerator.class).startGenerateReport("employees_by_role", "employee/employees-by-role/", "employees_by_role", null);
+		this.reportGenerator.startGenerateReport("employees_by_role", "employee/employees-by-role/", "employees_by_role", null);
 	}
 }

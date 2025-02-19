@@ -69,7 +69,6 @@ CREATE TABLE `order` (
     id INT AUTO_INCREMENT,
     `date` DATE NOT NULL,
     `time` TIME NOT NULL,
-    amount DECIMAL(10, 2),
     employee_id INT NOT NULL,
     customer_id INT NOT NULL,
     is_deleted BOOLEAN DEFAULT FALSE,
@@ -81,7 +80,9 @@ CREATE TABLE `order` (
 CREATE TABLE order_item (
     order_id INT,
     product_id INT,
-    discount DECIMAL(10, 2),
+    quantity INT(10) NOT NULL,
+    amount DECIMAL(10, 2) NOT NULL,
+    discount DECIMAL(10, 2) DEFAULT 0.0,
     is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (order_id, product_id),
     FOREIGN KEY (order_id) REFERENCES `order` (id),
@@ -279,16 +280,16 @@ INSERT INTO supplier (name, phone, email, address, type, description) VALUES
 ('Silken Dreams', '0001112222', 'silken@dreams.com', '150 Silk St', 'BUSINESS', 'Exclusive silk textiles'),
 ('Pioneer Garments', '1112223333', 'pioneer@garments.com', '160 Uniform Rd', 'BUSINESS', 'Workwear and uniforms');
 
-INSERT INTO `order` (`date`, `time`, amount, employee_id, customer_id) VALUES
-('2025-02-01', '10:30:00', 150.00, 1, 1),
-('2025-02-02', '11:00:00', 200.00, 1, 2),
-('2025-02-03', '14:15:00', 75.50, 1, 3);
+INSERT INTO `order` (`date`, `time`, employee_id, customer_id) VALUES
+('2025-02-01', '10:30:00', 1, 1),
+('2025-02-11', '11:00:00', 1, 2),
+('2025-02-19', '14:15:00', 1, 3);
 
-INSERT INTO order_item (order_id, product_id, discount) VALUES
-(1, 1, 10.00),
-(1, 2, 5.00),
-(2, 3, 0.00),
-(3, 1, 15.00);
+INSERT INTO order_item (order_id, product_id, quantity, amount, discount) VALUES
+(1, 1, 3, 150.00, 10.00),
+(1, 2, 2, 60.00, 5.00),
+(2, 3, 1, 120.00, 0.00),
+(3, 1, 2, 100.00, 15.00);
 
 INSERT INTO product_supplier (supplier_id, product_id, `date`, `time`, quantity, supplier_price, payment_status, payment_date) VALUES
 (1, 1, '2025-01-15', '09:00:00', 100, 10.50, 'PAID', '2025-01-16'),
@@ -421,3 +422,72 @@ LEFT JOIN (
 ) ep ON e.id = ep.employee_id
 WHERE e.is_deleted = FALSE AND e.type = 'ADMIN'
 GROUP BY e.id, e.full_name, e.role, e.nic, e.salary;
+
+SELECT id, name, phone, email, type
+FROM supplier
+WHERE is_deleted = FALSE
+ORDER BY name;
+
+-- All
+SELECT
+    o.id,
+    o.date,
+    o.time,
+    COALESCE(SUM(oi.amount), 0) AS total_amount,
+    COALESCE(SUM(oi.discount), 0) AS total_discount
+FROM `order` o
+LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
+WHERE o.is_deleted = FALSE
+GROUP BY o.id, o.date, o.time;
+
+-- Today Orders
+SELECT
+    o.id,
+    o.date,
+    o.time,
+    COALESCE(SUM(oi.amount), 0) AS total_amount,
+    COALESCE(SUM(oi.discount), 0) AS total_discount
+FROM `order` o
+LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
+WHERE o.is_deleted = FALSE
+AND o.date = CURDATE()
+GROUP BY o.id, o.date, o.time;
+
+  -- Last 7 days, excluding today
+SELECT
+    o.id,
+    o.date,
+    o.time,
+    COALESCE(SUM(oi.amount), 0) AS total_amount,
+    COALESCE(SUM(oi.discount), 0) AS total_discount
+FROM `order` o
+LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
+WHERE o.is_deleted = FALSE
+AND o.date BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()
+GROUP BY o.id, o.date, o.time;
+
+-- months
+SELECT
+    o.id,
+    o.date,
+    o.time,
+    COALESCE(SUM(oi.amount), 0) AS total_amount,
+    COALESCE(SUM(oi.discount), 0) AS total_discount
+FROM `order` o
+LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
+WHERE o.is_deleted = FALSE
+AND o.date BETWEEN CURDATE() - INTERVAL 6 MONTH AND CURDATE()
+GROUP BY o.id, o.date, o.time;
+
+-- years
+SELECT
+    o.id,
+    o.date,
+    o.time,
+    COALESCE(SUM(oi.amount), 0) AS total_amount,
+    COALESCE(SUM(oi.discount), 0) AS total_discount
+FROM `order` o
+LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
+WHERE o.is_deleted = FALSE
+AND o.date BETWEEN CURDATE() - INTERVAL 6 YEAR AND CURDATE()
+GROUP BY o.id, o.date, o.time;

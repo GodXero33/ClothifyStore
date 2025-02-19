@@ -32,6 +32,9 @@ public class EmployeeManagementFormController implements Initializable, MenuForm
 		}
 	}
 
+	@Override
+	public void update () {}
+
 	// Load new menu into content pane.
 	private void openMenu (MenuType menuType, Button button) throws IOException {
 		if (button.equals(this.currentActiveMenuButton)) return; // If target menu is already opened, exit.
@@ -49,11 +52,6 @@ public class EmployeeManagementFormController implements Initializable, MenuForm
 
 		button.getStyleClass().add("button-active");
 		((MenuForm) loader.getController()).update();
-	}
-
-	@Override
-	public void update () {
-
 	}
 
 	@FXML

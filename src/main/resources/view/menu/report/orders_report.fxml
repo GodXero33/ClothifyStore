@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/report-content.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.report.OrdersReportFormController">
    <children>
       <Label alignment="CENTER" layoutX="3.0" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="Orders Report" />
+      <Button layoutX="187.0" layoutY="97.0" mnemonicParsing="false" onAction="#todayOrdersReportButtonOnAction" prefHeight="49.0" prefWidth="251.0" text="Today Orders Report" />
+      <Button layoutX="187.0" layoutY="159.0" mnemonicParsing="false" onAction="#lastWeekOrdersButtonOnAction" text="Last Week Orders Report" />
+      <Pane layoutX="10.0" layoutY="252.0" prefHeight="49.0" prefWidth="582.0">
+         <children>
+            <Slider fx:id="monthSlider" blockIncrement="1.0" layoutX="104.0" majorTickUnit="1.0" max="12.0" minorTickCount="1" prefHeight="49.0" prefWidth="208.0" snapToTicks="true" />
+            <TextField fx:id="monthTextField" layoutX="321.0" prefHeight="49.0" prefWidth="105.0" styleClass="text-field-normal" text="0" />
+            <Button layoutX="442.0" mnemonicParsing="false" onAction="#monthButtonOnAction" prefHeight="49.0" prefWidth="126.0" text="Generate" />
+            <Label layoutX="14.0" prefHeight="49.0" prefWidth="74.0" styleClass="text-field-label" text="Months" />
+         </children>
+      </Pane>
+      <Pane layoutX="10.0" layoutY="309.0" prefHeight="49.0" prefWidth="582.0">
+         <children>
+            <Slider fx:id="yearSlider" blockIncrement="1.0" layoutX="104.0" majorTickUnit="1.0" minorTickCount="1" prefHeight="49.0" prefWidth="208.0" snapToTicks="true" />
+            <TextField fx:id="yearTextField" layoutX="321.0" prefHeight="49.0" prefWidth="105.0" styleClass="text-field-normal" text="0" />
+            <Button layoutX="442.0" mnemonicParsing="false" onAction="#yearButtonOnAction" prefHeight="49.0" prefWidth="126.0" text="Generate" />
+            <Label layoutX="14.0" prefHeight="49.0" prefWidth="74.0" styleClass="text-field-label" text="Years" />
+         </children>
+      </Pane>
+      <Button layoutX="186.0" layoutY="392.0" mnemonicParsing="false" onAction="#allTimeOrdersButtonOnAction" prefHeight="49.0" prefWidth="251.0" text="All Time Orders Report" />
    </children>
 </AnchorPane>

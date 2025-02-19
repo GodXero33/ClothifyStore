@@ -6,10 +6,10 @@
 
 <AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/report-content.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.report.AllEmployeesReportFormController">
    <children>
-      <Label alignment="CENTER" layoutX="5.0" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="All Employees Report" />
-      <Button layoutX="211.0" layoutY="141.0" mnemonicParsing="false" onAction="#activeEmployeesButtonOnAction" prefHeight="49.0" prefWidth="209.0" text="Active Employees" />
-      <Button layoutX="211.0" layoutY="200.0" mnemonicParsing="false" onAction="#deletedEmployeesButtonOnAction" prefHeight="49.0" prefWidth="209.0" text="Deleted Employees" />
-      <Button layoutX="211.0" layoutY="258.0" mnemonicParsing="false" onAction="#adminsButtonOnAction" prefHeight="49.0" prefWidth="209.0" text="Admins" />
-      <Button layoutX="210.0" layoutY="316.0" mnemonicParsing="false" onAction="#employeesByRoleButtonOnAction" prefHeight="49.0" prefWidth="209.0" text="Employees by Role" />
+      <Label alignment="CENTER" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="All Employees Reports" />
+      <Button layoutX="163.0" layoutY="97.0" mnemonicParsing="false" onAction="#activeEmployeesButtonOnAction" prefHeight="49.0" prefWidth="294.0" text="Active Employees Report" />
+      <Button layoutX="163.0" layoutY="156.0" mnemonicParsing="false" onAction="#deletedEmployeesButtonOnAction" prefHeight="49.0" prefWidth="294.0" text="Deleted Employees Report" />
+      <Button layoutX="163.0" layoutY="214.0" mnemonicParsing="false" onAction="#adminsButtonOnAction" prefHeight="49.0" prefWidth="294.0" text="Admins Report" />
+      <Button layoutX="162.0" layoutY="272.0" mnemonicParsing="false" onAction="#employeesByRoleButtonOnAction" prefHeight="49.0" prefWidth="294.0" text="Employees by Role Report" />
    </children>
 </AnchorPane>

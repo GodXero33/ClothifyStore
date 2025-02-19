@@ -1,0 +1,199 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="Blank_A4" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2110e46-04fa-49de-9bba-91fcbbcda7bb">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<query language="SQL"><![CDATA[SELECT
+    o.id,
+    o.date,
+    o.time,
+    COALESCE(SUM(oi.amount), 0) AS total_amount,
+    COALESCE(SUM(oi.discount), 0) AS total_discount
+FROM `order` o
+LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
+WHERE o.is_deleted = FALSE
+AND o.date BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()
+GROUP BY o.id, o.date, o.time]]></query>
+	<field name="id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="id"/>
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="order"/>
+	</field>
+	<field name="date" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="date"/>
+		<property name="com.jaspersoft.studio.field.label" value="date"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="order"/>
+	</field>
+	<field name="time" class="java.sql.Time">
+		<property name="com.jaspersoft.studio.field.name" value="time"/>
+		<property name="com.jaspersoft.studio.field.label" value="time"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="order"/>
+	</field>
+	<field name="total_amount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="total_amount"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_amount"/>
+	</field>
+	<field name="total_discount" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="total_discount"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_discount"/>
+	</field>
+	<title height="121" splitType="Stretch">
+		<element kind="staticText" uuid="6fdfaa4d-be9e-4f06-946c-3c2744828aa3" x="3" y="20" width="549" height="30" fontSize="19.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Orders Report]]></text>
+		</element>
+		<element kind="staticText" uuid="ffbde111-19e1-4784-b788-2e2c0f8a60d6" x="227" y="50" width="100" height="23" fontSize="14.0">
+			<text><![CDATA[ClothifyStore]]></text>
+		</element>
+		<element kind="line" uuid="51b86cf4-5f92-42e0-b24a-61b83c6364ca" x="34" y="120" width="480" height="1"/>
+		<element kind="textField" uuid="15bbe4c0-6bab-4bef-9135-59bdbf6fe6f8" x="40" y="90" width="300" height="20" fontSize="14.0" pattern="MMMMM dd, yyyy" bold="true">
+			<expression><![CDATA[new SimpleDateFormat("yyyy / MM / dd").format(new java.util.Date()) + " - " + 
+new SimpleDateFormat("yyyy / MM / dd").format(new java.util.Date(new java.util.Date().getTime() - 7L * 24 * 60 * 60 * 1000))
+]]></expression>
+		</element>
+	</title>
+	<columnHeader height="44">
+		<element kind="staticText" uuid="f7a47e99-2d36-4942-921e-abe567d4e4eb" mode="Opaque" x="38" y="11" width="80" height="30" forecolor="#FFFFFF" backcolor="#A6A6A6" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[ID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5019876-2434-44e0-820b-ad1007e52e10"/>
+			<box>
+				<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="8cf4950f-092c-40ec-a224-66522309d26f" mode="Opaque" x="118" y="11" width="120" height="30" forecolor="#FFFFFF" backcolor="#A6A6A6" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Date]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="23bd7c11-0b24-4f61-90b6-300df9b645d1"/>
+			<box>
+				<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="418ce8ad-7cad-45eb-b5e8-eabb25db1642" mode="Opaque" x="238" y="11" width="92" height="30" forecolor="#FFFFFF" backcolor="#A6A6A6" fontSize="12.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Time]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9487cb65-9168-4732-ae55-328211f600cb"/>
+			<box>
+				<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="73d2abac-2975-4c02-84ea-1720f2c9f552" mode="Opaque" x="330" y="11" width="100" height="30" forecolor="#FFFFFF" backcolor="#A6A6A6" fontSize="10.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Total Amount (Rs)]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1a2e8859-9ff1-42b8-89a8-638e6a51b2af"/>
+			<box>
+				<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="78954bc1-0f90-4593-995d-37f4897de824" mode="Opaque" x="430" y="11" width="102" height="30" forecolor="#FFFFFF" backcolor="#A6A6A6" fontSize="10.0" bold="true" hTextAlign="Center" vTextAlign="Middle">
+			<text><![CDATA[Total Discount (Rs)]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d736ee74-1094-4887-8f49-abd9f491f70b"/>
+			<box>
+				<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+				<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<element kind="textField" uuid="7b65120c-800a-4a07-bb72-c3c02fabbce9" mode="Opaque" x="38" y="1" width="80" height="30" backcolor="#DEDEDE" fontSize="12.0" hTextAlign="Center" vTextAlign="Middle">
+				<paragraph leftIndent="4" rightIndent="4"/>
+				<expression><![CDATA[$F{id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5019876-2434-44e0-820b-ad1007e52e10"/>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="35fa6d16-4c00-4647-93fa-e2c6ad808a25" mode="Opaque" x="118" y="1" width="120" height="30" backcolor="#DEDEDE" fontSize="12.0" vTextAlign="Middle">
+				<paragraph leftIndent="4" rightIndent="4"/>
+				<expression><![CDATA[($F{date}.getYear() + 1900) + " / " +
+(($F{date}.getMonth() + 1) < 10 ? "0" : "") + ($F{date}.getMonth() + 1) + " / " +
+($F{date}.getDate() < 10 ? "0" : "") + $F{date}.getDate()]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="23bd7c11-0b24-4f61-90b6-300df9b645d1"/>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="b23c96b9-33e8-46ef-84e0-4caba80c4a37" mode="Opaque" x="238" y="1" width="92" height="30" backcolor="#DEDEDE" fontSize="12.0" vTextAlign="Middle">
+				<paragraph leftIndent="4" rightIndent="4"/>
+				<expression><![CDATA[$F{time}.getHours() + ":" +
+(($F{time}.getMinutes() < 10) ? "0" : "") + $F{time}.getMinutes()
+]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9487cb65-9168-4732-ae55-328211f600cb"/>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="5d6a83c6-ea50-46dd-b5f4-449eabfaeccf" mode="Opaque" x="330" y="1" width="100" height="30" backcolor="#DEDEDE" fontSize="12.0" hTextAlign="Right" vTextAlign="Middle">
+				<paragraph leftIndent="4" rightIndent="4"/>
+				<expression><![CDATA[$F{total_amount}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1a2e8859-9ff1-42b8-89a8-638e6a51b2af"/>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="d4244442-ac84-406f-8fae-1162fedd4842" mode="Opaque" x="430" y="1" width="102" height="30" backcolor="#DEDEDE" fontSize="12.0" hTextAlign="Right" vTextAlign="Middle">
+				<paragraph leftIndent="4" rightIndent="4"/>
+				<expression><![CDATA[$F{total_discount}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d736ee74-1094-4887-8f49-abd9f491f70b"/>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+				<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+				<box>
+					<pen lineWidth="0.25" lineColor="#FFFFFF"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#FFFFFF"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<pageFooter height="60">
+		<element kind="textField" uuid="50268ab2-bcb3-4937-9229-aac44b266416" x="430" y="40" width="100" height="20" fontSize="12.0" pattern="HH:mm">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="textField" uuid="2dcc6838-80e0-439d-a067-f861cb5402ca" x="430" y="19" width="100" height="20" fontSize="12.0" pattern="MMMMM dd, yyyy">
+			<expression><![CDATA[new java.util.Date()]]></expression>
+		</element>
+		<element kind="textField" uuid="d35b074c-63a3-4429-9298-088deae4e74f" x="40" y="29" width="100" height="30" bold="true" vTextAlign="Middle">
+			<expression><![CDATA[$V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
+</jasperReport>

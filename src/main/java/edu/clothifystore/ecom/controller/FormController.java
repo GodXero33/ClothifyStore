@@ -39,7 +39,7 @@ public class FormController {
 		return FormController.instance;
 	}
 
-	public FXMLLoader openStage (Stage stage, String url, String title, boolean show) throws IOException {
+	public void openStage (Stage stage, String url, String title, boolean show) throws IOException {
 		if (stage == null) stage = new Stage();
 
 		final FXMLLoader loader = new FXMLLoader(Starter.class.getResource(String.format("%s/%s.fxml", this.formFXMLPath, url)));
@@ -49,7 +49,6 @@ public class FormController {
 
 		if (show) stage.show();
 
-		return loader;
 	}
 
 	public FXMLLoader openMenu (MenuType menuType, Pane pane) throws IOException {

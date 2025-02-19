@@ -34,9 +34,7 @@ public class ProductManagementFormController implements Initializable, MenuForm 
 	}
 
 	@Override
-	public void update () {
-
-	}
+	public void update () {}
 
 	// Load new menu into content pane.
 	private void openMenu (MenuType menuType, Button button) throws IOException {
