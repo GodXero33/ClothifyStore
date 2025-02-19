@@ -64,6 +64,9 @@ public class EmployeeSalaryReportFormController implements Initializable, MenuFo
 
 		this.generateReportButton.setDisable(false);
 		this.fullnameLabel.setText(employee.getFullName());
+		this.idTextField.setText(employee.getId().toString());
+		this.nictextField.setText(employee.getNIC());
+		this.usernameTextField.setText(employee.getUserName());
 
 		this.loadedEmployee = employee;
 	}
@@ -137,7 +140,12 @@ public class EmployeeSalaryReportFormController implements Initializable, MenuFo
 
 		parameters.put("employeeID", this.loadedEmployee.getId());
 
-		reportGenerator.startGenerateReport("employee_salary_report", "employee/salary/", "employee-salary", parameters);
+		reportGenerator.startGenerateReport("employee_salary_report", "employee/salaries/", "employee-salary", parameters);
+		this.resetForm();
+	}
+
+	@FXML
+	public void clearButtonOnAction (ActionEvent actionEvent) {
 		this.resetForm();
 	}
 }

@@ -2,7 +2,6 @@ package edu.clothifystore.ecom.controller.form.menu.main;
 
 import edu.clothifystore.ecom.controller.FormController;
 import edu.clothifystore.ecom.controller.form.menu.MenuForm;
-import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.service.ServiceFactory;
 import edu.clothifystore.ecom.service.custom.EmployeeService;
 import edu.clothifystore.ecom.util.*;
@@ -16,8 +15,6 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ReportsFormController implements Initializable, MenuForm {
@@ -60,27 +57,23 @@ public class ReportsFormController implements Initializable, MenuForm {
 		((MenuForm) loader.getController()).update();
 	}
 
-
-
-	@FXML
-	public void dailyEmployeeReportOnAction (ActionEvent actionEvent) {
-
-	}
-
 	@FXML
 	public void employeeSalaryReportButtonOnAction (ActionEvent actionEvent) throws IOException {
 		this.openMenu(MenuType.EMPLOYEE_SALARY_REPORT, (Button) actionEvent.getTarget());
 	}
 
 	@FXML
-	public void allEmployeesReportButtonOnAction (ActionEvent actionEvent) {
+	public void allEmployeesReportButtonOnAction (ActionEvent actionEvent) throws IOException {
+		this.openMenu(MenuType.ALL_EMPLOYEES_REPORT, (Button) actionEvent.getTarget());
 	}
 
 	@FXML
-	public void suppliersReportButtonOnAction (ActionEvent actionEvent) {
+	public void suppliersReportButtonOnAction (ActionEvent actionEvent) throws IOException {
+		this.openMenu(MenuType.SUPPLIERS_REPORT, (Button) actionEvent.getTarget());
 	}
 
 	@FXML
-	public void ordersReportButtonOnAction (ActionEvent actionEvent) {
+	public void ordersReportButtonOnAction (ActionEvent actionEvent) throws IOException {
+		this.openMenu(MenuType.ORDERS_REPORT, (Button) actionEvent.getTarget());
 	}
 }

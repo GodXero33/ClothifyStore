@@ -295,6 +295,10 @@ INSERT INTO product_supplier (supplier_id, product_id, `date`, `time`, quantity,
 (2, 2, '2025-01-16', '10:30:00', 200, 15.75, 'PENDING', NULL),
 (3, 3, '2025-01-17', '12:45:00', 50, 8.25, 'PAID', '2025-01-18');
 
+UPDATE employee SET is_deleted = TRUE WHERE id = 10;
+UPDATE employee_phone SET is_deleted = TRUE WHERE employee_id = 10;
+UPDATE employee_phone SET is_deleted = TRUE WHERE employee_id = 10;
+
 SELECT * FROM employee;
 SELECT * FROM employee_phone;
 SELECT * FROM product;
@@ -341,7 +345,6 @@ LEFT JOIN (
 WHERE e.is_deleted = FALSE
 GROUP BY e.id;
 
-
 SELECT
     e.full_name,
     e.role,
@@ -357,3 +360,64 @@ WHERE e.is_deleted = FALSE
 AND e.id = 1
 GROUP BY e.id;
 
+SELECT
+    e.id,
+    e.full_name,
+    e.role,
+    e.nic,
+    e.salary,
+    MAX(CASE WHEN p_row = 1 THEN ep.phone END) AS phone1,
+    MAX(CASE WHEN p_row = 2 THEN ep.phone END) AS phone2,
+    MAX(CASE WHEN p_row = 3 THEN ep.phone END) AS phone3
+FROM employee e
+LEFT JOIN (
+    SELECT
+        employee_id,
+        phone,
+        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY phone) AS p_row
+    FROM employee_phone
+    WHERE is_deleted = FALSE
+) ep ON e.id = ep.employee_id
+WHERE e.is_deleted = FALSE
+GROUP BY e.id, e.full_name, e.role, e.nic, e.salary;
+
+SELECT
+    e.id,
+    e.full_name,
+    e.role,
+    e.nic,
+    e.salary,
+    MAX(CASE WHEN p_row = 1 THEN ep.phone END) AS phone1,
+    MAX(CASE WHEN p_row = 2 THEN ep.phone END) AS phone2,
+    MAX(CASE WHEN p_row = 3 THEN ep.phone END) AS phone3
+FROM employee e
+LEFT JOIN (
+    SELECT
+        employee_id,
+        phone,
+        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY phone) AS p_row
+    FROM employee_phone
+) ep ON e.id = ep.employee_id
+WHERE e.is_deleted = TRUE
+GROUP BY e.id, e.full_name, e.role, e.nic, e.salary;
+
+SELECT
+    e.id,
+    e.full_name,
+    e.role,
+    e.nic,
+    e.salary,
+    MAX(CASE WHEN p_row = 1 THEN ep.phone END) AS phone1,
+    MAX(CASE WHEN p_row = 2 THEN ep.phone END) AS phone2,
+    MAX(CASE WHEN p_row = 3 THEN ep.phone END) AS phone3
+FROM employee e
+LEFT JOIN (
+    SELECT
+        employee_id,
+        phone,
+        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY phone) AS p_row
+    FROM employee_phone
+    WHERE is_deleted = FALSE
+) ep ON e.id = ep.employee_id
+WHERE e.is_deleted = FALSE AND e.type = 'ADMIN'
+GROUP BY e.id, e.full_name, e.role, e.nic, e.salary;
