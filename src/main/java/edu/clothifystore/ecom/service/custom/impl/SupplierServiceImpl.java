@@ -29,4 +29,32 @@ public class SupplierServiceImpl implements SupplierService {
 	public boolean add (Supplier supplier) {
 		return this.supplierRepository.add(this.mapper.toEntity(supplier));
 	}
+
+	@Override
+	public boolean update (Supplier supplier) {
+		return this.supplierRepository.update(this.mapper.toEntity(supplier));
+	}
+
+	@Override
+	public boolean delete (Integer id) {
+		return this.supplierRepository.delete(id);
+	}
+
+	@Override
+	public Supplier getByName (String name) {
+		final SupplierEntity supplierEntity = this.supplierRepository.getByName(name);
+
+		if (supplierEntity == null) return null;
+
+		return this.mapper.toDTO(supplierEntity);
+	}
+
+	@Override
+	public Supplier getByPhone (String phone) {
+		final SupplierEntity supplierEntity = this.supplierRepository.getByPhone(phone);
+
+		if (supplierEntity == null) return null;
+
+		return this.mapper.toDTO(supplierEntity);
+	}
 }

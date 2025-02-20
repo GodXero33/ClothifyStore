@@ -1,11 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;"
-            stylesheets="@../../../css/supplier-edit.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.supplier.UpdateSupplierFormController">
+<AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/employee-edit.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.supplier.UpdateSupplierFormController">
     <children>
-        <Label alignment="CENTER" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="Delete / Update Supplier" />
+        <Label alignment="CENTER" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="Add Supplier" />
+        <AnchorPane layoutX="1.0" layoutY="53.0" minHeight="0.0" minWidth="0.0" prefHeight="343.0" prefWidth="618.0" style="-fx-background-color: #121212;">
+            <children>
+                <Pane layoutX="14.0" layoutY="26.0" prefHeight="41.0" prefWidth="570.0">
+                    <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Supplier Name" />
+                        <TextField fx:id="supplierNameTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Supplier Name" styleClass="text-field-normal" />
+                    </children>
+                </Pane>
+                <Pane layoutX="14.0" layoutY="77.0" prefHeight="41.0" prefWidth="570.0">
+                    <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Phone" />
+                        <TextField fx:id="phoneTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Phone" styleClass="text-field-normal" />
+                    </children>
+                </Pane>
+                <Pane layoutX="14.0" layoutY="127.0" prefHeight="41.0" prefWidth="570.0">
+                    <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="E-Mail" />
+                        <TextField fx:id="emailTextField" disable="true" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="E-Mail" styleClass="text-field-normal" />
+                    </children>
+                </Pane>
+                <Pane layoutX="14.0" layoutY="177.0" prefHeight="41.0" prefWidth="570.0">
+                    <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Address" />
+                        <TextField fx:id="addressTextField" disable="true" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Address" styleClass="text-field-normal" />
+                    </children>
+                </Pane>
+                <Pane layoutX="14.0" layoutY="229.0" prefHeight="41.0" prefWidth="570.0">
+                    <children>
+                        <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Description" />
+                        <TextField fx:id="descriptionTextField" disable="true" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Description" styleClass="text-field-normal" />
+                    </children>
+                </Pane>
+                <Pane layoutX="14.0" layoutY="276.0" prefHeight="53.0" prefWidth="570.0">
+                    <children>
+                        <Label layoutY="13.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Type" />
+                        <ComboBox fx:id="typeComboBox" disable="true" layoutX="187.0" layoutY="6.0" prefHeight="41.0" prefWidth="195.0" promptText="Type" />
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+        <Button fx:id="deleteButton" disable="true" layoutX="482.0" layoutY="449.0" mnemonicParsing="false" onAction="#deleteButtonOnAction" text="Delete" />
+        <Button fx:id="updateButton" disable="true" layoutX="374.0" layoutY="449.0" mnemonicParsing="false" onAction="#updateButtonOnAction" text="Update" />
+      <Button layoutX="285.0" layoutY="449.0" mnemonicParsing="false" onAction="#clearButtonOnAction" text="Clear" />
+      <Button layoutX="476.0" layoutY="390.0" mnemonicParsing="false" onAction="#searchButtonOnAction" text="Search" />
     </children>
 </AnchorPane>

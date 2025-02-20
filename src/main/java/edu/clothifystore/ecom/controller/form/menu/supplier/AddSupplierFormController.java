@@ -106,7 +106,7 @@ public class AddSupplierFormController implements Initializable, MenuForm {
 	}
 
 	@FXML
-	public void supplierAddButtonOnAction(ActionEvent actionEvent) {
+	public void supplierAddButtonOnAction (ActionEvent actionEvent) {
 		final Supplier newSupplier = this.validateInputsNadGetNewSupplier();
 
 		if (newSupplier == null) return;

@@ -56,7 +56,7 @@ CREATE TABLE product (
 CREATE TABLE supplier (
     id INT AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
-    phone VARCHAR(12) NOT NULL,
+    phone VARCHAR(12) NOT NULL UNIQUE,
     email VARCHAR(255),
     address VARCHAR(255) NOT NUll,
     type ENUM('BUSINESS', 'INDIVIDUAL') NOT NULL,
@@ -266,19 +266,19 @@ INSERT INTO supplier (name, phone, email, address, type, description) VALUES
 ('XYZ Garments', '4445556666', 'xyz@garments.com', '20 Fashion Ave', 'BUSINESS', 'Premium garment supplier'),
 ('Tom Taylor', '7778889999', 'tom@taylor.com', '5 Handmade Ln', 'INDIVIDUAL', 'Independent tailor'),
 ('Global Fabrics', '8889990000', 'global@fabrics.com', '30 Linen St', 'BUSINESS', 'Export quality fabrics'),
-('Elite Threads', '9990001111', 'elite@threads.com', '40 Cotton Rd', 'BUSINESS', 'High-end garments'),
-('Vintage Apparel', '0001112222', 'vintage@apparel.com', '50 Retro Ln', 'BUSINESS', 'Classic fashion supplier'),
-('Smart Stitches', '1112223333', 'smart@stitches.com', '60 Designer St', 'INDIVIDUAL', 'Bespoke tailoring service'),
+('Elite Threads', '9990001113', 'elite@threads.com', '40 Cotton Rd', 'BUSINESS', 'High-end garments'),
+('Vintage Apparel', '0001112226', 'vintage@apparel.com', '50 Retro Ln', 'BUSINESS', 'Classic fashion supplier'),
+('Smart Stitches', '1112223331', 'smart@stitches.com', '60 Designer St', 'INDIVIDUAL', 'Bespoke tailoring service'),
 ('Trend Weavers', '2223334444', 'trend@weavers.com', '70 Knit Rd', 'BUSINESS', 'Modern clothing trends'),
 ('Royal Fabrics', '3334445555', 'royal@fabrics.com', '80 Silk Blvd', 'BUSINESS', 'Luxury fabric supplier'),
-('Nova Textiles', '4445556666', 'nova@textiles.com', '90 Denim Ave', 'BUSINESS', 'Denim specialist'),
+('Nova Textiles', '4445556664', 'nova@textiles.com', '90 Denim Ave', 'BUSINESS', 'Denim specialist'),
 ('Fine Tailors', '5556667777', 'fine@tailors.com', '100 Tailor St', 'INDIVIDUAL', 'Personalized tailoring'),
 ('Urban Wear', '6667778888', 'urban@wear.com', '110 Streetwear Ln', 'BUSINESS', 'Street fashion brand'),
-('Classic Cuts', '7778889999', 'classic@cuts.com', '120 Suit Ave', 'BUSINESS', 'Premium suits and coats'),
-('Modern Stitch', '8889990000', 'modern@stitch.com', '130 Couture Rd', 'BUSINESS', 'Haute couture supplier'),
+('Classic Cuts', '7778889991', 'classic@cuts.com', '120 Suit Ave', 'BUSINESS', 'Premium suits and coats'),
+('Modern Stitch', '8889990001', 'modern@stitch.com', '130 Couture Rd', 'BUSINESS', 'Haute couture supplier'),
 ('Blue Weave', '9990001111', 'blue@weave.com', '140 Fashion St', 'BUSINESS', 'Casual wear fabrics'),
 ('Silken Dreams', '0001112222', 'silken@dreams.com', '150 Silk St', 'BUSINESS', 'Exclusive silk textiles'),
-('Pioneer Garments', '1112223333', 'pioneer@garments.com', '160 Uniform Rd', 'BUSINESS', 'Workwear and uniforms');
+('Pioneer Garments', '1112223332', 'pioneer@garments.com', '160 Uniform Rd', 'BUSINESS', 'Workwear and uniforms');
 
 INSERT INTO `order` (`date`, `time`, employee_id, customer_id) VALUES
 ('2025-02-01', '10:30:00', 1, 1),

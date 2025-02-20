@@ -31,17 +31,35 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 
 	@Override
 	public boolean update (SupplierEntity entity) {
-		return false;
+		try {
+			CrudUtil.execute(
+				"UPDATE supplier SET name = ?, phone = ?, email = ?, address = ?, type = ?, description = ? WHERE is_deleted = FALSE AND id = ?",
+				entity.getName(),
+				entity.getPhone(),
+				entity.getEmail(),
+				entity.getAddress(),
+				entity.getType(),
+				entity.getDescription(),
+				entity.getId()
+			);
+
+			return true;
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+			return false;
+		}
 	}
 
 	@Override
 	public boolean delete (Integer id) {
-		return false;
-	}
+		try {
+			CrudUtil.execute("UPDATE supplier SET is_deleted = TRUE WHERE id = ?", id);
 
-	@Override
-	public SupplierEntity get (Integer id) {
-		return null;
+			return true;
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+			return false;
+		}
 	}
 
 	@Override
@@ -61,5 +79,41 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 			System.out.println(exception.getMessage());
 			return -1;
 		}
+	}
+
+	private SupplierEntity getSupplierByFieldName (String fieldName, Object searchValue) {
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT id, name, phone, email, address, type, description FROM supplier WHERE is_deleted = FALSE AND " + fieldName + " = ?", searchValue);
+
+			if (resultSet.next()) return SupplierEntity.builder().
+				id(resultSet.getInt(1)).
+				name(resultSet.getString(2)).
+				phone(resultSet.getString(3)).
+				email(resultSet.getString(4)).
+				address(resultSet.getString(5)).
+				type(resultSet.getString(6)).
+				description(resultSet.getString(7)).
+				build();
+
+			return null;
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+			return null;
+		}
+	}
+
+	@Override
+	public SupplierEntity get (Integer id) {
+		return this.getSupplierByFieldName("id", id);
+	}
+
+	@Override
+	public SupplierEntity getByName (String name) {
+		return this.getSupplierByFieldName("name", name);
+	}
+
+	@Override
+	public SupplierEntity getByPhone (String phone) {
+		return this.getSupplierByFieldName("phone", phone);
 	}
 }
