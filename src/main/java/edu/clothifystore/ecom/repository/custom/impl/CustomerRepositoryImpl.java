@@ -6,6 +6,7 @@ import edu.clothifystore.ecom.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
@@ -54,7 +55,23 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
 	@Override
 	public List<CustomerEntity> getAll () {
-		return List.of();
+		final List<CustomerEntity> customerEntities = new ArrayList<>();
+
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT id, name, phone, email, address FROM customer WHERE is_deleted = FALSE");
+
+			while (resultSet.next()) customerEntities.add(CustomerEntity.builder().
+				id(resultSet.getInt(1)).
+				name(resultSet.getString(2)).
+				phone(resultSet.getString(3)).
+				email(resultSet.getString(4)).
+				address(resultSet.getString(5)).
+				build());
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+		}
+
+		return customerEntities;
 	}
 
 	@Override

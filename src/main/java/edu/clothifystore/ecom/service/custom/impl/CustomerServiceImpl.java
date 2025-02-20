@@ -9,6 +9,9 @@ import edu.clothifystore.ecom.service.custom.CustomerService;
 import edu.clothifystore.ecom.util.RepositoryType;
 import edu.clothifystore.ecom.util.UtilFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CustomerServiceImpl implements CustomerService {
 	private final CustomerRepository customerRepository = UtilFactory.getObject(RepositoryFactory.class).getRepositoryType(RepositoryType.CUSTOMER);
 	private final CustomerMapper mapper = UtilFactory.getObject(CustomerMapper.class);
@@ -54,5 +57,15 @@ public class CustomerServiceImpl implements CustomerService {
 		if (customerEntity == null) return null;
 
 		return this.mapper.toDTO(customerEntity);
+	}
+
+	@Override
+	public List<Customer> getAll() {
+		final List<CustomerEntity> customerEntities = this.customerRepository.getAll();
+		final List<Customer> customers = new ArrayList<>();
+
+		customerEntities.forEach(customerEntity -> customers.add(this.mapper.toDTO(customerEntity)));
+
+		return customers;
 	}
 }
