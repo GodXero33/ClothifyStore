@@ -24,4 +24,9 @@ public class SupplierServiceImpl implements SupplierService {
 	public int getCount () {
 		return this.supplierRepository.getCount();
 	}
+
+	@Override
+	public boolean add (Supplier supplier) {
+		return this.supplierRepository.add(this.mapper.toEntity(supplier));
+	}
 }

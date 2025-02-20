@@ -3,19 +3,17 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
 	<parameter name="employeeID" class="java.lang.Integer"/>
-	<query language="SQL"><![CDATA[SELECT
+	<query language="SQL"><![CDATA[SELECT 
+    e.id,
     e.full_name,
     e.role,
-    e.salary,
+    COALESCE(SUM(oi.amount), 0) AS total_sales,
     COUNT(o.id) AS orders_handled,
-    COALESCE(SUM(o.amount), 0) AS total_sales
+    e.salary
 FROM employee e
-LEFT JOIN `order` o
-    ON e.id = o.employee_id
-    AND o.is_deleted = FALSE
-    AND o.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)  -- Last 30 days filter
-WHERE e.is_deleted = FALSE
-AND e.id = $P{employeeID}
+LEFT JOIN `order` o ON e.id = o.employee_id AND o.is_deleted = FALSE
+LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
+WHERE e.is_deleted = FALSE AND e.id = $P{employeeID}
 GROUP BY e.id
 ]]></query>
 	<field name="full_name" class="java.lang.String">

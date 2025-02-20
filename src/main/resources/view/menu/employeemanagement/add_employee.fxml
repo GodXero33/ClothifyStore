@@ -107,5 +107,6 @@
         </content>
       </ScrollPane>
       <Button fx:id="employeeEditFormActionButton" layoutX="511.0" layoutY="461.0" mnemonicParsing="false" onAction="#employeeEditFormActionButtonOnAction" text="Add" />
+      <Button layoutX="420.0" layoutY="461.0" mnemonicParsing="false" onAction="#clearButtonOnAction" text="Clear" />
    </children>
 </AnchorPane>

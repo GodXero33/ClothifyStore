@@ -18,7 +18,10 @@ public enum MenuType {
 	EMPLOYEE_SALARY_REPORT("report", null),
 	ALL_EMPLOYEES_REPORT("report", null),
 	SUPPLIERS_REPORT("report", null),
-	ORDERS_REPORT("report", null);
+	ORDERS_REPORT("report", null),
+	ADD_SUPPLIER("supplier", null),
+	UPDATE_SUPPLIER("supplier", null),
+	ALL_SUPPLIERS("supplier", null);
 
 	private final String path;
 	@Getter

@@ -282,7 +282,7 @@ INSERT INTO supplier (name, phone, email, address, type, description) VALUES
 
 INSERT INTO `order` (`date`, `time`, employee_id, customer_id) VALUES
 ('2025-02-01', '10:30:00', 1, 1),
-('2025-02-11', '11:00:00', 1, 2),
+('2025-02-11', '11:00:00', 2, 2),
 ('2025-02-19', '14:15:00', 1, 3);
 
 INSERT INTO order_item (order_id, product_id, quantity, amount, discount) VALUES
@@ -317,116 +317,20 @@ SELECT COUNT(*) FROM product_supplier;
 SELECT COUNT(*) FROM `order`;
 SELECT COUNT(*) FROM order_item;
 
+
+-- Employee salary
 SELECT
     e.id,
-    e.user_name,
-    e.full_name,
-    e.nic,
-    e.email,
-    e.address,
-    e.dob,
-    e.password,
-    e.salary,
-    e.type,
-    e.role,
-    e.admin_id,
-    e.is_deleted,
-    MAX(CASE WHEN ep.row_num = 1 THEN ep.phone END) AS phone1,
-    MAX(CASE WHEN ep.row_num = 2 THEN ep.phone END) AS phone2,
-    MAX(CASE WHEN ep.row_num = 3 THEN ep.phone END) AS phone3
-FROM employee e
-LEFT JOIN (
-    SELECT
-        phone,
-        employee_id,
-        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY phone) AS row_num
-    FROM employee_phone
-    WHERE is_deleted = FALSE
-) ep ON e.id = ep.employee_id
-WHERE e.is_deleted = FALSE
-GROUP BY e.id;
-
-SELECT
     e.full_name,
     e.role,
-    e.salary,
+    COALESCE(SUM(oi.amount), 0) AS total_sales,
     COUNT(o.id) AS orders_handled,
-    COALESCE(SUM(o.amount), 0) AS total_sales
+    e.salary
 FROM employee e
-LEFT JOIN `order` o
-    ON e.id = o.employee_id
-    AND o.is_deleted = FALSE
-    AND o.date >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)  -- Last 30 days filter
-WHERE e.is_deleted = FALSE
-AND e.id = 1
+LEFT JOIN `order` o ON e.id = o.employee_id AND o.is_deleted = FALSE
+LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
+WHERE e.is_deleted = FALSE AND e.id = 2
 GROUP BY e.id;
-
-SELECT
-    e.id,
-    e.full_name,
-    e.role,
-    e.nic,
-    e.salary,
-    MAX(CASE WHEN p_row = 1 THEN ep.phone END) AS phone1,
-    MAX(CASE WHEN p_row = 2 THEN ep.phone END) AS phone2,
-    MAX(CASE WHEN p_row = 3 THEN ep.phone END) AS phone3
-FROM employee e
-LEFT JOIN (
-    SELECT
-        employee_id,
-        phone,
-        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY phone) AS p_row
-    FROM employee_phone
-    WHERE is_deleted = FALSE
-) ep ON e.id = ep.employee_id
-WHERE e.is_deleted = FALSE
-GROUP BY e.id, e.full_name, e.role, e.nic, e.salary;
-
-SELECT
-    e.id,
-    e.full_name,
-    e.role,
-    e.nic,
-    e.salary,
-    MAX(CASE WHEN p_row = 1 THEN ep.phone END) AS phone1,
-    MAX(CASE WHEN p_row = 2 THEN ep.phone END) AS phone2,
-    MAX(CASE WHEN p_row = 3 THEN ep.phone END) AS phone3
-FROM employee e
-LEFT JOIN (
-    SELECT
-        employee_id,
-        phone,
-        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY phone) AS p_row
-    FROM employee_phone
-) ep ON e.id = ep.employee_id
-WHERE e.is_deleted = TRUE
-GROUP BY e.id, e.full_name, e.role, e.nic, e.salary;
-
-SELECT
-    e.id,
-    e.full_name,
-    e.role,
-    e.nic,
-    e.salary,
-    MAX(CASE WHEN p_row = 1 THEN ep.phone END) AS phone1,
-    MAX(CASE WHEN p_row = 2 THEN ep.phone END) AS phone2,
-    MAX(CASE WHEN p_row = 3 THEN ep.phone END) AS phone3
-FROM employee e
-LEFT JOIN (
-    SELECT
-        employee_id,
-        phone,
-        ROW_NUMBER() OVER (PARTITION BY employee_id ORDER BY phone) AS p_row
-    FROM employee_phone
-    WHERE is_deleted = FALSE
-) ep ON e.id = ep.employee_id
-WHERE e.is_deleted = FALSE AND e.type = 'ADMIN'
-GROUP BY e.id, e.full_name, e.role, e.nic, e.salary;
-
-SELECT id, name, phone, email, type
-FROM supplier
-WHERE is_deleted = FALSE
-ORDER BY name;
 
 -- All
 SELECT

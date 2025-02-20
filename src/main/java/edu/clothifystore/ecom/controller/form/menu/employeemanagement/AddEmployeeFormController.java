@@ -27,4 +27,9 @@ public class AddEmployeeFormController extends AddEditEmployeeFormController {
 			new Alert(Alert.AlertType.ERROR, "Failed to add new employee.").show();
 		}
 	}
+
+	@FXML
+	public void clearButtonOnAction (ActionEvent actionEvent) {
+		this.clearInputData();
+	}
 }

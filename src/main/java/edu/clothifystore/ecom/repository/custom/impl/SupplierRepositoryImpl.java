@@ -11,7 +11,22 @@ import java.util.List;
 public class SupplierRepositoryImpl implements SupplierRepository {
 	@Override
 	public boolean add (SupplierEntity entity) {
-		return false;
+		try {
+			CrudUtil.execute(
+				"INSERT INTO supplier (name, phone, email, address, type, description) VALUES (?, ?, ?, ?, ?, ?)",
+				entity.getName(),
+				entity.getPhone(),
+				entity.getEmail(),
+				entity.getAddress(),
+				entity.getType(),
+				entity.getDescription()
+			);
+
+			return true;
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+			return false;
+		}
 	}
 
 	@Override
