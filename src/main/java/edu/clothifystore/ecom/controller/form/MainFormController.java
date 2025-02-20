@@ -142,13 +142,6 @@ public class MainFormController implements Initializable {
 	}
 
 	@FXML
-	public void supplierManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
-		if (this.isCurrentUserEmployee()) return;
-
-		this.openMenu(MenuType.SUPPLIER_MANAGEMENT, (Button) actionEvent.getTarget());
-	}
-
-	@FXML
 	public void orderManagementButtonOnAction (ActionEvent actionEvent) throws IOException {
 		this.openMenu(MenuType.ORDER_MANAGEMENT, (Button) actionEvent.getTarget());
 	}

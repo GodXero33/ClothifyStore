@@ -12,8 +12,7 @@ public class RepositoryFactory {
 			case EMPLOYEE -> (T) UtilFactory.getObject(EmployeeRepositoryImpl.class);
 			case ORDER -> (T) UtilFactory.getObject(OrderRepositoryImpl.class);
 			case PRODUCT -> (T) UtilFactory.getObject(ProductRepositoryImpl.class);
-			case SUPPLIER -> (T) UtilFactory.getObject(SupplierRepositoryImpl.class);
-			case ORDER_ITEM, PRODUCT_SUPPLIER -> null;
+			case ORDER_ITEM -> null;
 		};
 	}
 }

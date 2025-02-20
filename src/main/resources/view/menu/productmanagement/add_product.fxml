@@ -14,54 +14,54 @@
 <AnchorPane prefHeight="520.0" prefWidth="619.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/employee-edit.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.productmanagement.AddProductFormController">
     <children>
         <Label alignment="CENTER" prefHeight="53.0" prefWidth="619.0" styleClass="title" text="Add Product" />
-        <ScrollPane hbarPolicy="NEVER" layoutY="53.0" prefHeight="397.0" prefWidth="619.0" style="-fx-background-color: #121212;">
+        <ScrollPane hbarPolicy="NEVER" layoutY="53.0" prefHeight="396.0" prefWidth="619.0" style="-fx-background-color: #121212;">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="555.0" prefWidth="618.0" style="-fx-background-color: #121212;">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="615.0" prefWidth="618.0" style="-fx-background-color: #121212;">
                     <children>
-                        <Pane layoutX="14.0" layoutY="93.0" prefHeight="41.0" prefWidth="570.0">
+                        <Pane layoutX="24.0" layoutY="97.0" prefHeight="41.0" prefWidth="570.0">
                             <children>
                                 <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Product Name" />
                                 <TextField fx:id="productNameTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Product Name" styleClass="text-field-normal" />
                             </children>
                         </Pane>
-                        <Pane layoutX="14.0" layoutY="144.0" prefHeight="41.0" prefWidth="570.0">
+                        <Pane layoutX="24.0" layoutY="148.0" prefHeight="41.0" prefWidth="570.0">
                             <children>
                                 <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Size" />
                         <ComboBox fx:id="sizeComboBox" layoutX="187.0" prefHeight="41.0" prefWidth="107.0" promptText="Size" />
                             </children>
                         </Pane>
-                        <Pane layoutX="14.0" layoutY="193.0" prefHeight="41.0" prefWidth="570.0">
+                        <Pane layoutX="24.0" layoutY="197.0" prefHeight="41.0" prefWidth="570.0">
                             <children>
                                 <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Quantity" />
                                 <TextField fx:id="quantityTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Quantity" styleClass="text-field-normal" />
                             </children>
                         </Pane>
-                        <Pane layoutX="14.0" layoutY="245.0" prefHeight="41.0" prefWidth="570.0">
+                        <Pane layoutX="24.0" layoutY="249.0" prefHeight="41.0" prefWidth="570.0">
                             <children>
                                 <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Brand" />
                                 <TextField fx:id="brandTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Brand" styleClass="text-field-normal" />
                             </children>
                         </Pane>
-                        <Pane layoutX="14.0" layoutY="298.0" prefHeight="53.0" prefWidth="570.0">
+                        <Pane layoutX="24.0" layoutY="302.0" prefHeight="53.0" prefWidth="570.0">
                             <children>
                                 <Label layoutY="13.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Gender" />
                                 <ComboBox fx:id="genderComboBox" layoutX="187.0" layoutY="6.0" prefHeight="41.0" prefWidth="155.0" promptText="Gender" />
                             </children>
                         </Pane>
-                        <Pane layoutX="14.0" layoutY="360.0" prefHeight="41.0" prefWidth="570.0">
+                        <Pane layoutX="24.0" layoutY="364.0" prefHeight="41.0" prefWidth="570.0">
                             <children>
                                 <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Price" />
                                 <TextField fx:id="priceTextField" layoutX="184.0" prefHeight="41.0" prefWidth="357.0" promptText="Price (Rs)" styleClass="text-field-normal" />
                                 <Label layoutX="544.0" layoutY="7.0" prefHeight="27.0" prefWidth="25.0" styleClass="text-field-label" text="Rs" />
                             </children>
                         </Pane>
-                        <Pane layoutX="14.0" layoutY="414.0" prefHeight="41.0" prefWidth="570.0">
+                        <Pane layoutX="24.0" layoutY="418.0" prefHeight="41.0" prefWidth="570.0">
                             <children>
                                 <Label layoutY="7.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Description" />
                                 <TextField fx:id="descriptionTextField" layoutX="184.0" prefHeight="41.0" prefWidth="380.0" promptText="Description" styleClass="text-field-normal" />
                             </children>
                         </Pane>
-                  <Pane layoutX="14.0" layoutY="462.0" prefHeight="53.0" prefWidth="570.0">
+                  <Pane layoutX="24.0" layoutY="466.0" prefHeight="53.0" prefWidth="570.0">
                      <children>
                         <Label layoutY="13.0" prefHeight="27.0" prefWidth="162.0" styleClass="text-field-label" text="Type" />
                         <TextField fx:id="typeTextField" layoutX="183.0" layoutY="6.0" prefHeight="41.0" prefWidth="380.0" promptText="Type" styleClass="text-field-normal" />

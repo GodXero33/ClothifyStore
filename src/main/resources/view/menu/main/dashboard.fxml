@@ -71,13 +71,7 @@
                   <Label fx:id="totalEmployeesLabel" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="19.0" prefHeight="27.0" prefWidth="103.0" styleClass="count-card-text" text="0" />
                </children>
             </Pane>
-            <Pane layoutX="114.0" layoutY="88.0" prefHeight="63.0" prefWidth="304.0" styleClass="count-card">
-               <children>
-                  <Label layoutX="14.0" layoutY="17.0" prefHeight="30.0" prefWidth="161.0" styleClass="count-card-head" text="Total Suppliers" />
-                  <Label fx:id="totalSuppliersLabel" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="19.0" prefHeight="27.0" prefWidth="103.0" styleClass="count-card-text" text="0" />
-               </children>
-            </Pane>
-            <Pane layoutX="428.0" layoutY="88.0" prefHeight="63.0" prefWidth="304.0" styleClass="count-card">
+            <Pane layoutX="271.0" layoutY="88.0" prefHeight="63.0" prefWidth="304.0" styleClass="count-card">
                <children>
                   <Label layoutX="14.0" layoutY="17.0" prefHeight="30.0" prefWidth="161.0" styleClass="count-card-head" text="Total Orders" />
                   <Label fx:id="totalOrdersLabel" alignment="CENTER_RIGHT" layoutX="187.0" layoutY="19.0" prefHeight="27.0" prefWidth="103.0" styleClass="count-card-text" text="0" />

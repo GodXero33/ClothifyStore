@@ -68,11 +68,6 @@ public class ReportsFormController implements Initializable, MenuForm {
 	}
 
 	@FXML
-	public void suppliersReportButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.SUPPLIERS_REPORT, (Button) actionEvent.getTarget());
-	}
-
-	@FXML
 	public void ordersReportButtonOnAction (ActionEvent actionEvent) throws IOException {
 		this.openMenu(MenuType.ORDERS_REPORT, (Button) actionEvent.getTarget());
 	}

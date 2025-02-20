@@ -18,12 +18,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="13.0" layoutY="172.0" mnemonicParsing="false" onAction="#suppliersReportButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Suplliers Reports">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="13.0" layoutY="224.0" mnemonicParsing="false" onAction="#ordersReportButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Orders Reports">
+            <Button layoutX="13.0" layoutY="171.0" mnemonicParsing="false" onAction="#ordersReportButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Orders Reports">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -6,7 +6,6 @@ public enum MenuType {
 	DASHBOARD("main", "Dashboard"),
 	EMPLOYEE_MANAGEMENT("main", "Employees"),
 	PRODUCT_MANAGEMENT("main", "Products"),
-	SUPPLIER_MANAGEMENT("main", "Suppliers"),
 	ORDER_MANAGEMENT("main", "Orders"),
 	REPORTS("main", "Reports"),
 	SETTINGS("main", "Settings"),
@@ -17,11 +16,7 @@ public enum MenuType {
 	UPDATE_PRODUCT("productmanagement", null),
 	EMPLOYEE_SALARY_REPORT("report", null),
 	ALL_EMPLOYEES_REPORT("report", null),
-	SUPPLIERS_REPORT("report", null),
-	ORDERS_REPORT("report", null),
-	ADD_SUPPLIER("supplier", null),
-	UPDATE_SUPPLIER("supplier", null),
-	ALL_SUPPLIERS("supplier", null);
+	ORDERS_REPORT("report", null);
 
 	private final String path;
 	@Getter

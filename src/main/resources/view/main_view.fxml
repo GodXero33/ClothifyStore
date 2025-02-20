@@ -49,7 +49,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="menuPane" onMouseClicked="#menuPaneOnMouseClicked" onTouchPressed="#menuPaneOnTouchPressed" prefHeight="599.0" prefWidth="845.0" styleClass="menu-anchor-pane" visible="false">
+      <AnchorPane fx:id="menuPane" onMouseClicked="#menuPaneOnMouseClicked" onTouchPressed="#menuPaneOnTouchPressed" prefHeight="599.0" prefWidth="845.0" styleClass="menu-anchor-pane">
          <children>
             <Pane layoutX="14.0" layoutY="14.0" prefHeight="412.0" prefWidth="294.0" styleClass="nav-pane">
                <effect>
@@ -60,15 +60,14 @@
                   </Shadow>
                </effect>
             </Pane>
-            <Pane layoutX="14.0" layoutY="14.0" prefHeight="395.0" prefWidth="294.0" styleClass="nav-pane">
+            <Pane layoutX="14.0" layoutY="14.0" prefHeight="345.0" prefWidth="294.0" styleClass="nav-pane">
                <children>
                   <Button layoutX="18.0" layoutY="4.0" mnemonicParsing="false" onAction="#dashboardButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Dashboard " />
                   <Button layoutX="17.0" layoutY="60.0" mnemonicParsing="false" onAction="#employeeManagementButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Employee Management" />
                   <Button layoutX="17.0" layoutY="114.0" mnemonicParsing="false" onAction="#productManagementButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Product Management" />
-                  <Button layoutX="18.0" layoutY="166.0" mnemonicParsing="false" onAction="#supplierManagementButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Supplier Management" />
-                  <Button layoutX="18.0" layoutY="219.0" mnemonicParsing="false" onAction="#orderManagementButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Order Management" />
-                  <Button layoutX="18.0" layoutY="272.0" mnemonicParsing="false" onAction="#reportsButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Reports " />
-                  <Button layoutX="18.0" layoutY="324.0" mnemonicParsing="false" onAction="#settingsButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Settings " />
+                  <Button layoutX="17.0" layoutY="167.0" mnemonicParsing="false" onAction="#orderManagementButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Order Management" />
+                  <Button layoutX="17.0" layoutY="220.0" mnemonicParsing="false" onAction="#reportsButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Reports " />
+                  <Button layoutX="17.0" layoutY="272.0" mnemonicParsing="false" onAction="#settingsButtonOnAction" prefHeight="44.0" prefWidth="259.0" text="Settings " />
                </children>
             </Pane>
          </children>

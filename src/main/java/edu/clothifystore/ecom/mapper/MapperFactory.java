@@ -11,8 +11,7 @@ public class MapperFactory {
 			case EMPLOYEE -> (Mapper<D, E>) UtilFactory.getObject(EmployeeMapper.class);
 			case ORDER -> (Mapper<D, E>) UtilFactory.getObject(OrderMapper.class);
 			case PRODUCT -> (Mapper<D, E>) UtilFactory.getObject(ProductMapper.class);
-			case SUPPLIER -> (Mapper<D, E>) UtilFactory.getObject(SupplierMapper.class);
-			case ORDER_ITEM, PRODUCT_SUPPLIER -> null;
+			case ORDER_ITEM -> null;
 		};
 	}
 }
