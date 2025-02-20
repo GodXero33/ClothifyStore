@@ -6,6 +6,7 @@ import edu.clothifystore.ecom.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierRepositoryImpl implements SupplierRepository {
@@ -64,7 +65,25 @@ public class SupplierRepositoryImpl implements SupplierRepository {
 
 	@Override
 	public List<SupplierEntity> getAll () {
-		return List.of();
+			final List<SupplierEntity> supplierEntities = new ArrayList<>();
+
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT id, name, phone, email, address, type, description FROM supplier WHERE is_deleted = FALSE");
+
+			while (resultSet.next()) supplierEntities.add(SupplierEntity.builder().
+				id(resultSet.getInt(1)).
+				name(resultSet.getString(2)).
+				phone(resultSet.getString(3)).
+				email(resultSet.getString(4)).
+				address(resultSet.getString(5)).
+				type(resultSet.getString(6)).
+				description(resultSet.getString(7)).
+				build());
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+		}
+
+		return supplierEntities;
 	}
 
 	@Override

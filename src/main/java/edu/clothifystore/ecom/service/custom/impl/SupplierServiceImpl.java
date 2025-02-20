@@ -11,6 +11,9 @@ import edu.clothifystore.ecom.util.MapperType;
 import edu.clothifystore.ecom.util.RepositoryType;
 import edu.clothifystore.ecom.util.UtilFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SupplierServiceImpl implements SupplierService {
 	private final Mapper<Supplier, SupplierEntity> mapper;
 	private final SupplierRepository supplierRepository;
@@ -56,5 +59,15 @@ public class SupplierServiceImpl implements SupplierService {
 		if (supplierEntity == null) return null;
 
 		return this.mapper.toDTO(supplierEntity);
+	}
+
+	@Override
+	public List<Supplier> getAll () {
+		final List<SupplierEntity> supplierEntities = this.supplierRepository.getAll();
+		final List<Supplier> suppliers = new ArrayList<>();
+
+		supplierEntities.forEach(supplierEntity -> suppliers.add(this.mapper.toDTO(supplierEntity)));
+
+		return suppliers;
 	}
 }

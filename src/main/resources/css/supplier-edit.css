@@ -122,5 +122,67 @@
     -fx-background-color: #00cccc; /* Even darker aqua */
 }
 
+/* TableView base styling */
+.table-view {
+    -fx-background-color: #121212;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;
+}
 
+/* Table column headers */
+.table-view .column-header {
+    -fx-background-color: #343434;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0 0 2px 0;
+}
 
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* Even and odd row colors */
+.table-row-cell:odd {
+    -fx-background-color: #222222;
+}
+
+.table-row-cell:even {
+    -fx-background-color: #2a2a2a;
+}
+
+/* Row hover effect */
+.table-row-cell:hover {
+    -fx-background-color: #444444;
+}
+
+/* Selected row styling */
+.table-row-cell:selected {
+    -fx-background-color: #00ffff;
+    -fx-text-fill: #121212;
+}
+
+/* Table cell text styling */
+.table-cell {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+}
+
+/* Scrollbar styling */
+.table-view .scroll-bar {
+    -fx-background-color: #343434;
+}
+
+.table-view .scroll-bar .thumb {
+    -fx-background-color: #00ffff;
+    -fx-background-radius: 5px;
+}
+
+.table-view .scroll-bar .increment-button,
+.table-view .scroll-bar .decrement-button {
+    -fx-background-color: #343434;
+    -fx-border-color: #ffffff;
+}
