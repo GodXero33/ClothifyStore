@@ -31,8 +31,8 @@ CREATE TABLE employee_phone (
 CREATE TABLE customer (
     id INT AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
-    phone VARCHAR(12),
-    email VARCHAR(255),
+    phone VARCHAR(12) UNIQUE,
+    email VARCHAR(255) UNIQUE,
     address VARCHAR(255),
     is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)
@@ -48,18 +48,6 @@ CREATE TABLE product (
     price DECIMAL(10, 2) NOT NULL,
     discount DECIMAL(10, 2) DEFAULT 0.0,
     quantity INT(10) NOT NULL,
-    description VARCHAR(255),
-    is_deleted BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE supplier (
-    id INT AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    phone VARCHAR(12) NOT NULL UNIQUE,
-    email VARCHAR(255),
-    address VARCHAR(255) NOT NUll,
-    type ENUM('BUSINESS', 'INDIVIDUAL') NOT NULL,
     description VARCHAR(255),
     is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id)
@@ -89,29 +77,12 @@ CREATE TABLE order_item (
     FOREIGN KEY (product_id) REFERENCES product (id)
 );
 
-CREATE TABLE product_supplier (
-    supplier_id INT,
-    product_id INT,
-    `date` DATE,
-    `time` TIME,
-    quantity INT NOT NULL,
-    supplier_price DECIMAL(10, 2) NOT NULL,
-    payment_status ENUM('PENDING', 'PAID') DEFAULT 'PENDING',
-    payment_date DATE,
-    is_deleted BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (supplier_id, product_id, `date`, `time`),
-    FOREIGN KEY (supplier_id) REFERENCES supplier (id),
-    FOREIGN KEY (product_id) REFERENCES product (id)
-);
-
 DESC employee;
 DESC employee_phone;
 DESC customer;
 DESC product;
-DESC supplier;
 DESC `order`;
 DESC order_item;
-DESC product_supplier;
 
 INSERT INTO employee (user_name, full_name, nic, email, address, dob, password, salary, type, role, admin_id) VALUES
 ('god_xero', 'Sathish Shan', '200121001975', 'shansathish38@gmail.com', 'No.60, Alokamawatha, Walawegama, Udawalawa, Embilipitiya', '2001-07-28', '1111', 400000.00, 'ADMIN', 'Manager', NULL),
@@ -241,15 +212,15 @@ INSERT INTO product (name, gender, size, type, brand, price, discount, quantity,
 ('Denim Overalls', 'FEMALE', 'L', 'Overalls', 'Levi\'s', 6800.00, 0.0, 12, 'Trendy denim overalls');
 
 INSERT INTO customer (name, phone, email, address) VALUES
-('John Doe', '1234567890', 'john@example.com', '123 Main St'),
+('John Doe', '0770110488', 'john@example.com', '123 Main St'),
 ('Jane Smith', '9876543210', 'jane@example.com', '456 Elm St'),
 ('Alice Brown', '5551234567', 'alice@example.com', '789 Oak St'),
-('Michael Johnson', '1112223333', 'michael@example.com', '101 Pine St'),
-('Emily Davis', '2223334444', 'emily@example.com', '202 Maple St'),
-('David Wilson', '3334445555', 'david@example.com', '303 Birch St'),
-('Sophia Martinez', '4445556666', 'sophia@example.com', '404 Cedar St'),
-('James Anderson', '5556667777', 'james@example.com', '505 Spruce St'),
-('Olivia Thomas', '6667778888', 'olivia@example.com', '606 Fir St'),
+('Michael Johnson', '1112223323', 'michael@example.com', '101 Pine St'),
+('Emily Davis', '2223334144', 'emily@example.com', '202 Maple St'),
+('David Wilson', '4333445555', 'david@example.com', '303 Birch St'),
+('Sophia Martinez', '4445526666', 'sophia@example.com', '404 Cedar St'),
+('James Anderson', '2556667777', 'james@example.com', '505 Spruce St'),
+('Olivia Thomas', '6667728888', 'olivia@example.com', '606 Fir St'),
 ('Benjamin Harris', '7778889999', 'benjamin@example.com', '707 Oak St'),
 ('Charlotte White', '8889990000', 'charlotte@example.com', '808 Walnut St'),
 ('Daniel Clark', '9990001111', 'daniel@example.com', '909 Chestnut St'),
@@ -260,25 +231,6 @@ INSERT INTO customer (name, phone, email, address) VALUES
 ('Isabella Young', '4445556666', 'isabella@example.com', '1414 Cypress St'),
 ('Lucas King', '5556667777', 'lucas@example.com', '1515 Palm St'),
 ('Amelia Wright', '6667778888', 'amelia@example.com', '1616 Willow St');
-
-INSERT INTO supplier (name, phone, email, address, type, description) VALUES
-('ABC Textiles', '1112223333', 'abc@textiles.com', '10 Fabric St', 'BUSINESS', 'Wholesale fabric supplier'),
-('XYZ Garments', '4445556666', 'xyz@garments.com', '20 Fashion Ave', 'BUSINESS', 'Premium garment supplier'),
-('Tom Taylor', '7778889999', 'tom@taylor.com', '5 Handmade Ln', 'INDIVIDUAL', 'Independent tailor'),
-('Global Fabrics', '8889990000', 'global@fabrics.com', '30 Linen St', 'BUSINESS', 'Export quality fabrics'),
-('Elite Threads', '9990001113', 'elite@threads.com', '40 Cotton Rd', 'BUSINESS', 'High-end garments'),
-('Vintage Apparel', '0001112226', 'vintage@apparel.com', '50 Retro Ln', 'BUSINESS', 'Classic fashion supplier'),
-('Smart Stitches', '1112223331', 'smart@stitches.com', '60 Designer St', 'INDIVIDUAL', 'Bespoke tailoring service'),
-('Trend Weavers', '2223334444', 'trend@weavers.com', '70 Knit Rd', 'BUSINESS', 'Modern clothing trends'),
-('Royal Fabrics', '3334445555', 'royal@fabrics.com', '80 Silk Blvd', 'BUSINESS', 'Luxury fabric supplier'),
-('Nova Textiles', '4445556664', 'nova@textiles.com', '90 Denim Ave', 'BUSINESS', 'Denim specialist'),
-('Fine Tailors', '5556667777', 'fine@tailors.com', '100 Tailor St', 'INDIVIDUAL', 'Personalized tailoring'),
-('Urban Wear', '6667778888', 'urban@wear.com', '110 Streetwear Ln', 'BUSINESS', 'Street fashion brand'),
-('Classic Cuts', '7778889991', 'classic@cuts.com', '120 Suit Ave', 'BUSINESS', 'Premium suits and coats'),
-('Modern Stitch', '8889990001', 'modern@stitch.com', '130 Couture Rd', 'BUSINESS', 'Haute couture supplier'),
-('Blue Weave', '9990001111', 'blue@weave.com', '140 Fashion St', 'BUSINESS', 'Casual wear fabrics'),
-('Silken Dreams', '0001112222', 'silken@dreams.com', '150 Silk St', 'BUSINESS', 'Exclusive silk textiles'),
-('Pioneer Garments', '1112223332', 'pioneer@garments.com', '160 Uniform Rd', 'BUSINESS', 'Workwear and uniforms');
 
 INSERT INTO `order` (`date`, `time`, employee_id, customer_id) VALUES
 ('2025-02-01', '10:30:00', 1, 1),
@@ -291,11 +243,6 @@ INSERT INTO order_item (order_id, product_id, quantity, amount, discount) VALUES
 (2, 3, 1, 120.00, 0.00),
 (3, 1, 2, 100.00, 15.00);
 
-INSERT INTO product_supplier (supplier_id, product_id, `date`, `time`, quantity, supplier_price, payment_status, payment_date) VALUES
-(1, 1, '2025-01-15', '09:00:00', 100, 10.50, 'PAID', '2025-01-16'),
-(2, 2, '2025-01-16', '10:30:00', 200, 15.75, 'PENDING', NULL),
-(3, 3, '2025-01-17', '12:45:00', 50, 8.25, 'PAID', '2025-01-18');
-
 UPDATE employee SET is_deleted = TRUE WHERE id = 10;
 UPDATE employee_phone SET is_deleted = TRUE WHERE employee_id = 10;
 UPDATE employee_phone SET is_deleted = TRUE WHERE employee_id = 10;
@@ -303,8 +250,6 @@ UPDATE employee_phone SET is_deleted = TRUE WHERE employee_id = 10;
 SELECT * FROM employee;
 SELECT * FROM employee_phone;
 SELECT * FROM product;
-SELECT * FROM supplier;
-SELECT * FROM product_supplier;
 SELECT * FROM `order`;
 SELECT * FROM order_item;
 
@@ -312,11 +257,8 @@ SELECT * FROM order_item;
 SELECT COUNT(*) FROM employee;
 SELECT COUNT(*) FROM employee_phone;
 SELECT COUNT(*) FROM product;
-SELECT COUNT(*) FROM supplier;
-SELECT COUNT(*) FROM product_supplier;
 SELECT COUNT(*) FROM `order`;
 SELECT COUNT(*) FROM order_item;
-
 
 -- Employee salary
 SELECT

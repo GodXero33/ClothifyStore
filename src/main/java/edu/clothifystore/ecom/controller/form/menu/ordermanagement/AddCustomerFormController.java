@@ -27,6 +27,8 @@ public class AddCustomerFormController implements Initializable, MenuForm {
 	@FXML
 	public TextField addressTextField;
 
+	private final CustomerService customerService = UtilFactory.getObject(ServiceFactory.class).getServiceType(ServiceType.CUSTOMER);
+
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {}
 
@@ -42,8 +44,7 @@ public class AddCustomerFormController implements Initializable, MenuForm {
 		this.addressTextField.clear();
 	}
 
-	@FXML
-	public void addButtonOnAction (ActionEvent actionEvent) {
+	private Customer validateInputsAndGetNewCustomer () {
 		final String name = this.nameTextField.getText().trim();
 		final String phone = this.phoneTextField.getText().trim();
 		final String email = this.emailTextField.getText().trim().toLowerCase();
@@ -53,20 +54,46 @@ public class AddCustomerFormController implements Initializable, MenuForm {
 		if (name.isEmpty()) {
 			new Alert(Alert.AlertType.WARNING, "Name can't be empty.").show();
 			this.nameTextField.requestFocus();
-			return;
+			return null;
 		}
 
 		if (!phone.isEmpty() && !inputValidator.isHomePhoneNumber(phone) && !inputValidator.isMobilePhoneNumber(phone)) {
 			new Alert(Alert.AlertType.WARNING, "Invalid phone number.").show();
 			this.phoneTextField.requestFocus();
-			return;
+			return null;
 		}
 
 		if (!email.isEmpty() && !inputValidator.isEmail(email)) {
 			new Alert(Alert.AlertType.WARNING, "Invalid email address.").show();
 			this.emailTextField.requestFocus();
-			return;
+			return null;
 		}
+
+		if (this.customerService.isPhoneAvailable(phone)) {
+			new Alert(Alert.AlertType.WARNING, "The phone number has already taken.").show();
+			this.phoneTextField.requestFocus();
+			return null;
+		}
+
+		if (this.customerService.isEmailAvailable(email)) {
+			new Alert(Alert.AlertType.WARNING, "The email address has already taken.").show();
+			this.emailTextField.requestFocus();
+			return null;
+		}
+
+		return Customer.builder().
+			name(name).
+			phone(phone.isEmpty() ? null : phone).
+			email(email.isEmpty() ? null : email).
+			address(address.isEmpty() ? null : address).
+			build();
+	}
+
+	@FXML
+	public void addButtonOnAction (ActionEvent actionEvent) {
+		final Customer newCustomer = this.validateInputsAndGetNewCustomer();
+
+		if (newCustomer == null) return;
 
 		final Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
@@ -76,12 +103,7 @@ public class AddCustomerFormController implements Initializable, MenuForm {
 
 		if (alert.showAndWait().get() != ButtonType.OK) return;
 
-		final int newCustomerID = ((CustomerService) UtilFactory.getObject(ServiceFactory.class).getServiceType(ServiceType.CUSTOMER)).add(Customer.builder().
-			name(name).
-			phone(phone.isEmpty() ? null : phone).
-			email(email.isEmpty() ? null : email).
-			address(address.isEmpty() ? null : address).
-			build());
+		final int newCustomerID = this.customerService.add(newCustomer);
 
 		if (newCustomerID > 0) {
 			new Alert(Alert.AlertType.INFORMATION, "New customer has added.\nNew customer's ID is: " + newCustomerID).show();
