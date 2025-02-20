@@ -8,22 +8,27 @@
     <children>
         <AnchorPane prefHeight="520.0" prefWidth="227.0">
             <children>
-                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="201.0" text="Place Order">
+                <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#placeOrderButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Place Order">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button alignment="CENTER" layoutX="13.0" layoutY="122.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="201.0" text="Update / Delete Customer" textAlignment="CENTER" wrapText="true">
+                <Button alignment="CENTER" layoutX="13.0" layoutY="122.0" mnemonicParsing="false" onAction="#updateCustomerButtonOnAction" prefHeight="79.0" prefWidth="201.0" text="Update / Delete Customer" textAlignment="CENTER" wrapText="true">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-            <Button layoutX="13.0" layoutY="211.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="201.0" text="View Customers">
+            <Button layoutX="13.0" layoutY="211.0" mnemonicParsing="false" onAction="#viewCustomersButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="View Customers">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="201.0" text="Add Customer">
+            <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#addCustomerButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Add Customer">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button layoutX="13.0" layoutY="266.0" mnemonicParsing="false" onAction="#viewProductsButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="View Products">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

@@ -16,7 +16,12 @@ public enum MenuType {
 	UPDATE_PRODUCT("productmanagement", null),
 	EMPLOYEE_SALARY_REPORT("report", null),
 	ALL_EMPLOYEES_REPORT("report", null),
-	ORDERS_REPORT("report", null);
+	ORDERS_REPORT("report", null),
+	PLACE_ORDER("ordermanagement", null),
+	ADD_CUSTOMER("ordermanagement", null),
+	UPDATE_CUSTOMER("ordermanagement", null),
+	VIEW_CUSTOMERS("ordermanagement", null),
+	VIEW_PRODUCTS("ordermanagement", null);
 
 	private final String path;
 	@Getter

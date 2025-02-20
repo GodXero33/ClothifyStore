@@ -1,7 +1,5 @@
 package edu.clothifystore.ecom.mapper;
 
-
-import edu.clothifystore.ecom.dto.Employee;
 import edu.clothifystore.ecom.dto.Product;
 import edu.clothifystore.ecom.entity.ProductEntity;
 import edu.clothifystore.ecom.util.UtilFactory;

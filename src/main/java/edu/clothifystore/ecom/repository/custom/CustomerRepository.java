@@ -4,4 +4,5 @@ import edu.clothifystore.ecom.entity.CustomerEntity;
 import edu.clothifystore.ecom.repository.CrudRepository;
 
 public interface CustomerRepository extends CrudRepository<CustomerEntity> {
+	int addAndGetID (CustomerEntity entity);
 }
