@@ -3,6 +3,8 @@ package edu.clothifystore.ecom.service.custom;
 import edu.clothifystore.ecom.dto.Product;
 import edu.clothifystore.ecom.service.SuperService;
 
+import java.util.List;
+
 public interface ProductService extends SuperService {
 	boolean add (Product product);
 	int addAndGetID (Product product);
@@ -10,4 +12,5 @@ public interface ProductService extends SuperService {
 	Product get (int id);
 	boolean delete (int id);
 	int getCount ();
+	List<Product> getAll ();
 }

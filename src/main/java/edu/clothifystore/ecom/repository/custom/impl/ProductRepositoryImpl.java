@@ -6,6 +6,7 @@ import edu.clothifystore.ecom.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepositoryImpl implements ProductRepository {
@@ -95,7 +96,28 @@ public class ProductRepositoryImpl implements ProductRepository {
 
 	@Override
 	public List<ProductEntity> getAll () {
-		return List.of();
+		final List<ProductEntity> productEntities = new ArrayList<>();
+
+		try {
+			final ResultSet resultSet = CrudUtil.execute("SELECT id, name, gender, size, type, brand, price, discount, quantity, description FROM product WHERE is_deleted = FALSE");
+
+			while (resultSet.next()) productEntities.add(ProductEntity.builder().
+				id(resultSet.getInt(1)).
+				name(resultSet.getString(2)).
+				gender(resultSet.getString(3)).
+				size(resultSet.getString(4)).
+				type(resultSet.getString(5)).
+				brand(resultSet.getString(6)).
+				price(resultSet.getDouble(7)).
+				discount(resultSet.getDouble(8)).
+				quantity(resultSet.getInt(9)).
+				description(resultSet.getString(10)).
+				build());
+		} catch (SQLException exception) {
+			System.out.println(exception.getMessage());
+		}
+
+		return productEntities;
 	}
 
 	@Override

@@ -58,7 +58,7 @@ public class ViewCustomersFormController implements Initializable, MenuForm {
 
 		this.searchNameTextField.textProperty().addListener((observable, oldValue, newValue) -> this.updateTable());
 
-		loadSuppliers();
+		this.loadSuppliers();
 	}
 
 	@Override
@@ -81,7 +81,7 @@ public class ViewCustomersFormController implements Initializable, MenuForm {
 		final boolean isEmpty = searchName.isEmpty();
 
 		for (final Customer customer : this.customerList) {
-			if (customer.getName().toLowerCase().contains(searchName.toLowerCase()) || isEmpty) {
+			if (isEmpty || customer.getName().toLowerCase().contains(searchName.toLowerCase())) {
 				filteredList.add(customer);
 			}
 		}
@@ -95,7 +95,6 @@ public class ViewCustomersFormController implements Initializable, MenuForm {
 		this.prevButton.setDisable(this.currentPage == 0);
 		this.nextButton.setDisable(end >= filteredList.size());
 	}
-
 
 	@FXML
 	public void prevButtonOnAction (ActionEvent actionEvent) {

@@ -11,6 +11,9 @@ import edu.clothifystore.ecom.util.MapperType;
 import edu.clothifystore.ecom.util.RepositoryType;
 import edu.clothifystore.ecom.util.UtilFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductServiceImpl implements ProductService {
 	private final Mapper<Product, ProductEntity> mapper;
 	private final ProductRepository productRepository;
@@ -52,5 +55,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getCount () {
 		return this.productRepository.getCount();
+	}
+
+	@Override
+	public List<Product> getAll () {
+		final List<ProductEntity> productEntities = this.productRepository.getAll();
+		final List<Product> products = new ArrayList<>();
+
+		productEntities.forEach(productEntity -> products.add(this.mapper.toDTO(productEntity)));
+
+		return products;
 	}
 }
