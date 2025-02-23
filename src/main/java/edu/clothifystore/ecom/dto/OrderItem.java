@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class OrderItem {
-	private Integer order_id;
-	private Integer product_id;
+	private Integer orderId;
+	private Product product;
 	private Integer quantity;
 	private Double discount;
 }

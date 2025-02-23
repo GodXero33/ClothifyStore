@@ -22,6 +22,7 @@ import java.util.Map;
  */
 public class FormController {
 	private static FormController instance;
+	private static Stage placeOrderStage;
 
 	@Setter
 	@Getter
@@ -39,7 +40,7 @@ public class FormController {
 		return FormController.instance;
 	}
 
-	public void openStage (Stage stage, String url, String title, boolean show) throws IOException {
+	public Stage openStage (Stage stage, String url, String title, boolean show) throws IOException {
 		if (stage == null) stage = new Stage();
 
 		final FXMLLoader loader = new FXMLLoader(Starter.class.getResource(String.format("%s/%s.fxml", this.formFXMLPath, url)));
@@ -49,6 +50,7 @@ public class FormController {
 
 		if (show) stage.show();
 
+		return stage;
 	}
 
 	public FXMLLoader openMenu (MenuType menuType, Pane pane) throws IOException {
@@ -70,5 +72,15 @@ public class FormController {
 		pane.getChildren().setAll(newContent);
 
 		return loader;
+	}
+
+	public static void requestOpenPlaceOrderStage () throws IOException {
+		if (FormController.placeOrderStage == null) {
+			FormController.placeOrderStage = FormController.getInstance().openStage(null, "menu/ordermanagement/place_order", "Place Order - Clothify Store", true);
+
+			FormController.placeOrderStage.setOnCloseRequest(event -> FormController.placeOrderStage = null);
+		} else {
+			FormController.placeOrderStage.requestFocus();
+		}
 	}
 }

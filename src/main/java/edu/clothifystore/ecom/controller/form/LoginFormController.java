@@ -48,8 +48,11 @@ public class LoginFormController {
 		if (this.loadedEmployee.getPassword().equals(this.passwordPasswordField.getText())) { // If both strings are equal, login is success.
 			try {
 				FormController.getInstance().setCurentEmployee(this.loadedEmployee); // Set current user that give access of current user to every form controller.
-				FormController.getInstance().openStage(null, "main_view", "Clothify Store", true); // Open main window.
+
+				final Stage mainWindowStage = FormController.getInstance().openStage(null, "main_view", "Clothify Store", true); // Open main window.
+
 				((Stage) ((Node) actionEvent.getSource()).getScene().getWindow()).close(); // Close current login window.
+				mainWindowStage.setOnCloseRequest(event -> System.exit(0)); // Shutdown JVM if main view close. This because when place order window open if main view close JVm not shut down because place order view still running.
 			} catch (IOException exception) {
 				new Alert(Alert.AlertType.ERROR, "Failed to load application window. Please click 'Login' button again.").show();
 			}

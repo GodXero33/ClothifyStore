@@ -1,5 +1,6 @@
 package edu.clothifystore.ecom.entity;
 
+import edu.clothifystore.ecom.dto.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class OrderItemEntity {
-	private Integer order_id;
-	private Integer product_id;
+	private Integer orderId;
+	private Product product;
 	private Integer quantity;
 	private Double discount;
 }

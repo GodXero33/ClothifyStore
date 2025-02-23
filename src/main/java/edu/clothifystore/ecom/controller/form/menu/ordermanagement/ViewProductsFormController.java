@@ -55,7 +55,7 @@ public class ViewProductsFormController implements Initializable, MenuForm {
 
 	private final ProductService productService = UtilFactory.getObject(ServiceFactory.class).getServiceType(ServiceType.PRODUCT);
 	private int currentPage = 0;
-	private List<Product> productList;
+	private List<Product> productsList;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
@@ -69,11 +69,11 @@ public class ViewProductsFormController implements Initializable, MenuForm {
 		this.productsTableGenderColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getGender()));
 		this.productsTableTypeColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getType()));
 
-		this.sizeComboBox.getItems().setAll("ALL", "XS", "S", "M", "L", "XL", "XXL");
-		this.genderComboBox.getItems().setAll("ALL", "MALE", "FEMALE", "COMMON");
+		this.sizeComboBox.getItems().setAll("All", "XS", "S", "M", "L", "XL", "XXL");
+		this.genderComboBox.getItems().setAll("All", "Male", "Female", "Common");
 
-		this.sizeComboBox.setValue("ALL");
-		this.genderComboBox.setValue("ALL");
+		this.sizeComboBox.setValue("All");
+		this.genderComboBox.setValue("All");
 
 		this.sizeComboBox.valueProperty().addListener((observable, oldValue, newValue) -> this.updateTable());
 		this.genderComboBox.valueProperty().addListener((observable, oldValue, newValue) -> this.updateTable());
@@ -91,33 +91,30 @@ public class ViewProductsFormController implements Initializable, MenuForm {
 	}
 
 	private void loadProducts () {
-		this.productList = this.productService.getAll();
+		this.productsList = this.productService.getAll();
 		this.currentPage = 0;
 
 		this.updateTable();
 	}
 
 	private void updateTable () {
-		final String searchName = this.searchNameTextField.getText().trim();
 		final List<Product> filteredList = new ArrayList<>();
+		final String searchName = this.searchNameTextField.getText().trim();
 		final String size = this.sizeComboBox.getValue();
 		final String gender = this.genderComboBox.getValue();
 
-		for (final Product product : this.productList) {
+		for (final Product product : this.productsList) {
 			if (
 				(searchName.isEmpty() || product.getName().toLowerCase().contains(searchName.toLowerCase())) &&
-				(size == null || size.isEmpty() || size.equals("ALL") || product.getSize().equalsIgnoreCase(size)) &&
-				(gender == null || gender.isEmpty() || gender.equals("ALL") || product.getGender().equalsIgnoreCase(gender))
-			) {
-				filteredList.add(product);
-			}
+				(size == null || size.isEmpty() || size.equals("All") || product.getSize().equalsIgnoreCase(size)) &&
+				(gender == null || gender.isEmpty() || gender.equals("All") || product.getGender().equalsIgnoreCase(gender) || product.getGender().equalsIgnoreCase("common"))
+			) filteredList.add(product);
 		}
 
 		final int start = this.currentPage * ViewProductsFormController.MAXIMUM_RECORDS_PER_VIEW;
 		final int end = Math.min(start + ViewProductsFormController.MAXIMUM_RECORDS_PER_VIEW, filteredList.size());
-		final ObservableList<Product> pageSuppliers = FXCollections.observableArrayList(filteredList.subList(start, end));
 
-		this.productsTable.setItems(pageSuppliers);
+		this.productsTable.setItems(FXCollections.observableArrayList(filteredList.subList(start, end)));
 
 		this.prevButton.setDisable(this.currentPage == 0);
 		this.nextButton.setDisable(end >= filteredList.size());
@@ -133,7 +130,7 @@ public class ViewProductsFormController implements Initializable, MenuForm {
 
 	@FXML
 	public void nextButtonOnAction (ActionEvent actionEvent) {
-		if ((this.currentPage + 1) * ViewProductsFormController.MAXIMUM_RECORDS_PER_VIEW < this.productList.size()) {
+		if ((this.currentPage + 1) * ViewProductsFormController.MAXIMUM_RECORDS_PER_VIEW < this.productsList.size()) {
 			this.currentPage++;
 			this.updateTable();
 		}

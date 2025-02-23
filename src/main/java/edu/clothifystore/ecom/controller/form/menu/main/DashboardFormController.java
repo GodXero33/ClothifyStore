@@ -9,10 +9,13 @@ import edu.clothifystore.ecom.service.custom.ProductService;
 import edu.clothifystore.ecom.util.DailyAlertGenerator;
 import edu.clothifystore.ecom.util.ServiceType;
 import edu.clothifystore.ecom.util.UtilFactory;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -63,5 +66,14 @@ public class DashboardFormController implements Initializable, MenuForm {
 		this.totalEmployeesLabel.setText(totalEmployees == -1 ? "0" : totalEmployees + "");
 		this.totalProductLabel.setText(totalProduct == -1 ? "0" : totalProduct + "");
 		this.totalOrdersLabel.setText(totalOrders == -1 ? "0" : totalOrders + "");
+	}
+
+	@FXML
+	public void placeOrderButtonOnAction (ActionEvent actionEvent) {
+		try {
+			FormController.requestOpenPlaceOrderStage();
+		} catch (IOException exception) {
+			new Alert(Alert.AlertType.WARNING, "Can't open place order window.").show();
+		}
 	}
 }

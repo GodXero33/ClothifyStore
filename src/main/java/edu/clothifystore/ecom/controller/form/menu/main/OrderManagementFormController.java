@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,15 +21,16 @@ public class OrderManagementFormController implements Initializable, MenuForm {
 	@FXML
 	public AnchorPane contentPane;
 	private Button currentActiveMenuButton;
+	private Stage placeOrderStage;
 
 	@Override
 	public void initialize (URL url, ResourceBundle resourceBundle) {
-		final Button placeOrderButton = (Button) (((Pane) ((Pane) this.contentPane.getParent()).getChildren().getFirst()).getChildren().getFirst());
+		final Button addCustomerButton = (Button) (((Pane) ((Pane) this.contentPane.getParent()).getChildren().getFirst()).getChildren().get(1));
 
 		try {
-			this.openMenu(MenuType.PLACE_ORDER, placeOrderButton);
+			this.openMenu(MenuType.ADD_CUSTOMER, addCustomerButton);
 		} catch (IOException exception) {
-			new Alert(Alert.AlertType.ERROR, "Failed to load add employee menu. Please open menu and click on another menu and come back to try again.").show();
+			new Alert(Alert.AlertType.ERROR, "Failed to load add customer menu. Please open menu and click on another menu and come back to try again.").show();
 		}
 	}
 
@@ -56,7 +58,11 @@ public class OrderManagementFormController implements Initializable, MenuForm {
 
 	@FXML
 	public void placeOrderButtonOnAction (ActionEvent actionEvent) throws IOException {
-		this.openMenu(MenuType.PLACE_ORDER, (Button) actionEvent.getTarget());
+		try {
+			FormController.requestOpenPlaceOrderStage();
+		} catch (IOException exception) {
+			new Alert(Alert.AlertType.WARNING, "Can't open place order window.").show();
+		}
 	}
 
 	@FXML

@@ -13,17 +13,17 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
+            <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#addCustomerButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Add Customer">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
                 <Button alignment="CENTER" layoutX="13.0" layoutY="122.0" mnemonicParsing="false" onAction="#updateCustomerButtonOnAction" prefHeight="79.0" prefWidth="201.0" text="Update / Delete Customer" textAlignment="CENTER" wrapText="true">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
             <Button layoutX="13.0" layoutY="211.0" mnemonicParsing="false" onAction="#viewCustomersButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="View Customers">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onAction="#addCustomerButtonOnAction" prefHeight="45.0" prefWidth="201.0" text="Add Customer">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
