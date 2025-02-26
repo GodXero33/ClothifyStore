@@ -28,7 +28,7 @@ public class FormController {
 	@Getter
 	private Employee curentEmployee;
 	private final Map<MenuType, FXMLLoader> loadedStagesMap;
-	private final String formFXMLPath = "../../../view";
+	private final String formFXMLPath = "/view";
 
 	private FormController () {
 		this.loadedStagesMap = new HashMap<>();
