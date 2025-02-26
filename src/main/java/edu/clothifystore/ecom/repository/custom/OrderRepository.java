@@ -5,4 +5,5 @@ import edu.clothifystore.ecom.repository.CrudRepository;
 
 public interface OrderRepository extends CrudRepository<OrderEntity> {
 	int getCount ();
+	int addAndGetId (OrderEntity entity);
 }

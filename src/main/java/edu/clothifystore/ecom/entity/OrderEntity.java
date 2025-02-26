@@ -18,5 +18,5 @@ public class OrderEntity {
 	private String time;
 	private Integer employeeID;
 	private Integer customerID;
-	private List<OrderItem> orderItems;
+	private List<OrderItemEntity> orderItems;
 }

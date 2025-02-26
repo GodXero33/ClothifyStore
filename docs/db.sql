@@ -58,7 +58,7 @@ CREATE TABLE `order` (
     `date` DATE NOT NULL,
     `time` TIME NOT NULL,
     employee_id INT NOT NULL,
-    customer_id INT NOT NULL,
+    customer_id INT,
     is_deleted BOOLEAN DEFAULT FALSE,
     PRIMARY KEY (id),
     FOREIGN KEY (employee_id) REFERENCES employee (id),
@@ -337,3 +337,41 @@ LEFT JOIN order_item oi ON o.id = oi.order_id AND oi.is_deleted = FALSE
 WHERE o.is_deleted = FALSE
 AND o.date BETWEEN CURDATE() - INTERVAL 6 YEAR AND CURDATE()
 GROUP BY o.id, o.date, o.time;
+
+-- Order receipt
+SELECT
+    e.user_name AS employee_name,
+    JSON_ARRAYAGG(
+        JSON_OBJECT(
+            'product_name', p.name,
+            'quantity', oi.quantity,
+            'price', oi.amount
+        )
+    ) AS order_items,
+    SUM(oi.amount) AS total_price
+FROM order_item oi
+JOIN `order` o ON oi.order_id = o.id
+JOIN product p ON oi.product_id = p.id
+JOIN employee e ON o.employee_id = e.id
+WHERE o.id = 8  -- Only passing order_id
+AND o.is_deleted = FALSE  -- Ensure the order is not deleted
+AND e.is_deleted = FALSE  -- Ensure the employee is not deleted
+AND p.is_deleted = FALSE  -- Ensure the product is not deleted
+AND oi.is_deleted = FALSE  -- Ensure the order item is not deleted
+GROUP BY e.user_name;
+
+SELECT
+    e.user_name AS employee_name,
+    p.name AS product_name,
+    oi.quantity,
+    oi.amount,
+    SUM(oi.amount) OVER (PARTITION BY o.id) AS total_price
+FROM order_item oi
+JOIN `order` o ON oi.order_id = o.id
+JOIN product p ON oi.product_id = p.id
+JOIN employee e ON o.employee_id = e.id
+WHERE o.id = 8  -- Only passing order_id
+AND o.is_deleted = FALSE
+AND e.is_deleted = FALSE
+AND p.is_deleted = FALSE
+AND oi.is_deleted = FALSE;

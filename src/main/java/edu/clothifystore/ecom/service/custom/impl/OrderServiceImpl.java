@@ -24,4 +24,9 @@ public class OrderServiceImpl implements OrderService {
 	public int getCount () {
 		return this.orderRepository.getCount();
 	}
+
+	@Override
+	public int add (Order order) {
+		return this.orderRepository.addAndGetId(this.mapper.toEntity(order));
+	}
 }
