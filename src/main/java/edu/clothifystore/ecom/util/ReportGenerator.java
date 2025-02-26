@@ -26,7 +26,7 @@ public class ReportGenerator {
 		final JasperPrint print = JasperFillManager.fillReport(report, parameters, DBConnection.getInstance().getConnection());
 		final LocalDateTime timeNow = LocalDateTime.now();
 		final String now = String.format("%d%02d%02d_%02d%02d", timeNow.getYear(), timeNow.getMonthValue(), timeNow.getDayOfMonth(), timeNow.getHour(), timeNow.getMinute());
-		pdfPath = String.format("%sreports/%s%s-%s.pdf", UserConfig.getConfiguration("resources"), folder, fileName, now);
+		pdfPath = String.format("%s/Reports/%s%s-%s.pdf", UserConfig.getConfiguration("resources"), folder, fileName, now);
 		final Path directoryPath = Path.of(UserConfig.getConfiguration("resources") + "reports" + folder);
 
 		if (!Files.exists(directoryPath)) Files.createDirectories(directoryPath);
