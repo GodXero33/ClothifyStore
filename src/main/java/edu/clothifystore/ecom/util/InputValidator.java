@@ -1,24 +1,12 @@
 package edu.clothifystore.ecom.util;
 
 public class InputValidator {
-	public boolean isValid (String str) {
-		return true;
-	}
-
 	public boolean isNonZeroPositiveInteger (String str) {
 		return str.matches("^\\d+$") && Integer.parseInt(str) != 0;
 	}
 
-	public boolean isInteger (String str) {
-		return str.matches("^-?\\d+$");
-	}
-
 	public boolean isNonZeroPositiveDouble (String str) {
 		return str.matches("^\\d+(\\.\\d+)?$") && Double.parseDouble(str) != 0.0;
-	}
-
-	public boolean isDouble (String str) {
-		return str.matches("^-?\\d+(\\.\\d+)?$");
 	}
 
 	public boolean isEmail (String str) {

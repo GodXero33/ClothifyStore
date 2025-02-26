@@ -48,7 +48,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		if (employeeID == null || employeeID < 1) return false;
 
 		try {
-			CrudUtil.execute("UPDATE employee_phone SET is_deleted = TRUE WHERE employee_id = ?", employeeID);
+			CrudUtil.execute("DELETE FROM employee_phone WHERE employee_id = ?", employeeID);
 			return true;
 		} catch (SQLException exception) {
 			System.out.println(exception.getMessage());
@@ -139,35 +139,23 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
 			connection.setAutoCommit(false); // Start transaction.
 
-			final PreparedStatement employeeUpdateStatement = connection.prepareStatement("UPDATE employee SET user_name = ?, full_name = ?, nic = ?, address = ?, dob = ?, type = ?, role = ?, email = ?, salary = ?, admin_id = ? WHERE id = ?"); // Update record from employee table.
+			CrudUtil.execute(
+				"UPDATE employee SET user_name = ?, full_name = ?, nic = ?, address = ?, dob = ?, type = ?, role = ?, email = ?, password = ?, salary = ?, admin_id = ? WHERE id = ?",
+				entity.getUserName(),
+				entity.getFullName(),
+				entity.getNIC(),
+				entity.getAddress(),
+				entity.getDOB(),
+				entity.getType(),
+				entity.getRole(),
+				entity.getEmail(),
+				entity.getPassword(),
+				entity.getSalary() == null ? 0.0 : entity.getSalary(),
+				entity.getAdminID(),
+				employeeID
+			);
 
-			employeeUpdateStatement.setString(1, entity.getUserName());
-			employeeUpdateStatement.setString(2, entity.getFullName());
-			employeeUpdateStatement.setString(3, entity.getNIC());
-			employeeUpdateStatement.setString(4, entity.getAddress());
-			employeeUpdateStatement.setString(5, entity.getDOB());
-			employeeUpdateStatement.setString(6, entity.getType());
-			employeeUpdateStatement.setString(7, entity.getRole());
-
-			if (entity.getEmail() == null) {
-				employeeUpdateStatement.setNull(8, Types.VARCHAR); // Set email to NULL
-			} else {
-				employeeUpdateStatement.setString(8, entity.getEmail());
-			}
-
-			employeeUpdateStatement.setDouble(9, entity.getSalary() == null ? 0.0 : entity.getSalary());
-
-			if (entity.getAdminID() == null) {
-				employeeUpdateStatement.setNull(10, Types.INTEGER); // Set admin_id to NULL
-			} else {
-				employeeUpdateStatement.setInt(10, entity.getAdminID());
-			}
-
-			employeeUpdateStatement.setInt(11, employeeID); // Set id. in condition (... WHERE id = ?)
-
-			if (!this.deletePhonesByEmployeeID(employeeID) /* Delete all phones from employee_phone table. So, simply delete all and add as new. :) */) return false; // Failed to delete phone numbers. Can't go further.
-
-			if (employeeUpdateStatement.executeUpdate() == 0) return false; // Update employee failed. no rows affected.
+			if (!this.deletePhonesByEmployeeID(employeeID) /* Delete all phones from employee_phone table. So, simply delete all and add as new. :) */) return false;
 
 			final List<EmployeePhoneEntity> phoneEntities = entity.getPhone();
 

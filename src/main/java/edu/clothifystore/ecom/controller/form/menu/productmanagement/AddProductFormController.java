@@ -129,11 +129,11 @@ public class AddProductFormController implements Initializable, MenuForm {
 
 		try {
 			String fileExtension = selectedImageFile.getName().substring(selectedImageFile.getName().lastIndexOf('.'));
-			final Path directoryPath = Path.of(UserConfig.getConfiguration("image_save_directory"));
+			final Path directoryPath = Path.of(UserConfig.getConfiguration("resources") + "ProductImages/");
 
 			if (!Files.exists(directoryPath)) Files.createDirectories(directoryPath);
 
-			final Path destinationPath = Path.of(UserConfig.getConfiguration("image_save_directory"), String.format("%06d", id) + fileExtension);
+			final Path destinationPath = Path.of(UserConfig.getConfiguration("resources") + "ProductImages/", String.format("%06d", id) + fileExtension);
 			Files.copy(this.selectedImageFile.toPath(), destinationPath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException exception) {
 			System.out.println(exception.getMessage());

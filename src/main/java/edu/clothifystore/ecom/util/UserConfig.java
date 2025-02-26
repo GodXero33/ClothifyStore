@@ -17,6 +17,10 @@ public class UserConfig {
 		return null;
 	}
 
+	public static void setConfiguration (String configuration, String value) {
+		if (UserConfig.configMap.containsKey(configuration)) UserConfig.configMap.put(configuration, value);
+	}
+
 	public static void loadConfigurations () {
 		final String userHome = System.getProperty("user.home");
 		final File configFile = new File(userHome, "Documents/clothify_store.config");
@@ -38,9 +42,6 @@ public class UserConfig {
 
 			UserConfig.configMap.put(pieces[0], pieces[1]);
 		});
-
-		// Fixed configurations.
-		UserConfig.configMap.put("default_show_image", "img/add-image.png");
 	}
 
 	private static void readConfig (File configFile) {
@@ -54,6 +55,30 @@ public class UserConfig {
 		}
 	}
 
+	public static void saveConfig () {
+		try {
+			final String userHome = System.getProperty("user.home");
+			final File configFile = new File(userHome, "Documents/clothify_store.config");
+
+			if (configFile.getParentFile() != null) {
+				configFile.getParentFile().mkdirs();
+			}
+
+			if (!configFile.exists()) {
+				configFile.createNewFile();
+			}
+
+			final StringBuilder defaultContentBuilder = new StringBuilder();
+
+			UserConfig.configMap.forEach((key, value) -> defaultContentBuilder.append(key).append('=').append(value).append('\n'));
+
+			Files.write(configFile.toPath(), defaultContentBuilder.toString().getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+			System.out.println("Config file updated.");
+		} catch (IOException exception) {
+			System.err.println("Error updating config file: " + exception.getMessage());
+		}
+	}
+
 	private static void createDefaultConfig (File configFile) {
 		try {
 			if (configFile.getParentFile() != null) {
@@ -64,8 +89,7 @@ public class UserConfig {
 				final List<String> defaultContent = new ArrayList<>();
 				final StringBuilder defaultContentBuilder = new StringBuilder();
 
-				defaultContent.add("image_save_directory=C:/ClothifyStore/ProductImages/");
-				defaultContent.add("report_save_directory=C:/ClothifyStore/Reports/");
+				defaultContent.add("resources=C:/ClothifyStore/");
 
 				defaultContent.forEach(line -> defaultContentBuilder.append(line).append('\n'));
 

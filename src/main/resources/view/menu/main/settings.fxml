@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.clothifystore.ecom.controller.form.menu.main.SettingsFormController"
-            prefHeight="520.0" prefWidth="845.0">
-
+<AnchorPane prefHeight="520.0" prefWidth="845.0" style="-fx-background-color: #121212;" stylesheets="@../../../css/settings.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.clothifystore.ecom.controller.form.menu.main.SettingsFormController">
+   <children>
+      <Pane layoutX="39.0" layoutY="53.0" prefHeight="80.0" prefWidth="532.0">
+         <children>
+            <TextField fx:id="resourceDirectoryTextField" layoutY="29.0" prefHeight="49.0" prefWidth="345.0" styleClass="text-field-normal" />
+            <Button layoutX="414.0" layoutY="29.0" mnemonicParsing="false" onAction="#resourceDirectoryChangeButtonOnAction" text="Change" />
+            <Label prefHeight="29.0" prefWidth="185.0" styleClass="text-field-label" text="Resources Directory" />
+            <Button layoutX="355.0" layoutY="29.0" mnemonicParsing="false" onAction="#resourceDirectoryPickButtonOnAction" prefHeight="49.0" prefWidth="50.0" />
+            <ImageView disable="true" fitHeight="35.0" fitWidth="38.0" layoutX="363.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/pick.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Button layoutX="39.0" layoutY="146.0" mnemonicParsing="false" onAction="#openConfigurationButtonOnAction" prefHeight="49.0" prefWidth="289.0" text="Open Configuration File" />
+      <Button layoutX="33.0" layoutY="431.0" mnemonicParsing="false" onAction="#logoutButtonOnAction" prefHeight="49.0" prefWidth="138.0" text="Logout" />
+      <Line endX="678.0" layoutX="133.0" layoutY="140.0" startX="-100.0" stroke="WHITE" />
+      <Line endX="678.0" layoutX="133.0" layoutY="202.0" startX="-100.0" stroke="WHITE" />
+      <Pane layoutX="36.0" layoutY="215.0">
+         <children>
+            <TextField fx:id="oldPasswordTextField" layoutX="170.0" layoutY="29.0" prefHeight="49.0" prefWidth="345.0" styleClass="text-field-normal" />
+            <Label layoutX="3.0" prefHeight="29.0" prefWidth="161.0" styleClass="text-field-label" text="Change Password" />
+            <Label layoutX="3.0" layoutY="39.0" prefHeight="29.0" prefWidth="161.0" styleClass="text-field-label" text="Old Password" />
+            <TextField fx:id="newPasswordTextField" layoutX="170.0" layoutY="86.0" prefHeight="49.0" prefWidth="345.0" styleClass="text-field-normal" />
+            <Label layoutY="96.0" prefHeight="29.0" prefWidth="161.0" styleClass="text-field-label" text="New Password" />
+            <TextField fx:id="confirmPasswordTextField" layoutX="170.0" layoutY="143.0" prefHeight="49.0" prefWidth="345.0" styleClass="text-field-normal" />
+            <Label layoutY="153.0" prefHeight="29.0" prefWidth="170.0" styleClass="text-field-label" text="Confirm Passsword" />
+            <Button layoutX="526.0" layoutY="143.0" mnemonicParsing="false" onAction="#passwordChangeButtonOnAction" text="Change" />
+         </children>
+      </Pane>
+      <Line endX="678.0" layoutX="133.0" layoutY="418.0" startX="-100.0" stroke="WHITE" />
+      <Button layoutX="184.0" layoutY="431.0" mnemonicParsing="false" onAction="#exitButtonOnAction" prefHeight="49.0" prefWidth="138.0" styleClass="button-exit" text="Exit" />
+   </children>
 </AnchorPane>

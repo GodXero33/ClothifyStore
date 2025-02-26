@@ -24,7 +24,6 @@ CREATE TABLE employee_phone (
     employee_id INT NOT NULL,
     type ENUM('MOBILE', 'HOME', 'WHATSAPP') NOT NULL,
     is_deleted BOOLEAN DEFAULT FALSE,
-    PRIMARY KEY (phone),
     FOREIGN KEY (employee_id) REFERENCES employee (id)
 );
 
